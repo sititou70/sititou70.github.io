@@ -173,8 +173,6 @@ void function() {
 </ul>
 <h2>宇宙語が読めるようになった</h2>
 <p>TAPL には <strong>規則図</strong> と呼ばれる図が数ページごとに登場します．ちょっと見てみてください</p>
-<blockquote>
-<p>規則図の例</p>
 <p><span
       class="gatsby-resp-image-wrapper"
       style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 628px; "
@@ -217,9 +215,8 @@ void function() {
         </picture>
   </a>
     </span></p>
-</blockquote>
 <p><em>？？？</em></p>
-<p>これらの図は，ぱっと見の意味不明さから <strong>宇宙語</strong> と呼ばれています<sup id="fnref-2"><a href="#fn-2" class="footnote-ref">2</a></sup>．しかし，TAPL の議論はこの図をベースに進んで行くので，なんとか頑張って理解しました．</p>
+<p>これらの図は，ぱっと見の意味不明さから <strong>宇宙語</strong> と呼ばれています．<sup id="fnref-2"><a href="#fn-2" class="footnote-ref">2</a></sup>しかし，TAPL の議論はこの図をベースに進んで行くので，なんとか頑張って理解しました．</p>
 <p>規則図とは，あるプログラミング言語<sup id="fnref-3"><a href="#fn-3" class="footnote-ref">3</a></sup>の定義を，なんと <strong>全て</strong> 表したものです．定義というのは，例えば以下のようなものです．</p>
 <ul>
 <li>プログラムをどのように表現するか（構文形式）</li>
@@ -230,7 +227,7 @@ void function() {
 <p>先ほど見た規則図もまた，１つのプログラミング言語を表しています．さすがに本格的なシステム開発などは難しいですが，例えばリストを定義して多相的なソート関数が書けるほどの能力があります．</p>
 <p>つまるところ，これだけのものを図 1 枚で表そうとしているので， <strong>専用の記法で表現を圧縮しまくった結果，宇宙語になっちゃった</strong> みたいなかんじです．</p>
 <h2>「型安全」を説明できるようになった</h2>
-<p>私に <strong>娘（6 歳）<sup id="fnref-4"><a href="#fn-4" class="footnote-ref">4</a></sup></strong> がいると仮定します<sup id="fnref-5"><a href="#fn-5" class="footnote-ref">5</a></sup>．</p>
+<p>私に <strong>娘（6 歳）<sup id="fnref-4"><a href="#fn-4" class="footnote-ref">4</a></sup></strong> がいると仮定します．<sup id="fnref-5"><a href="#fn-5" class="footnote-ref">5</a></sup></p>
 <h3>TAPL を読む前だと</h3>
 <p>娘「ねぇパパ， <strong>型安全</strong> ってな〜に？」</p>
 <p>ワイ「ファッ！？いきなりどうしたんや，娘ちゃん？」</p>
@@ -262,8 +259,8 @@ void function() {
 <p>ワイ「これは Harper さん，Wright さん，Felleisen さんなど，えらい頭の良い人たちが考えたんや」</p>
 <p>ワイ「ただし，型によってどこまでの <strong>おかしなこと</strong> を抑制できるのかは言語によるからな！より高度な検査には相応の表現力のある型システムが必要になるけど，それだけ言語機能との兼ね合いが難しくなるし，証明や型検査器の実装も大変になんねん」</p>
 <p>娘「なるほど，型システムは言語設計とも深い関係にあって，両者は手を取り合って設計を進めるべき<sup id="fnref-6"><a href="#fn-6" class="footnote-ref">6</a></sup>なんだね！」</p>
-<p>娘「ちなみに Java と Perl は型安全なの？<sup id="fnref-7"><a href="#fn-7" class="footnote-ref">7</a></sup>」</p>
-<p>ワイ「よっしゃ宇宙語もってこい！構造的帰納法で証明したるわ！<sup id="fnref-8"><a href="#fn-8" class="footnote-ref">8</a></sup>」</p>
+<p>娘「ちなみに Java と Perl は型安全なの？」<sup id="fnref-7"><a href="#fn-7" class="footnote-ref">7</a></sup></p>
+<p>ワイ「よっしゃ宇宙語もってこい！構造的帰納法で証明したるわ！」<sup id="fnref-8"><a href="#fn-8" class="footnote-ref">8</a></sup></p>
 <h2>用語の使用に慎重になった</h2>
 <p>例えば，私は以前次のような発言をしたことがありました．</p>
 <p>「TypeScript を書くときは <strong>型安全なコードを心がけましょう！</strong> 」</p>
@@ -275,7 +272,6 @@ void function() {
 <p>同じような疑問を型に対しても持っていたわけです．しかし TAPL を読むことで「型システムの強さとは， <strong>表現力</strong> のことである」とか，「表現力の高い型システムは，プログラムが <strong>より多くの場面で</strong> おかしくならないのを保証できる」と理解しました．</p>
 <h3>ラムダキューブ</h3>
 <p>以下の図は <strong>ラムダキューブ</strong> と呼ばれ， <strong>いろいろな型システムの関係を示す地図</strong> のようなものです．これは「表現力」を理解するのにも役立ちます．</p>
-<blockquote>
 <p><span
       class="gatsby-resp-image-wrapper"
       style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 321px; "
@@ -316,9 +312,10 @@ void function() {
         </picture>
   </a>
     </span></p>
+<blockquote>
 <p>出典：<a href="https://ja.wikipedia.org/wiki/%E3%83%A9%E3%83%A0%E3%83%80%E3%83%BB%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%96#/media/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB:Lambda_cube.png" target="_blank" rel="noopener">Lambda cube.png, ウィキメディア・コモンズ</a>より，以降同じ図に関して出典略</p>
 </blockquote>
-<p>この立方体を理解する鍵は「〇〇から □□ を作る機能<sup id="fnref-9"><a href="#fn-9" class="footnote-ref">9</a></sup>」であると思います．ここに登場する型システムは，以下のような機能を持っていたり，持っていなかったりします．</p>
+<p>この立方体を理解する鍵は「〇〇から □□ を作る機能」<sup id="fnref-9"><a href="#fn-9" class="footnote-ref">9</a></sup>であると思います．ここに登場する型システムは，以下のような機能を持っていたり，持っていなかったりします．</p>
 <ul>
 <li><strong>プログラム</strong> <sup id="fnref-10"><a href="#fn-10" class="footnote-ref">10</a></sup> から <strong>プログラム</strong> を作る機能</li>
 <li><strong>型</strong> から <strong>プログラム</strong> を作る機能</li>
@@ -333,7 +330,6 @@ void function() {
 <span class="token punctuation">}</span></code></pre></div>
 <p>という関数<code class="language-text">plusOne</code>ですが，コイツに<code class="language-text">1</code>というプログラムを与えれば<code class="language-text">1 + 1</code>というプログラムを作れるし，<code class="language-text">2</code>を与えれば<code class="language-text">2 + 1</code>が作れます．プログラムからプログラムを作れています．</p>
 <p>ラムダキューブの手前左下にある <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo lspace="0em" rspace="0em">→</mo></mrow><annotation encoding="application/x-tex">{\lambda}{\rightarrow}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord"><span class="mord mathnormal">λ</span></span><span class="mord"><span class="mrel">→</span></span></span></span></span></span> へ注目してください．</p>
-<blockquote>
 <p><span
       class="gatsby-resp-image-wrapper"
       style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 321px; "
@@ -374,16 +370,14 @@ void function() {
         </picture>
   </a>
     </span></p>
-</blockquote>
 <p><span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo lspace="0em" rspace="0em">→</mo></mrow><annotation encoding="application/x-tex">{\lambda}{\rightarrow}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord"><span class="mord mathnormal">λ</span></span><span class="mord"><span class="mrel">→</span></span></span></span></span></span> がこのキューブの <strong>原点</strong> で，一番 <em>よわい</em> 表現力を持つ型システムです．なんと，この世界には「関数型」 <strong>しか</strong> ありません（！）</p>
-<p>（この計算体系では，値は関数だけで， <strong>真偽値，整数，配列すら無い</strong> というのですからびっくりです．さらにびっくりなのは，そんな世界でも <strong>関数だけで真偽値，整数，配列などが作れる</strong> という事実です<sup id="fnref-11"><a href="#fn-11" class="footnote-ref">11</a></sup>．頭のいい人が考えることはぶっ飛んでますね？）</p>
+<p>（この計算体系では，値は関数だけで， <strong>真偽値，整数，配列すら無い</strong> というのですからびっくりです．さらにびっくりなのは，そんな世界でも <strong>関数だけで真偽値，整数，配列などが作れる</strong> という事実です．<sup id="fnref-11"><a href="#fn-11" class="footnote-ref">11</a></sup>頭のいい人が考えることはぶっ飛んでますね？）</p>
 <h4><strong>型</strong> から <strong>プログラム</strong> を作る機能</h4>
 <p>これは，Java の <strong>ジェネリクス</strong> が例として分かりやすいと思います．例えば以下のコードでは</p>
 <div class="gatsby-highlight" data-language="java"><pre class="language-java"><code class="language-java"><span class="token keyword">var</span> list <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 list<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p><code class="language-text">ArrayList</code>に<code class="language-text">Integer</code>という型を与えることで，整数を格納できる配列（のプログラム）を作っています．つまり，型からプログラムを作れています．</p>
 <p>先程の原点 <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo lspace="0em" rspace="0em">→</mo></mrow><annotation encoding="application/x-tex">{\lambda}{\rightarrow}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord"><span class="mord mathnormal">λ</span></span><span class="mord"><span class="mrel">→</span></span></span></span></span></span> から上に移動して， <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">{\lambda}{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord"><span class="mord mathnormal">λ</span></span><span class="mord"><span class="mord">2</span></span></span></span></span></span> を見つけてください．</p>
-<blockquote>
 <p><span
       class="gatsby-resp-image-wrapper"
       style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 321px; "
@@ -424,7 +418,6 @@ list<span class="token punctuation">.</span><span class="token function">add</sp
         </picture>
   </a>
     </span></p>
-</blockquote>
 <p>ラムダキューブの矢印は，矢印の <strong>先</strong> の型システムが， <strong>根</strong> のシステムを拡張して定義されることを表します．</p>
 <p><span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">{\lambda}{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord"><span class="mord mathnormal">λ</span></span><span class="mord"><span class="mord">2</span></span></span></span></span></span> は， <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo lspace="0em" rspace="0em">→</mo></mrow><annotation encoding="application/x-tex">{\lambda}{\rightarrow}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord"><span class="mord mathnormal">λ</span></span><span class="mord"><span class="mrel">→</span></span></span></span></span></span> の機能に <strong>加えて</strong> ，ジェネリクスに相当する<sup id="fnref-12"><a href="#fn-12" class="footnote-ref">12</a></sup>「全称型」という機能を持っています．</p>
 <p>したがって， <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">{\lambda}{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord"><span class="mord mathnormal">λ</span></span><span class="mord"><span class="mord">2</span></span></span></span></span></span> は <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo lspace="0em" rspace="0em">→</mo></mrow><annotation encoding="application/x-tex">{\lambda}{\rightarrow}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord"><span class="mord mathnormal">λ</span></span><span class="mord"><span class="mrel">→</span></span></span></span></span></span> よりも <em>つよい</em> 表現力を持つといえるのです．</p>
@@ -438,7 +431,6 @@ list<span class="token punctuation">.</span><span class="token function">add</sp
 <p><code class="language-text">Pair</code>に<code class="language-text">number</code>型を与えて<code class="language-text">[number, number]</code>型を作っています．つまり，型から型を作っています．</p>
 <p>このような機能は「型演算子」と呼ばれています．</p>
 <p><span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo lspace="0em" rspace="0em">→</mo></mrow><annotation encoding="application/x-tex">{\lambda}{\rightarrow}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord"><span class="mord mathnormal">λ</span></span><span class="mord"><span class="mrel">→</span></span></span></span></span></span> から奥に行った <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><munder accentunder="true"><mi>ω</mi><mo stretchy="true">‾</mo></munder></mrow><annotation encoding="application/x-tex">{\lambda}{\underline{\omega}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8944em;vertical-align:-0.2em;"></span><span class="mord"><span class="mord mathnormal">λ</span></span><span class="mord"><span class="mord underline"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.4306em;"><span style="top:-2.84em;"><span class="pstrut" style="height:3em;"></span><span class="underline-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2em;"><span></span></span></span></span></span></span></span></span></span></span> は，<span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo lspace="0em" rspace="0em">→</mo></mrow><annotation encoding="application/x-tex">{\lambda}{\rightarrow}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord"><span class="mord mathnormal">λ</span></span><span class="mord"><span class="mrel">→</span></span></span></span></span></span> の機能に加えて型演算子も持っています．</p>
-<blockquote>
 <p><span
       class="gatsby-resp-image-wrapper"
       style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 321px; "
@@ -479,7 +471,6 @@ list<span class="token punctuation">.</span><span class="token function">add</sp
         </picture>
   </a>
     </span></p>
-</blockquote>
 <h4><strong>プログラム</strong> から <strong>型</strong> を作る機能</h4>
 <p>Q. プログラムから型を作る機能ってなに？</p>
 <p>A. <em><a href="https://dic.nicovideo.jp/a/%E3%82%8F%20%E3%82%8F%E3%81%8B%E3%82%93%E3%81%AA%E3%81%84%E3%81%A3%E3%83%94..." target="_blank" rel="noopener">わ　わかんないっピ…</a></em></p>
@@ -492,7 +483,6 @@ list<span class="token punctuation">.</span><span class="token function">add</sp
 <p>すごいっピね！</p>
 <p><span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo lspace="0em" rspace="0em">→</mo></mrow><annotation encoding="application/x-tex">{\lambda}{\rightarrow}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord"><span class="mord mathnormal">λ</span></span><span class="mord"><span class="mrel">→</span></span></span></span></span></span> から右に行った <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mi>P</mi></mrow><annotation encoding="application/x-tex">{\lambda}{P}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord"><span class="mord mathnormal">λ</span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">P</span></span></span></span></span></span> は，<span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo lspace="0em" rspace="0em">→</mo></mrow><annotation encoding="application/x-tex">{\lambda}{\rightarrow}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord"><span class="mord mathnormal">λ</span></span><span class="mord"><span class="mrel">→</span></span></span></span></span></span> の機能に加えて依存型も持っているんだっピ！</p>
 <h4>ラムダキューブまとめ</h4>
-<blockquote>
 <p><span
       class="gatsby-resp-image-wrapper"
       style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 321px; "
@@ -533,7 +523,6 @@ list<span class="token punctuation">.</span><span class="token function">add</sp
         </picture>
   </a>
     </span></p>
-</blockquote>
 <p>ラムダキューブでは <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo lspace="0em" rspace="0em">→</mo></mrow><annotation encoding="application/x-tex">{\lambda}{\rightarrow}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord"><span class="mord mathnormal">λ</span></span><span class="mord"><span class="mrel">→</span></span></span></span></span></span> が原点であり，一番弱い表現力を持つのでした．</p>
 <p>対象的に，全ての矢印が向かう先である <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mrow><mi>P</mi><mi>ω</mi></mrow></mrow><annotation encoding="application/x-tex">{\lambda}{P\omega}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord"><span class="mord mathnormal">λ</span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span></span></span></span></span></span> は， <em>Calculus of Constructions</em> とも呼ばれ，上述の全ての機能を持つ最強の型システムです．（<a href="https://ja.wikipedia.org/wiki/Coq" target="_blank" rel="noopener">Coq</a> が用いる型システムだそうです）</p>
 <p>しかし，型システムの冒険は終わりません．</p>
@@ -561,7 +550,7 @@ list<span class="token punctuation">.</span><span class="token function">add</sp
 <p>上記の発言は，以下で説明するような <strong>自己言及のパラドックス</strong> について言っています．</p>
 </details>
 <p>Russell のパラドックスとは，すごくざっくりと説明すると（すごくざっくりとしか説明できない）</p>
-<p>Russell さん「あーちょっと暇だし<sup id="fnref-14"><a href="#fn-14" class="footnote-ref">14</a></sup>， <strong>自分自身を要素として含まない集合全体の集合</strong> でも考えてみるか〜」</p>
+<p>Russell さん「あーちょっと暇だし，<sup id="fnref-14"><a href="#fn-14" class="footnote-ref">14</a></sup> <strong>自分自身を要素として含まない集合全体の集合</strong> でも考えてみるか〜」</p>
 <p>Russell さん「は？その集合に自分が含まれるかどうかが <strong>矛盾するやんけ！</strong> こりゃ数学を基礎から揺るがす大事件やで！」</p>
 <p>Russell さん「……よく考えたら， <strong>こんな変な集合を定義できるほうがおかしいわ</strong> 」</p>
 <p>Russell さん「せや！ <strong>型</strong> <sup id="fnref-15"><a href="#fn-15" class="footnote-ref">15</a></sup> を導入することで論理式の文法に制限を加え，変な集合を定義できなくしたろ！」</p>
