@@ -594,7 +594,7 @@ StringLiteral:
   <span class="token keyword">let</span> desc <span class="token operator">=</span> <span class="token constant">O</span><span class="token punctuation">.</span><span class="token function">GetOwnProperty</span><span class="token punctuation">(</span><span class="token constant">P</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Oの"@@iterator"プロパティをGetする</span>
 
   <span class="token keyword">if</span> <span class="token punctuation">(</span>desc <span class="token operator">===</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// 自分がPを持っていなかったら親へメソッドチェーンをたどる操作．ここではStringが"@@iterator"を持っているので該当しない</span>
+    <span class="token comment">// 自分がPを持っていなかったら親へプロトタイプチェーンをたどる操作．ここではStringが"@@iterator"を持っているので該当しない</span>
     <span class="token comment">// 2. If desc is undefined, then</span>
     <span class="token comment">//     a. Let parent be ? O.[[GetPrototypeOf]]().</span>
     <span class="token comment">//     b. If parent is null, return undefined.</span>
