@@ -72,7 +72,13 @@ void function() {
 </blockquote>
 <p>依存型は，関数型，全称型，型演算子に続いてラムダキューブを完成させる最後のピースでした．</p>
 <p>それが埋まらず，日々ストレスを貯める一方だったのですが，はてブのコメントで「<a href="https://b.hatena.ne.jp/entry/4719109124404117986/comment/zyzy" target="_blank" rel="noopener">実戦で色々試したくなったらIdrisがあるよ!!</a>」と親切な方が教えてくださったので，</p>
-<p>依存型の雰囲気を味わうためにIdrisへふんわり入門してみます．そんな日記です．</p>
+<p>依存型の雰囲気を味わうためにIdrisへふんわり入門してみます．</p>
+<ul>
+<li>依存型ってなんやねん</li>
+<li>型にプログラムが書けるってどういうこと</li>
+<li>プログラミングと証明に何の関係があるんだ</li>
+</ul>
+<p>といった疑問を解決するまでの日記です．</p>
 <h2>Idrisとは</h2>
 <div class="math math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>I</mi><mi>d</mi><mi>r</mi><mi>i</mi><mi>s</mi><mo>=</mo><mi>H</mi><mi>a</mi><mi>s</mi><mi>k</mi><mi>e</mi><mi>l</mi><mi>l</mi><mo>+</mo><mtext>依存型</mtext></mrow><annotation encoding="application/x-tex">Idris = Haskell + 依存型</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">i</span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7778em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mord mathnormal">a</span><span class="mord mathnormal">s</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.01968em;">ll</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord cjk_fallback">依存型</span></span></span></span></span></div>
 <p>と<a href="https://keens.github.io/blog/2020/11/30/idristtedonnagengo_/" target="_blank" rel="noopener">言われている</a>そうです．</p>
@@ -185,11 +191,12 @@ void function() {
 <span class="token hvariable">modusPonens</span> <span class="token punctuation">(</span><span class="token hvariable">hpq</span><span class="token punctuation">,</span> <span class="token hvariable">hp</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token hvariable">hpq</span> <span class="token hvariable">hp</span></code></pre></div>
 <p><code class="language-text">hpq</code>や<code class="language-text">hp</code>にどのような値が来ようが，<code class="language-text">modusPonens</code>は100％確実に<code class="language-text">q</code>型の値を返します．このことは，型検査で容易に確かめられます．</p>
 <p>そして実際に，このコードを<code class="language-text">idris --check</code>で型検査すると成功しますので，先程の論理構造は正しいと証明されました．ご結婚おめでとうございます．</p>
+<h3>ウォーミングアップまとめ</h3>
 <p>今回のお題は自明すぎて，</p>
 <p><em>なぜこんなに回りくどいことをする必要があるのか？</em></p>
 <p>と思われたかもしれません．簡単すぎて依存型の出番もなく，イマイチしっくりきていないのも事実です．</p>
-<p>というわけで，もうちょっと難しい問題で依存型に触れてみましょう．</p>
-<h2>もうちょっと難しい問題：高校数学</h2>
+<p>というわけで，もうちょっと難しい <strong>実践編</strong> で依存型に触れてみましょう．</p>
+<h2>実践編：高校数学</h2>
 <p>想像してください．ここは高校で，今は数学の試験中です．</p>
 <p><span
       class="gatsby-resp-image-wrapper"
@@ -406,7 +413,7 @@ k + k(k + 1)</annotation></semantics></math></span><span class="katex-html" aria
 <p>これにより，ファイル内のすべての関数定義でIdrisの全域性チェッカーが有効になります．</p>
 <p>詳しくは割愛しますが，証明の場合分けが漏れていたり，再帰呼び出しの引数が減少していなかったりする場合に怒ってくれます．なので，とりあえずファイルの冒頭に書いておくと良いことあるお守りです．</p>
 <p>ともあれ，全域性を<a href="https://docs.idris-lang.org/en/latest/tutorial/theorems.html?highlight=total#totality-checking-issues" target="_blank" rel="noopener">保証することはできない</a>ので過信も禁物です．まぁ，関数の停止性を保証するなんて原理的に無理っぽいのはなんとなくわかりますよね．</p>
-<h3>証明完了！</h3>
+<h3>実践編まとめ</h3>
 <p>最終的なコードは以下のようになりました．</p>
 <div class="gatsby-highlight" data-language="idris"><pre class="language-idris"><code class="language-idris"><span class="token operator">%</span><span class="token hvariable">default</span> <span class="token keyword">total</span>
 
