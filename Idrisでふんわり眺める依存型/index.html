@@ -300,7 +300,7 @@ sum(0) \times 2 &#x26;= 0 \times (0 + 1) \\
 <p>なので自明ですね．このような場合次のように書きます．</p>
 <div class="gatsby-highlight" data-language="diff"><pre class="language-diff"><code class="language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span>p: (n : Nat) -> (sum n) * 2 = n * (n + 1)
 </span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>p Z = Refl</span></code></pre></div>
-<p>Reflという名前は反射律（reflective law）に由来すると思われます．</p>
+<p>Reflという名前は反射律（reflexive）に由来すると思われます．</p>
 <h5><code class="language-text">p (S k)</code>の場合</h5>
 <p>帰納法なので，<code class="language-text">p k</code>を仮定して<code class="language-text">p (S k)</code>を示します．</p>
 <p>とりあえず帰納法の仮定<code class="language-text">inductiveHypothesis</code>をローカル変数で宣言します．あとから必要になるはず．</p>
