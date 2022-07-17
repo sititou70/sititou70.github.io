@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="bg"
+   data-name="bg"
+   viewBox="0 0 1000 5000"
+   version="1.1"
+   sodipodi:docname="bg.svg"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   width="1000"
+   height="5000">
+  <metadata
+     id="metadata69">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>bg</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1600"
+     inkscape:window-height="863"
+     id="namedview67"
+     showgrid="true"
+     showguides="false"
+     inkscape:zoom="0.40966056"
+     inkscape:cx="266.10325"
+     inkscape:cy="3080.4326"
+     inkscape:window-x="0"
+     inkscape:window-y="638"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="bg">
+    <inkscape:grid
+       type="xygrid"
+       id="grid88"
+       enabled="true"
+       spacingx="10"
+       spacingy="10" />
+    <inkscape:grid
+       type="axonomgrid"
+       id="grid90"
+       units="mm"
+       empspacing="5"
+       enabled="false"
+       gridanglex="30"
+       spacingy="11.338583" />
+  </sodipodi:namedview>
+  <defs
+     id="defs52">
+    <linearGradient
+       inkscape:collect="always"
+       id="g1">
+      <stop
+         style="stop-color:#ab0084;stop-opacity:0.66666669"
+         offset="0"
+         id="stop5481" />
+      <stop
+         style="stop-color:#0072bb;stop-opacity:0"
+         offset="1"
+         id="stop5483" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="g3">
+      <stop
+         style="stop-color:#00758e;stop-opacity:0.66666669"
+         offset="0"
+         id="stop5471" />
+      <stop
+         style="stop-color:#390089;stop-opacity:0"
+         offset="1"
+         id="stop5473" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="g2">
+      <stop
+         style="stop-color:#531d46;stop-opacity:0.66666669"
+         offset="0"
+         id="stop4905" />
+      <stop
+         style="stop-color:#004804;stop-opacity:0"
+         offset="1"
+         id="stop4907" />
+    </linearGradient>
+    <style
+       id="style50">
+      .cls-1 {
+        fill: #1d3e53;
+      }
+      .cls-2 {
+        fill: #476d7c;
+      }
+      .cls-3 {
+        fill: #77abb7;
+      }
+      .cls-4 {
+        fill: #254b62;
+      }
+    </style>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#g2"
+       id="linearGradient4911"
+       x1="289.20645"
+       y1="301.5192"
+       x2="-39.367596"
+       y2="813.64032"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.3905673,0,0,1.3905673,750.83705,1328.9291)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#g3"
+       id="linearGradient5477"
+       x1="1914.2139"
+       y1="434.92453"
+       x2="1136.3965"
+       y2="-342.89294"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(1479.8989,2545.5843)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#g1"
+       id="linearGradient5487"
+       x1="636.39618"
+       y1="708.57874"
+       x2="106.06609"
+       y2="178.24861"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-70.710744,-142.89328)" />
+  </defs>
+  <title
+     id="title54">bg</title>
+  <circle
+     id="path395"
+     cx="785.6012"
+     cy="2128.5051"
+     r="382.40601"
+     style="fill:url(#linearGradient4911);fill-opacity:1;stroke-width:1.3905673" />
+  <rect
+     style="fill:url(#linearGradient5477);fill-opacity:1;stroke-width:0.97876388"
+     id="rect5469"
+     width="500.00003"
+     height="1050"
+     x="2611.2698"
+     y="2202.6912"
+     transform="rotate(45)" />
+  <rect
+     style="fill:url(#linearGradient5487);fill-opacity:1"
+     id="rect5479"
+     width="1000"
+     height="850"
+     x="-222.18253"
+     y="-355.02524"
+     transform="rotate(-45)" />
+</svg>
