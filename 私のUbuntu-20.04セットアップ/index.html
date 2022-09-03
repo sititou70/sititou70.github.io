@@ -311,10 +311,9 @@ void function() {
 <li><key>CapsLock</key>を<key>Ctrl</key>として使う - <code class="language-text">gsettings set
 org.gnome.desktop.input-sources xkb-options "['terminate:ctrl_alt_bksp',
 'ctrl:nocaps']"</code></li>
-<li>PCのふた（Lid）を閉じたとき，外部ディスプレイをつないでいる場合でもサスペンドしたい（<a href="https://gitlab.gnome.org/GNOME/gnome-settings-daemon/-/issues/111">参考</a>）
+<li>PCのふた（Lid）を閉じたとき，外部ディスプレイをつないでいる場合でもサスペンドしたい
 <ul>
-<li><code class="language-text">sudo vim /etc/UPower/UPower.conf</code>，<code class="language-text">IgnoreLid=true</code>に設定</li>
-<li><code class="language-text">sudo vim /etc/systemd/logind.conf</code>，<code class="language-text">HandleLidSwitchDocked=suspend</code>に設定</li>
+<li><a href="https://askubuntu.com/a/1320454">https://askubuntu.com/a/1320454</a></li>
 </ul>
 </li>
 <li>設定アプリから
