@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="Layer_1"
+   version="1.1"
+   xml:space="preserve"
+   viewBox="0 0 24 24"
+   enable-background="new 0 0 42 42"
+   y="0px"
+   x="0px"
+   sodipodi:docname="good.svg"
+   width="24"
+   height="24"
+   inkscape:version="1.2.1 (0b8a7e5fb6, 2022-09-14, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"><defs
+   id="defs35" /><sodipodi:namedview
+   id="namedview33"
+   pagecolor="#ffffff"
+   bordercolor="#000000"
+   borderopacity="0.25"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1"
+   showgrid="true"
+   inkscape:zoom="16"
+   inkscape:cx="10.375"
+   inkscape:cy="11.9375"
+   inkscape:window-width="1920"
+   inkscape:window-height="1043"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Layer_1"><inkscape:grid
+     type="xygrid"
+     id="grid195"
+     originx="0"
+     originy="0" /></sodipodi:namedview>
+<g
+   id="Layer_2"
+   transform="matrix(0.6,0,0,0.6,-0.5,-0.6)">
+	<circle
+   cy="21"
+   cx="21"
+   r="20"
+   fill="#ffffff"
+   id="circle18" />
+		<linearGradient
+   id="SVGID_1_"
+   x1="306"
+   gradientUnits="userSpaceOnUse"
+   y1="-333"
+   gradientTransform="matrix(1,0,0,-1,-285,-332)"
+   x2="306"
+   y2="-373">
+		<stop
+   stop-color="#5DF24F"
+   offset="0"
+   id="stop20" />
+		<stop
+   stop-color="#2A9C06"
+   offset="1"
+   id="stop22" />
+	</linearGradient>
+	<path
+   d="m 21,5 c 9.378,0 16,6.633 16,16 0,9.366 -6.622,16 -16,16 C 11.623,37 5,30.366 5,21 5,11.633 11.623,5 21,5 M 21,1 C 9.954,1 1,9.954 1,21 1,32.045 9.954,41 21,41 32.045,41 41,32.045 41,21 41,9.954 32.045,1 21,1 Z"
+   fill="url(#SVGID_1_)"
+   id="path25"
+   style="fill:url(#SVGID_1_)" />
+	<path
+   d="m 5.8333333,25.683338 c 0,0 1.1030537,-1.011524 2.6525505,-2.130468 1.5494962,-1.118944 3.7529932,-2.867852 3.7529932,-2.867852 l 6.119664,7.903098 c 0,0 3.69425,-7.222781 8.567268,-12.588116 4.873017,-5.365335 7.342812,-7.4834958 7.342812,-7.4834958 0,0 0.366816,3.3915188 0.45036,6.0490088 0.08224,2.657493 -0.45036,6.003134 -0.45036,6.003134 0,0 -4.03104,1.332662 -7.995507,5.687591 C 21.186014,31.844243 18.848062,36 18.848062,36 c 0,0 -2.040323,-1.677296 -5.630143,-4.89426 C 9.6280991,27.888778 5.8333333,25.683338 5.8333333,25.683338 Z"
+   fill="#018700"
+   id="path27"
+   style="stroke-width:1.20857" />
+</g>
+<metadata
+   id="metadata30"><rdf:RDF><cc:Work><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><cc:license
+         rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" /><dc:publisher><cc:Agent
+           rdf:about="http://openclipart.org/"><dc:title>Openclipart</dc:title></cc:Agent></dc:publisher><dc:title>dwcheckyes - &quot;complete&quot;</dc:title><dc:date>2013-04-30T15:49:56</dc:date><dc:description>icon, green, check, done, complete, finished, checked, ok, good, yes</dc:description><dc:source>https://openclipart.org/detail/177571/dwcheckyes---complete-by-forest51690-177571</dc:source><dc:creator><cc:Agent><dc:title>forest51690</dc:title></cc:Agent></dc:creator><dc:subject><rdf:Bag><rdf:li>check</rdf:li><rdf:li>checked</rdf:li><rdf:li>complete</rdf:li><rdf:li>done</rdf:li><rdf:li>finished</rdf:li><rdf:li>good</rdf:li><rdf:li>green</rdf:li><rdf:li>icon</rdf:li><rdf:li>ok</rdf:li><rdf:li>yes</rdf:li></rdf:Bag></dc:subject></cc:Work><cc:License
+       rdf:about="http://creativecommons.org/publicdomain/zero/1.0/"><cc:permits
+         rdf:resource="http://creativecommons.org/ns#Reproduction" /><cc:permits
+         rdf:resource="http://creativecommons.org/ns#Distribution" /><cc:permits
+         rdf:resource="http://creativecommons.org/ns#DerivativeWorks" /></cc:License></rdf:RDF></metadata></svg>
