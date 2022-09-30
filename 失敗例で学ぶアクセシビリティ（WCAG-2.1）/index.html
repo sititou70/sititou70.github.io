@@ -1427,7 +1427,7 @@ UIコンポーネントの設定を変更すると，コンテキストが予期
 エラーが検出されたときは，その箇所が特定され，エラー内容がテキストで説明される</p>
 <p><img src="/4883eac2d2b2af123688687b0c60863a/bad.svg" alt="失敗例">
 エラーが検出されたが，その内容の提示が不適切</p>
-<p>例：ある登録フォームを送信したが，次のようなページが返ってきたとする</p>
+<p>例1：ある登録フォームを送信したが，次のようなページが返ってきたとする</p>
 <div class="gatsby-highlight" data-language="html"><pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">action</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span><span class="token punctuation">></span></span>名前：<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token punctuation">/></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span><span class="token punctuation">></span></span>メールアドレス：<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token punctuation">/></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
@@ -1437,6 +1437,7 @@ UIコンポーネントの設定を変更すると，コンテキストが予期
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span></code></pre></div>
 <p>→目の見えないユーザーは，そもそもエラーに気づかないかもしれない</p>
 <p>「送信したのに同じページが返ってきたぞ」と思い，読み進めて初めてエラーがあったことに気づく</p>
+<p>例2：例1を改良して，エラーに気づきやすくした</p>
 <div class="gatsby-highlight" data-language="html"><pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>エラーあり | 登録フォーム<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
