@@ -629,7 +629,7 @@ CSSでコンテンツの順序を変えている</p>
 <p>例：以下では，<code class="language-text">img</code>要素でボタンをエミュレートしている．マウスでは使用できる</p>
 <div class="gatsby-highlight" data-language="html"><pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token special-attr"><span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value javascript language-javascript"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'hello'</span><span class="token punctuation">)</span></span><span class="token punctuation">"</span></span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>hello_button.png<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>say hello<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span></code></pre></div>
 <p>→しかしキーボードで操作できない</p>
-<p>キーボードで操作するためには，フォーカス可能にしてキーイベントを実装する必要がある</p>
+<p>キーボードで操作するためには，フォーカス可能にする必要がある</p>
 <p><img src="/4883eac2d2b2af123688687b0c60863a/bad.svg" alt="失敗例">
 フォーカスを強制的に解除している</p>
 <div class="gatsby-highlight" data-language="html"><pre class="language-html"><code class="language-html"><span class="token comment">&lt;!-- ボタンに謎の枠線が表示されないように，this.blurを使ってみた --></span>
