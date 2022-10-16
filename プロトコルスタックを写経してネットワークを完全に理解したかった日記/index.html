@@ -1064,9 +1064,8 @@ snd SYN,ACK</code></pre></div>
 <span class="token punctuation">}</span></code></pre></div>
 <p><a href="https://github.com/sititou70/klab-protocol-stack-tutorial/blob/work/src/test/static-http-server.c">改良したWebサーバーのすべてのコード</a></p>
 <h2 id="まとめ" style="position:relative;"><a href="#%E3%81%BE%E3%81%A8%E3%82%81" aria-label="まとめ permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>まとめ</h2>
-<p>Webページが表示されるまでを，プロトコルスタックの観点から追いかけてみました．今回の例は，名前解決もTLSも無しという最も単純なものでしたが，それでもたくさんのことが一瞬のうちに行われているのだと実感できました．</p>
-<p>プロトコルスタックを書くのはとても大変です．通信は，その一部が間違っているだけで全体がおかしくなります．そのたびに古の<code class="language-text">printf</code>デバッグでシーケンスを順番に確認しました．Wiresharkと見つめ合ったまま休日が終わっちゃったこともあります．最終的には，プロトコルの仕様を間違って理解していることが判明し，諦めてRFCを読むこともしばしばでした．</p>
-<p>今回触れた内容は，プロトコルスタックが持つ機能の一部にすぎません．実際，例えばカスサーバーを動かした時の<code class="language-text">tcp.c</code>のカバレッジを取ってみると</p>
+<p>Webページが表示されるまでを，プロトコルスタックの観点から追いかけてみました．今回の例は，名前解決もTLSも無しという最も単純なものでしたが，それでも1つずつ追いかけていくと結構な分量になりました．</p>
+<p>今回触れた内容はプロトコルスタックが持つ機能の一部にすぎません．例えばカスサーバーを動かした時の<code class="language-text">tcp.c</code>のカバレッジを取ってみると</p>
 <p><span
       class="gatsby-resp-image-wrapper"
       style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 665px; "
@@ -1107,9 +1106,11 @@ snd SYN,ACK</code></pre></div>
     </span></p>
 <p>約58％の機能しか実行されていません．</p>
 <p>また，今回のプロトコルスタックは学習用のものなのでシンプルな方です．例えば，実装した<code class="language-text">tcp.c</code>は約1,000行しかありませんが，Linux 6.0の<code class="language-text">net/ipv4/tcp.c</code>は約4,800行あり，関連ファイル全体（<code class="language-text">net/ipv4/tcp*</code>）では <strong>約30,700行</strong> あります．こういうプログラムを書けるすごい人たちのおかげでインターネットを使えていると思うと，頭が上がりませんね……．</p>
-<p>というわけで，コンパクトな実装と丁寧な学習資料が無ければ，今回の勉強は確実に挫折していたと言えます．<a href="https://twitter.com/pandax381">@pandax381</a>さん，素晴らしい資料をありがとうございました．</p>
+<p>実際，プロトコルスタックを書くのはとても大変です．通信は，その一部が間違っているだけで全体がおかしくなります．そのたびに<code class="language-text">printf</code>デバッグで内部状態を確認しました．Wiresharkと見つめ合ったまま休日が終わっちゃったこともあります．最終的には，プロトコルの仕様を間違って理解していることが判明し，潔くRFCを読むこともしばしばでした．</p>
+<p>しかし，普段隠れている仕組みがわかるというのは，そのような苦労を上回るくらい楽しいものでした．</p>
+<p>最後になりますが，コンパクトな実装と丁寧な学習資料が無ければ，今回の勉強は確実に挫折していたと言えます．<a href="https://twitter.com/pandax381">@pandax381</a>さん，素晴らしい資料をありがとうございました．</p>
 <p>ネットワーク初心者なので，プロトコルの理解や関西弁の使い方に間違いがあればマサカリをお願いします．</p>
-<p>ありがとうございました．</p>
+<p>読んでいただきありがとうございました．</p>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <div class="footnotes">
 <hr>
