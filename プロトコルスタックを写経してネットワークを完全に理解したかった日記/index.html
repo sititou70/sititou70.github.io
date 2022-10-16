@@ -495,7 +495,7 @@ $ <span class="token function">ip</span> a
 <li>データ(46〜1500)</li>
 <li>フレームチェックシーケンス(4)：CRC</li>
 </ul>
-<p>ether「送信先アドレスと自身のアドレス（tap0）を比較するで．お，一致するからウチらが処理すべきフレームやな」</p>
+<p>ether「送信先アドレスと自身のアドレス（tap0）を比較するで．お，一致するからワイらが処理すべきフレームやな」</p>
 <p>ether「CRCの検証などは割愛や」</p>
 <p>ether「netさん，処理すべきフレームが届きましたやで．上位プロトコルのタイプは<code class="language-text">0x0806</code>やったわ」</p>
 <p>net「了解や．登録されているプロトコルの中で<code class="language-text">0x0806</code>は……ARP君やな．彼の受信キューにデータを積んだで」</p>
@@ -518,7 +518,7 @@ $ <span class="token function">ip</span> a
 <li>送信先ハードウェアアドレス(6)</li>
 <li>送信元プロトコルアドレス(4)</li>
 </ul>
-<p>arp「今回のパケットを見る限り，相手さんもウチらと同じくIPとEthernetを使っとるみたいや．互いに通信できそうやな」</p>
+<p>arp「今回のパケットを見る限り，相手さんもワイらと同じくIPとEthernetを使っとるみたいや．互いに通信できそうやな」</p>
 <p>arp「せっかく相手さんの情報を得たことやし，これをARPキャッシュにメモっとくで．今後も通信のたびにARP解決するのは非効率やからな」</p>
 <p>arp「そしたらARPリプライを返すやで．『プロトコルアドレスxxx.xxx.xxx.xxx / ハードウェアアドレスxx:xx:xx:xx:xx:xxさん，お返事します．ワイらのプロトコルアドレスは192.168.70.2，ハードウェアアドレスは00:00:5e:00:53:01です』っと……．netさん，送信お願いやで」</p>
 <p>net「デバイスの送信処理を呼ぶで」</p>
@@ -603,7 +603,7 @@ $ <span class="token function">ip</span> a
 <p>tcp「お，了解やで．まずセグメントのチェックサムを計算して……問題なさそうや．」</p>
 <p>tcp「宛先に対応するPCBは……1つあるわ．状態はLISTEN，接続を待っとるな．<a href="https://datatracker.ietf.org/doc/html/rfc9293#section-3.10.7.2">RFC 9293の節3.10.7.2</a>のとおりに処理を進めていくで」</p>
 <p>tcp「まず，RSTフラグは……よし立ってないな．接続してないのに切断しようとするやつやったら無視しとったところや」</p>
-<p>tcp「次にACKフラグ……も立ってないな．ウチらは何も送信してないのに『受信しました！』とか言われたらおかしいもんな」</p>
+<p>tcp「次にACKフラグ……も立ってないな．ワイらはまだ何も送信してないのに『受信しました！』とか言われたらおかしいもんな」</p>
 <p>tcp「ではSYNフラグは……しっかり立っとるな！接続まちのワイに初期シーケンス番号を教えとるんや」</p>
 <p>tcp「ここで，LISTEN状態でSYNを受け取ったので，SYN_RECEIVED状態に移行する必要がある」</p>
 <p>tcp「PCBは一種のステートマシンになっていて，その状態遷移は以下の図で表されるんや」</p>
@@ -652,8 +652,8 @@ $ <span class="token function">ip</span> a
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">  rcv SYN
 -----------
 snd SYN,ACK</code></pre></div>
-<p>tcp「つまり，LISTEN状態でSYNを受け取ったら，SYN, ACKを送信してSYN_RECEIVED状態に移行しろって書いてあるわけや．『先程のSYNを受信しました（ACK），こちらの初期シーケンス番号はこちらです（SYN）』ってかんじやな」</p>
-<p>tcp「まずはSYN, ACK応答を最優先で行ってしまうで．PCBに必要な情報を突っ込んで」</p>
+<p>tcp「つまり，LISTEN状態でSYNを受け取ったら，SYN, ACKを送信してSYN_RECEIVED状態に移行しろって書いてあるわけや」</p>
+<p>tcp「というわけで，まずはSYN, ACK応答を最優先で行ってしまうで．PCBに必要な情報を突っ込んで」</p>
 <ul>
 <li>local（自分のアドレス）：受信セグメントの送信先</li>
 <li>foreign（相手のアドレス）：受信セグメントの送信元</li>
@@ -667,7 +667,7 @@ snd SYN,ACK</code></pre></div>
 <li>irs（初期受信シーケンス番号）：受信セグメントのシーケンス番号</li>
 <li>iss（初期送信シーケンス番号）：ランダム値</li>
 </ul>
-<p>tcp「送信セグメントのヘッダの必要な部分を埋めて，チェックサムなども計算する．そしたらあとはIPさんおねがいやで」</p>
+<p>tcp「送信セグメントのヘッダの必要な部分を埋めて，チェックサムなども計算する．セグメントの意味は『先程のSYNを受信しました（ACK），ワイらの初期シーケンス番号はこちらです（SYN）』ってかんじやな．そしたらあとはIPさんおねがいやで」</p>
 <p>ip「了解や．まずはどのデバイスから送信するかを決めなあかんな，えーっと，ルーティングテーブルは……」</p>
 <table>
 <thead>
@@ -687,7 +687,7 @@ snd SYN,ACK</code></pre></div>
 </tr>
 </tbody>
 </table>
-<p>ip「こうなっとるな．今回の宛先は<code class="language-text">192.168.70.1</code>やから……<code class="language-text">192.168.70.0/255.255.255.0</code>の行にヒットするな．しかもこれ，<code class="language-text">nexthop</code>が<code class="language-text">255.255.255.255</code>やから直接接続のルートや．したがって接続先アドレスは<code class="language-text">nexthop</code>ではなく<code class="language-text">192.168.0.1</code>にしとくで」</p>
+<p>ip「こうなっとるな．今回の宛先は<code class="language-text">192.168.70.1</code>やから……<code class="language-text">192.168.70.0/255.255.255.0</code>の行にヒットするな．しかもこれ，<code class="language-text">nexthop</code>が<code class="language-text">255.255.255.255</code>やから直接接続のルートや．したがって送信先アドレスは<code class="language-text">nexthop</code>ではなく<code class="language-text">192.168.0.1</code>にしとくで」</p>
 <p>ip「あとはIPヘッダの必要な部分埋めて……あ，送信先ハードウェアアドレスの部分やけど，arpさん，<code class="language-text">192.168.70.1</code>のハードウェアアドレス知らんか？」</p>
 <p>arp「あ，それならARPキャッシュにあるな．<code class="language-text">xx:xx:xx:xx:xx:xx</code>やで」</p>
 <p>ip「ありがとな，これで送信できる．netさん，お願いやで」</p>
@@ -906,7 +906,7 @@ snd SYN,ACK</code></pre></div>
 <p>tcp「次に，ACKがセットされていることを確認するで」</p>
 <p>tcp「そして，次の条件をテストするで．『送信したが受信を確認していない最も古いシーケンス番号 &#x3C; 受信セグメントのack番号（相手が次に要求しているシーケンス番号） &#x3C;= 次に送信すべきシーケンス番号』」</p>
 <p>tcp「これはさっきも出てきた条件やな．『送信したが受信を確認していない最も古いシーケンス番号』が確認されて，かつ相手が要求するシーケンス番号がこちらの想定するそれを追い越していない」</p>
-<p>tcp「これを確認したら，<code class="language-text">snd.una</code>（送信したが受信を確認していない最も古いシーケンス番号）を，受信セグメントのACK番号で更新するで．受信セグメントのACK番号は，言い換えれば相手が期待している次のシーケンス番号，つまりこのセグメントに対してウチらが後で送信するACK応答のシーケンス番号となるから，<code class="language-text">snd.una</code>の定義と一致するで」</p>
+<p>tcp「これを確認したら，<code class="language-text">snd.una</code>（送信したが受信を確認していない最も古いシーケンス番号）を，受信セグメントのACK番号で更新するで．受信セグメントのACK番号は，言い換えれば相手が期待している次のシーケンス番号，つまりこのセグメントに対してワイらが後で送信するACK応答のシーケンス番号となるから，<code class="language-text">snd.una</code>の定義と一致するで」</p>
 <p>tcp「次に，相手さんの受信ウインドウ（つまりこちらの送信ウインドウ）の更新を行うで．更新は以下どちらかが真なら行うで」</p>
 <ol>
 <li>直近のウインドウ更新でのシーケンス番号 &#x3C; 受信セグメントのシーケンス番号</li>
