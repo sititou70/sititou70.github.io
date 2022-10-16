@@ -345,7 +345,7 @@ $ <span class="token function">ip</span> a
   <span class="token class-name">ip_addr_t</span> netmask<span class="token punctuation">;</span> <span class="token comment">// ネットワークアドレス</span>
   <span class="token class-name">ip_addr_t</span> broadcast<span class="token punctuation">;</span> <span class="token comment">// ブロードキャストアドレス</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
-<p>ip「まぁようするに，IPアドレスやサブネットマスクなどの情報やんな．これをネットワークデバイスのifacesにつなぐから」</p>
+<p>ip「これをネットワークデバイスのifacesにつなぐから」</p>
 <div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c"><span class="token keyword">struct</span> <span class="token class-name">net_device</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token keyword">struct</span> <span class="token class-name">net_iface</span> <span class="token operator">*</span>ifaces<span class="token punctuation">;</span> <span class="token comment">// 上位プロトコルによって定義されるアドレス情報</span>
