@@ -285,7 +285,7 @@ void function() {
 <p>tcp「<strong>ipさんに</strong> 自身を登録したで．TCPパケットが来たら呼んでや．あと，セグメントの再送タイマーも開始したで」</p>
 <p>net「初期化完了や」</p>
 <h3 id="step-2-ネットワークデバイスのセットアップ" style="position:relative;"><a href="#step-2-%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%81%AE%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97" aria-label="step 2 ネットワークデバイスのセットアップ permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 2: ネットワークデバイスのセットアップ</h3>
-<p>ユーザープログラム「ネットワークデバイスを初期化してくれ．デバイス名は<code class="language-text">"tap0"</code>，ハードウェアアドレスは<code class="language-text">"00:00:5e:00:53:01"</code>」</p>
+<p>ユーザープログラム「ネットワークデバイスを初期化してくれ．デバイス名は<code class="language-text">tap0</code>，ハードウェアアドレスは<code class="language-text">00:00:5e:00:53:01</code>」</p>
 <p>ether_tapデバイスドライバ「環境依存の処理はワイが担当するで．今回はユーザーランドでの実装やから，<a href="https://ja.wikipedia.org/wiki/TUN/TAP">TAPデバイス</a>を使ってパケットを受け取るで．intrさん，パケットが来たらワイを呼び出してくれ」</p>
 <p>ether_tapデバイスドライバ「環境依存な情報は設定したから，あとはetherさん頼むわ」</p>
 <p>ether「よし，ネットワークデバイス構造体を初期化するで．これは以下のようなもので」</p>
