@@ -282,7 +282,7 @@ void function() {
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>arp「必要な欄を埋めてnetさんに渡したら登録完了や．ARPパケットが来たら呼んでや．あと，ARPキャッシュ（後述）を掃除するタイマーも開始したで」</p>
 <p>ip「netさんに自身を登録したで．IPパケットが来たら呼んでや」</p>
-<p>tcp「<strong>ipさんに</strong> 自身を登録したで．TCPパケットが来たら呼んでや．あと，セグメントの再送タイマーも開始したで」</p>
+<p>tcp「<strong>ipさんに</strong> 自身を登録したで．TCPセグメントが来たら呼んでや．あと，セグメントの再送タイマーも開始したで」</p>
 <p>net「初期化完了や」</p>
 <h3 id="step-2-ネットワークデバイスのセットアップ" style="position:relative;"><a href="#step-2-%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%81%AE%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97" aria-label="step 2 ネットワークデバイスのセットアップ permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 2: ネットワークデバイスのセットアップ</h3>
 <p>ユーザープログラム「ネットワークデバイスを初期化してくれ．デバイス名は<code class="language-text">tap0</code>，ハードウェアアドレスは<code class="language-text">00:00:5e:00:53:01</code>」</p>
@@ -405,7 +405,7 @@ $ <span class="token function">ip</span> a
 <h3 id="step-4-プロトコルスタックの開始" style="position:relative;"><a href="#step-4-%E3%83%97%E3%83%AD%E3%83%88%E3%82%B3%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%81%AE%E9%96%8B%E5%A7%8B" aria-label="step 4 プロトコルスタックの開始 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 4: プロトコルスタックの開始</h3>
 <p>ユーザープログラム「いろいろ設定が終わったから，プロトコルスタックを開始してくれ」</p>
 <p>net「まずは，intr君を開始するで」</p>
-<p>intr「無限ループでシグナルを処理するスレッドを開始します．これは，シグナルがあればnetさんのハンドラを呼び出し，それが終わるとまた即座にシグナルを待ちます」</p>
+<p>intr「無限ループでシグナルを処理するスレッドを開始します．これは，シグナルがあればその番号に対応する処理を呼び出し，それが終わるとまた即座にシグナルを待ちます」</p>
 <p>net「次に，すべてのネットワークデバイスを立ち上げるで．<code class="language-text">tap0</code>の<code class="language-text">net_device_ops->open</code>を呼ぶで」</p>
 <p>ether_tapデバイスドライバ「<code class="language-text">net_device_ops->open</code>はTAPの初期化処理になるようにさっき設定しといたから，ここでワイが呼ばれたで．初期化完了や」</p>
 <p>net「よし，<code class="language-text">tap0</code>のフラグを起動中にして…」</p>
@@ -534,7 +534,7 @@ $ <span class="token function">ip</span> a
 <h4 id="コネクション確立編" style="position:relative;"><a href="#%E3%82%B3%E3%83%8D%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E7%A2%BA%E7%AB%8B%E7%B7%A8" aria-label="コネクション確立編 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>コネクション確立編</h4>
 <p>Linuxのプロトコルスタック「それでは<code class="language-text">192.168.70.2:80</code>をアクティブオープンしよう．コネクションは3ウェイハンドシェイクによって，お互いに通信可能であることを確かめることで確立するよ」</p>
 <p>Linuxのプロトコルスタック「もう少し詳しくいうと，ここでお互いの初期シーケンス番号を伝え合うんだ．シーケンス番号とは，ざっくりいうと送っているデータの位置なんだけど，これが第三者に偽造されると危険なデータを差し込まれてしまう場合がある（<a href="https://ja.wikipedia.org/wiki/TCP%E3%82%B7%E3%83%BC%E3%82%B1%E3%83%B3%E3%82%B9%E7%95%AA%E5%8F%B7%E4%BA%88%E6%B8%AC%E6%94%BB%E6%92%83">シーケンス番号予測攻撃</a>）．そのため，初期のシーケンス番号を乱数で決めて最初だけ伝え合うことで，安全性を高めることになってるんだ」</p>
-<p>Linuxのプロトコルスタック「通信に必要なPCBを用意して，セグメントを構築するよ．<a href="https://datatracker.ietf.org/doc/html/rfc9293">RFC 9293</a>によれば，TCPパケットの構造は以下のようになってる」</p>
+<p>Linuxのプロトコルスタック「通信に必要なPCBを用意して，セグメントを構築するよ．<a href="https://datatracker.ietf.org/doc/html/rfc9293">RFC 9293</a>によれば，TCPセグメントの構造は以下のようになってる」</p>
 <ul>
 <li>送信元ポート番号(2)</li>
 <li>送信先ポート番号(2)：80など</li>
