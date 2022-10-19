@@ -1104,7 +1104,7 @@ snd SYN,ACK</code></pre></div>
   </a>
     </span></p>
 <p>約58％の機能しか実行されていません．</p>
-<p>また，今回のプロトコルスタックは学習用のものなのでシンプルな方です．例えば，実装した<code class="language-text">tcp.c</code>は約1,000行しかありませんが，Linux 6.0の<code class="language-text">net/ipv4/tcp.c</code>は約4,800行あり，関連ファイル全体（<code class="language-text">net/ipv4/tcp*</code>）では <strong>約30,700行</strong> あります．こういうプログラムを書けるすごい人たちのおかげでインターネットを使えていると思うと，頭が上がりませんね……．</p>
+<p>また，今回のプロトコルスタックは学習用のものなのでシンプルな方です．例えば，実装した<code class="language-text">tcp.c</code>は約1,000行しかありませんが，Linux 6.0の<code class="language-text">net/ipv4/tcp.c</code>は約4,800行あり，関連ファイル全体（<code class="language-text">net/ipv4/tcp*</code>）では <strong>約30,700行</strong> あります．こういうプログラムが書けるすごい人たちのおかげでインターネットを使えていると思うと，頭が上がりませんね……．</p>
 <p>実際，プロトコルスタックを書くのはとても大変です．通信は，その一部が間違っているだけで全体がおかしくなります．そのたびに<code class="language-text">printf</code>デバッグしたり，Wiresharkと見つめ合ったまま休日が終わっちゃったり，プロトコルを間違って理解していることが判明し，潔くRFCを読んだりしてました．</p>
 <p>しかし，普段隠れている仕組みがわかるというのは，それらの苦労を上回るくらいとっても楽しいものです．</p>
 <p>最後になりますが，コンパクトな実装と丁寧な学習資料が無ければ，今回の勉強は確実に挫折していたと言えます．<a href="https://twitter.com/pandax381">@pandax381</a>さん，素晴らしい資料をありがとうございました．</p>
