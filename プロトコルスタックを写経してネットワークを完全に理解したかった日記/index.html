@@ -373,7 +373,7 @@ $ <span class="token function">ip</span> a
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 <span class="token keyword">static</span> <span class="token keyword">struct</span> <span class="token class-name">ip_route</span> <span class="token operator">*</span>routes<span class="token punctuation">;</span> <span class="token comment">// ルーティングテーブル．ルートの単方向リスト</span></code></pre></div>
-<p>ip「この表の使い方は『<code class="language-text">送信したいIPアドレス &amp; netmask</code>が<code class="language-text">network</code>とマッチしたら，<code class="language-text">ip_iface</code>のデバイスから<code class="language-text">nexthop</code>向けに送り出す』といったかんじやな」</p>
+<p>ip「この表の使い方は『<code class="language-text">送信先IPアドレス &amp; netmask</code>が<code class="language-text">network</code>とマッチしたら，<code class="language-text">ip_iface</code>のデバイスから<code class="language-text">nexthop</code>向けに送り出す』といったかんじやな」</p>
 <p>ip「今回は，<code class="language-text">tap0</code>に<code class="language-text">192.168.70.2/24</code>が登録されたわけや．ということは，<code class="language-text">tap0</code>は<code class="language-text">192.168.70.0/24</code>のネットワークに接続されていることになる．当たり前やけどな」</p>
 <p>ip「したがって，今後これらのネットワークに属するホスト，例えば<code class="language-text">192.168.70.123</code>などと通信するときは，<code class="language-text">tap0</code>から送信すれば直接やり取りできるのが自明や．したがってルーティングテーブルにそのことをメモしておくで」</p>
 <table>
@@ -394,7 +394,7 @@ $ <span class="token function">ip</span> a
 </tr>
 </tbody>
 </table>
-<p>ip「nexthopは直接通信に必要ないから，適当に<code class="language-text">255.255.255.255</code>にしといたで」</p>
+<p>ip「nexthopは直接の通信に必要ないから，適当に<code class="language-text">255.255.255.255</code>にしといたで」</p>
 <p>ip「このように，ネットワークデバイスにIPを設定しただけで自動的に登録されるルート情報の種類は <strong>直接接続</strong> と呼ばれるで」</p>
 <p>ip「ちなみに他の種類は以下のとおりや」</p>
 <ul>
