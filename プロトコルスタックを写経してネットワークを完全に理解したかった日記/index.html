@@ -247,19 +247,19 @@ void function() {
 <p>さすがに分かりづらいので，以下会話形式<sup id="fnref-1"><a href="#fn-1" class="footnote-ref">1</a></sup>でお送りします</p>
 <h2 id="1-プロトコルスタックのセットアップ" style="position:relative;"><a href="#1-%E3%83%97%E3%83%AD%E3%83%88%E3%82%B3%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%81%AE%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97" aria-label="1 プロトコルスタックのセットアップ permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. プロトコルスタックのセットアップ</h2>
 <p>先程は割愛していたのですが，Webサーバーの起動前に以下のセットアップ処理を行っていました．</p>
-<div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c"><span class="token comment">// Step 1: プロトコルスタック初期化</span>
+<div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c"><span class="token comment">// Step 1: プロトコルスタックを初期化</span>
 <span class="token function">net_init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token comment">// Step 2: ネットワークデバイスのセットアップ</span>
+<span class="token comment">// Step 2: ネットワークデバイスをセットアップ</span>
 <span class="token keyword">struct</span> <span class="token class-name">net_device</span> <span class="token operator">*</span>dev <span class="token operator">=</span> <span class="token function">ether_tap_init</span><span class="token punctuation">(</span>ETHER_TAP_NAME<span class="token punctuation">,</span> ETHER_TAP_HW_ADDR<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token comment">// Step 3: IPアドレスの登録</span>
+<span class="token comment">// Step 3: IPアドレスを登録</span>
 <span class="token keyword">struct</span> <span class="token class-name">ip_iface</span> <span class="token operator">*</span>iface <span class="token operator">=</span> <span class="token function">ip_iface_alloc</span><span class="token punctuation">(</span>ETHER_TAP_IP_ADDR<span class="token punctuation">,</span> ETHER_TAP_NETMASK<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">ip_iface_register</span><span class="token punctuation">(</span>dev<span class="token punctuation">,</span> iface<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token comment">// Step 4: プロトコルスタックの開始</span>
+<span class="token comment">// Step 4: プロトコルスタックを開始</span>
 <span class="token function">net_run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<h3 id="step-1-プロトコルスタック初期化" style="position:relative;"><a href="#step-1-%E3%83%97%E3%83%AD%E3%83%88%E3%82%B3%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E5%88%9D%E6%9C%9F%E5%8C%96" aria-label="step 1 プロトコルスタック初期化 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 1: プロトコルスタック初期化</h3>
+<h3 id="step-1-プロトコルスタックを初期化" style="position:relative;"><a href="#step-1-%E3%83%97%E3%83%AD%E3%83%88%E3%82%B3%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%82%92%E5%88%9D%E6%9C%9F%E5%8C%96" aria-label="step 1 プロトコルスタックを初期化 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 1: プロトコルスタックを初期化</h3>
 <p>ユーザープログラム「プロトコルスタック初期化してくれ」</p>
 <p>net「ワイはプロトコルスタック全体を管理するリーダーやで．よっしゃ，まずはintr君を初期化するで」</p>
 <p>net「intr君は割り込みやタイマーでワイを呼び出してくれるんや．例えば，通信をスムーズに処理するためには受信と解析を非同期に処理することが重要なんやけど，そこで彼が役立つで」</p>
@@ -284,7 +284,7 @@ void function() {
 <p>ip「netさんに自身を登録したで．IPパケットが来たら呼んでや」</p>
 <p>tcp「<strong>ipさんに</strong> 自身を登録したで．TCPセグメントが来たら呼んでや．あと，セグメントの再送タイマーも開始したで」</p>
 <p>net「初期化完了や」</p>
-<h3 id="step-2-ネットワークデバイスのセットアップ" style="position:relative;"><a href="#step-2-%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%81%AE%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97" aria-label="step 2 ネットワークデバイスのセットアップ permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 2: ネットワークデバイスのセットアップ</h3>
+<h3 id="step-2-ネットワークデバイスをセットアップ" style="position:relative;"><a href="#step-2-%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%82%92%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97" aria-label="step 2 ネットワークデバイスをセットアップ permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 2: ネットワークデバイスをセットアップ</h3>
 <p>ユーザープログラム「ネットワークデバイスを初期化してくれ．デバイス名は<code class="language-text">tap0</code>，ハードウェアアドレスは<code class="language-text">00:00:5e:00:53:01</code>」</p>
 <p>ether_tapデバイスドライバ「環境依存の処理はワイが担当するで．今回はユーザーランドでの実装やから，<a href="https://ja.wikipedia.org/wiki/TUN/TAP">TAPデバイス</a>を使ってパケットを受け取るで．intrさん，パケットが来たらワイを呼び出してくれ」</p>
 <p>ether_tapデバイスドライバ「環境依存な情報は設定したから，あとはetherさん頼むわ」</p>
@@ -326,7 +326,7 @@ $ <span class="token function">ip</span> a
 <p>ether「必要な情報埋めたで」</p>
 <p>ether_tapデバイスドライバ「netさん，デバイス作ったから報告します」</p>
 <p>net「了解，覚えとくで」</p>
-<h3 id="step-3-ipアドレスの登録" style="position:relative;"><a href="#step-3-ip%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%81%AE%E7%99%BB%E9%8C%B2" aria-label="step 3 ipアドレスの登録 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 3: IPアドレスの登録</h3>
+<h3 id="step-3-ipアドレスを登録" style="position:relative;"><a href="#step-3-ip%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%82%92%E7%99%BB%E9%8C%B2" aria-label="step 3 ipアドレスを登録 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 3: IPアドレスを登録</h3>
 <p>ユーザープログラム「さっきのデバイスにIPアドレス<code class="language-text">192.168.70.2/24</code>を登録してくれ」</p>
 <p>ip「net_iface構造体を設定するやで．これは以下のような定義で」</p>
 <div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c"><span class="token keyword">struct</span> <span class="token class-name">net_iface</span> <span class="token punctuation">{</span>
@@ -402,7 +402,7 @@ $ <span class="token function">ip</span> a
 <li>スタティック：ユーザーが手動で追加した情報</li>
 <li>ダイナミック：ルーティングプロトコルによって追加された情報（本実装では割愛）</li>
 </ul>
-<h3 id="step-4-プロトコルスタックの開始" style="position:relative;"><a href="#step-4-%E3%83%97%E3%83%AD%E3%83%88%E3%82%B3%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%81%AE%E9%96%8B%E5%A7%8B" aria-label="step 4 プロトコルスタックの開始 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 4: プロトコルスタックの開始</h3>
+<h3 id="step-4-プロトコルスタックを開始" style="position:relative;"><a href="#step-4-%E3%83%97%E3%83%AD%E3%83%88%E3%82%B3%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%82%92%E9%96%8B%E5%A7%8B" aria-label="step 4 プロトコルスタックを開始 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 4: プロトコルスタックを開始</h3>
 <p>ユーザープログラム「いろいろ設定が終わったから，プロトコルスタックを開始してくれ」</p>
 <p>net「まずは，intr君を開始するで」</p>
 <p>intr「無限ループでシグナルを処理するスレッドを開始します．これは，シグナルがあればその番号に対応する処理を呼び出し，それが終わるとまた即座にシグナルを待ちます」</p>
@@ -1007,7 +1007,7 @@ snd SYN,ACK</code></pre></div>
 <p>Linuxのプロトコルスタック「さっきのFINにACKが来たので<code class="language-text">CLOSED</code>状態に移行して終了です」</p>
 <h2 id="3-プロトコルスタックの終了処理" style="position:relative;"><a href="#3-%E3%83%97%E3%83%AD%E3%83%88%E3%82%B3%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%81%AE%E7%B5%82%E4%BA%86%E5%87%A6%E7%90%86" aria-label="3 プロトコルスタックの終了処理 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. プロトコルスタックの終了処理</h2>
 <p>先程は割愛しましたが，Webサーバーの終了後に以下のような終了処理を行っていました．</p>
-<div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c"><span class="token comment">// プロトコルスタックの終了</span>
+<div class="gatsby-highlight" data-language="c"><pre class="language-c"><code class="language-c"><span class="token comment">// プロトコルスタックを終了</span>
 <span class="token function">net_shutdown</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>特に難しいことはしていません．まず，すべてのネットワークデバイスの終了処理を実行します．ここでTAPデバイスのファイルディスクリプタもcloseされます．</p>
 <p>最後に，intrのシグナル用スレッドを終了して終わりです．</p>
