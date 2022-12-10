@@ -147,8 +147,8 @@ void function() {
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>ここで，<code class="language-text">Dog &lt;: Animal</code>です．</p>
 <p><code class="language-text">&lt;:</code>という記号は2つの型のあいだに書いて，「左の型が右の型のサブタイプである」と読みます．</p>
-<p>TypeScriptにおいて，2つのオブジェクトがサブタイプ関係にあるには，<strong>それらに共通するプロパティについてもまた，サブタイプ関係である必要があります．</strong></p>
-<p>今回の例では，<code class="language-text">Dog</code>と<code class="language-text">Animal</code>に共通する<code class="language-text">animal</code>プロパティについて<code class="language-text">string &lt;: string</code>が成立するのでOKです．</p>
+<p>TypeScriptにおいて，2つのオブジェクトがサブタイプ関係にあるには，<strong>それらに共通するプロパティについてもまた，サブタイプ関係が必要です</strong></p>
+<p>今回の例では，<code class="language-text">Dog</code>と<code class="language-text">Animal</code>に共通する<code class="language-text">animal</code>プロパティについて<code class="language-text">string &lt;: string</code>なのでOKです．</p>
 <p>したがって，<strong><code class="language-text">Animal</code>型の変数に<code class="language-text">Dog</code>型の値を代入できます</strong></p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token comment">// できる</span>
 <span class="token keyword">const</span> animalVariable<span class="token operator">:</span> Animal <span class="token operator">=</span> dog<span class="token punctuation">;</span></code></pre></div>
@@ -164,9 +164,9 @@ void function() {
 <p>答え：TypeScriptでは<strong>できます</strong>（配列に共変性がある）</p>
 <h2 id="できて良いんだっけ" style="position:relative;"><a href="#%E3%81%A7%E3%81%8D%E3%81%A6%E8%89%AF%E3%81%84%E3%82%93%E3%81%A0%E3%81%A3%E3%81%91" aria-label="できて良いんだっけ permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>……できて良いんだっけ？</h2>
 <p>いっしょに考えてみましょう．</p>
-<p><code class="language-text">Animal[]</code>型の変数に<code class="language-text">Dog[]</code>型の値を代入するためには，<code class="language-text">Dog[] &lt;: Animal[]</code>である必要があります．</p>
-<p>したがって，先ほどと同じように<strong>2つの配列に共通するすべてのプロパティについてもまた，サブタイプ関係にある必要があります．</strong></p>
-<p>配列の型は以下のような<code class="language-text">lib.es5.d.ts</code>によって定義されています．</p>
+<p><code class="language-text">Animal[]</code>型の変数に<code class="language-text">Dog[]</code>型の値を代入するためには，<code class="language-text">Dog[] &lt;: Animal[]</code>が必要です．</p>
+<p>したがって，先ほどと同じように<strong>2つの配列に共通するすべてのプロパティについてもまた，サブタイプ関係が必要です．</strong></p>
+<p>配列の型は<code class="language-text">lib.es5.d.ts</code>によって，以下のように定義されています．</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">interface</span> <span class="token class-name"><span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">></span></span> <span class="token punctuation">{</span>
   <span class="token comment">/**
    * Gets or sets the length of the array. This is a number one higher than the highest index in the array.
@@ -189,7 +189,7 @@ void function() {
    * @param fromIndex The array index at which to begin the search. If fromIndex is omitted, the search starts at index 0.
    */</span>
   <span class="token function">indexOf</span><span class="token punctuation">(</span>searchElement<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span> fromIndex<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span></code></pre></div>
-<p>つまり，<code class="language-text">(searchElement: Dog, fromIndex?: number) => number &lt;: (searchElement: Animal, fromIndex?: number) => number</code>である必要があるということですが，これは一般的には <strong>成り立ちません</strong></p>
+<p>つまり，<code class="language-text">(searchElement: Dog, fromIndex?: number) => number &lt;: (searchElement: Animal, fromIndex?: number) => number</code>が必要ですが，これは一般的には <strong>成り立ちません</strong></p>
 <p><strong><code class="language-text">Animal</code>の入力を期待する関数</strong>を<strong>Dogの入力を期待する関数</strong>で置き換えられないからです．（反変性）</p>
 <p>以上を踏まえると，次のようないたずらができます．</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> dogArray<span class="token operator">:</span> Dog<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>dog<span class="token punctuation">]</span><span class="token punctuation">;</span>
@@ -241,7 +241,7 @@ TypeError: Cannot <span class="token builtin class-name">read</span> properties 
 <p>配列が共変扱いなのはわかりました．では，それはTS自身の型システム内でどのように実現されているのでしょうか？</p>
 <h3 id="メソッド記法の使用" style="position:relative;"><a href="#%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E8%A8%98%E6%B3%95%E3%81%AE%E4%BD%BF%E7%94%A8" aria-label="メソッド記法の使用 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>メソッド記法の使用</h3>
 <p>まず，メソッド記法が一役買っています．</p>
-<p>簡単のために，<code class="language-text">indexOf</code>しかプロパティを持たない<code class="language-text">MyArray</code>を作ってみます．</p>
+<p>説明の簡単のために，<code class="language-text">indexOf</code>しかプロパティを持たない<code class="language-text">MyArray</code>を作ってみます．</p>
 <p>以下の，2種類の<code class="language-text">MyArray</code>をみてください</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">interface</span> <span class="token class-name">MyArray1<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">></span></span> <span class="token punctuation">{</span>
   <span class="token function">indexOf</span><span class="token punctuation">(</span>elem<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
@@ -262,9 +262,9 @@ TypeError: Cannot <span class="token builtin class-name">read</span> properties 
 <span class="token comment">//    ^^^^^^^^^^^^^^</span>
 <span class="token comment">// 型 'MyArray2&lt;Dog>' を型 'MyArray2&lt;Animal>' に割り当てることはできません。</span>
 <span class="token comment">//   プロパティ 'dog' は型 'Animal' にありませんが、型 'Dog' では必須です。ts(2322)</span></code></pre></div>
-<p>メソッド記法を使うと，引数の型が双変として扱われるようになるそうです．双変とは，共変または反変といった感じで，詳しくはbivarianceHackと検索してみてください．</p>
+<p>メソッド記法を使うと，引数の型が双変として扱われるようになるそうです．双変とは，共変または反変を許すといった感じで，詳しくは「bivarianceHack」と検索してみてください．</p>
 <p>恥ずかしながら，私はこの挙動を半年くらい前まで知りませんでした．（そして知った当時はだいぶ驚きました）</p>
-<p>さて，思い返してみると，ライブラリの型定義はほとんどメソッド記法で書かれており，</p>
+<p>さて，思い返してみると，ライブラリの型定義は（配列に限らず）ほとんどメソッド記法で書かれており，</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">interface</span> <span class="token class-name"><span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">></span></span> <span class="token punctuation">{</span>
   <span class="token comment">/**
    * Gets or sets the length of the array. This is a number one higher than the highest index in the array.
@@ -280,7 +280,7 @@ TypeError: Cannot <span class="token builtin class-name">read</span> properties 
   <span class="token function">toLocaleString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
   <span class="token comment">// ...</span>
 <span class="token punctuation">}</span></code></pre></div>
-<p>配列に限らず，これらのメソッドの引数はゆるめに扱われます．その結果，配列の共変性にも影響しているというわけです．</p>
+<p>これらの引数はゆるめに扱われます．その結果，配列の共変性にも影響しているというわけです．</p>
 <h3 id="配列専用の型付け規則" style="position:relative;"><a href="#%E9%85%8D%E5%88%97%E5%B0%82%E7%94%A8%E3%81%AE%E5%9E%8B%E4%BB%98%E3%81%91%E8%A6%8F%E5%89%87" aria-label="配列専用の型付け規則 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>配列専用の型付け規則</h3>
 <p>メソッド記法と変性の関係についてわかったところで，さっそく<code class="language-text">lib.es5.d.ts</code>に次のようないたずらをしてみます．</p>
 <div class="gatsby-highlight" data-language="diff"><pre class="language-diff"><code class="language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span> /**
@@ -290,14 +290,15 @@ TypeError: Cannot <span class="token builtin class-name">read</span> properties 
 <span class="token prefix unchanged"> </span>  */
 </span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>  indexOf(searchElement: T, fromIndex?: number): number;
 </span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>  indexOf: (searchElement: T, fromIndex?: number) => number;</span></code></pre></div>
-<p>これで先ほどのコードが型検査で失敗するようになるはずです．</p>
+<p>これで先ほどのコードは型検査で失敗するようになるでしょう．</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> dogArray<span class="token operator">:</span> Dog<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>dog<span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> animalArray<span class="token operator">:</span> Animal<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> dogArray<span class="token punctuation">;</span></code></pre></div>
 <div class="gatsby-highlight" data-language="sh"><pre class="language-sh"><code class="language-sh">$ npx tsc
 $ <span class="token comment"># パス？？？</span></code></pre></div>
 <p>しかしパスしてしまいました．これが今回気づいたことです．</p>
 <p>原因を確かめるために，TypeScriptのコードを読んでみます．</p>
-<p>型検査器のコードは<a href="https://github.com/microsoft/TypeScript">microsoft/TypeScript</a>の<code class="language-text">src/compiler/checker.ts</code>にあるのですが，これは（テストコード以外で）最大のファイルで，現時点で47,206行（！？）あり，2.6MBのサイズを持ち，GitHubがプレビューを拒否します．<strong>これはあくまで1つの<code class="language-text">.ts</code>ファイルです．</strong></p>
+<p>型検査器のコードは<a href="https://github.com/microsoft/TypeScript">microsoft/TypeScript</a>の<code class="language-text">src/compiler/checker.ts</code>にあるのですが，これは（テストコード以外で）最大のファイルで，現時点で47,206行（！？）あり，2.6MBのサイズを持ち，GitHubがプレビューを拒否します．</p>
+<p><strong>念のために言っておくと，これはあくまで1つの<code class="language-text">.ts</code>ファイルです．</strong></p>
 <p><span
       class="gatsby-resp-image-wrapper"
       style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 514px; "
@@ -364,7 +365,7 @@ $ <span class="token comment"># パス？？？</span></code></pre></div>
   ところで，relationが取りうる値としてassignableRelationとsubtypeRelationというのがありますが，これらは何が違うのでしょうか？
 </summary>
 <p>サブタイプ関係は<strong>安全代入の原則</strong>とも呼ばれるだけあって，代入可能と同じ意味としてここまで暗黙的に扱ってきました．しかし，型検査器内では区別されているということで，何が違うのか気になりますね．</p>
-<p>結論から言うとコードが長すぎてよくわからなかったのですが，サッと眺めた感じだと<code class="language-text">assignableRelation</code>の方が<code class="language-text">subtypeRelation</code>と比べてゆるい関係に見えました．例えば以下のような記述があり</p>
+<p>結論から言うと<strong>コードが長すぎてよくわからなかった</strong>のですが，サッと眺めた感じだと<code class="language-text">assignableRelation</code>の方が<code class="language-text">subtypeRelation</code>と比べてゆるい関係に見えました．例えば以下のような記述があり</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">if</span> <span class="token punctuation">(</span>relation <span class="token operator">===</span> assignableRelation <span class="token operator">||</span> relation <span class="token operator">===</span> comparableRelation<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token comment">// Type number is assignable to any computed numeric enum type or any numeric enum literal type, and</span>
@@ -404,7 +405,7 @@ $ <span class="token comment"># パス？？？</span></code></pre></div>
   <span class="token comment">// We have type references to the same generic type, and the type references are not marker</span>
   <span class="token comment">// type references (which are intended by be compared structurally). Obtain the variance</span>
   <span class="token comment">// information for the type parameters and relate the type arguments accordingly.</span>
-  <span class="token comment">// 訳：「同じジェネリクス型に対する2つの型があり，それらはマーカータイプではなく（？），構造的に比較されることを意図しています．型パラメタの引数に対する変性の情報を計算し，それによって型引数を関連付けます（？？）」という感じ</span>
+  <span class="token comment">// 訳：「同じジェネリクス型に対する2つの型があり，それらはマーカータイプではなく（？），構造的に比較されることを意図しています．型パラメタの引数に対する変性の情報を計算し，それによって型引数を関連付けます（？？）」というかんじ</span>
 
   <span class="token comment">// ダンプ：source === Array&lt;Dog></span>
   <span class="token comment">// ダンプ：target === Array&lt;Animal></span>
@@ -415,10 +416,11 @@ $ <span class="token comment"># パス？？？</span></code></pre></div>
   <span class="token comment">// ダンプ：variances === [VarianceFlags.Covariant]</span>
   <span class="token comment">// おそらくArray&lt;T>のTが共変であることを表している</span>
 
-  <span class="token comment">// relateVariancesは，おそらく求めた変性情報を用いて，Array&lt;Dog> &lt;: Array&lt;Animal>をテストしている</span>
+  <span class="token comment">// relateVariancesは，[Dog]と[Animal]を[VarianceFlags.Covariant]でテストする</span>
+  <span class="token comment">// つまり，結局テストされるのはDog &lt;: Animalっぽい</span>
   <span class="token keyword">const</span> varianceResult <span class="token operator">=</span> <span class="token function">relateVariances</span><span class="token punctuation">(</span>
-    <span class="token function">getTypeArguments</span><span class="token punctuation">(</span>source <span class="token keyword">as</span> TypeReference<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// ダンプ：getTypeArguments(sourge) === Dog</span>
-    <span class="token function">getTypeArguments</span><span class="token punctuation">(</span>target <span class="token keyword">as</span> TypeReference<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// ダンプ：getTypeArguments(target) === Animal</span>
+    <span class="token function">getTypeArguments</span><span class="token punctuation">(</span>source <span class="token keyword">as</span> TypeReference<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// ダンプ：getTypeArguments(sourge) === [Dog]</span>
+    <span class="token function">getTypeArguments</span><span class="token punctuation">(</span>target <span class="token keyword">as</span> TypeReference<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// ダンプ：getTypeArguments(target) === [Animal]</span>
     variances<span class="token punctuation">,</span> <span class="token comment">// [VarianceFlags.Covariant]</span>
     intersectionState <span class="token comment">// ？？？　たぶん今回関係なし</span>
   <span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -426,7 +428,7 @@ $ <span class="token comment"># パス？？？</span></code></pre></div>
     <span class="token keyword">return</span> varianceResult<span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
-<p>というわけで，<code class="language-text">getVariances</code>が<code class="language-text">[VarianceFlags.Covariant]</code>を返す理由について気になります．さっそく定義を見てみると……</p>
+<p>というわけで，<code class="language-text">getVariances</code>が<code class="language-text">[VarianceFlags.Covariant]</code>を返す理由が気になります．さっそく定義を見てみると……</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">function</span> <span class="token function">getVariances</span><span class="token punctuation">(</span>type<span class="token operator">:</span> GenericType<span class="token punctuation">)</span><span class="token operator">:</span> VarianceFlags<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
   <span class="token comment">// Arrays and tuples are known to be covariant, no need to spend time computing this.</span>
   <span class="token keyword">return</span> type <span class="token operator">===</span> globalArrayType <span class="token operator">||</span>
@@ -435,7 +437,7 @@ $ <span class="token comment"># パス？？？</span></code></pre></div>
     <span class="token operator">?</span> arrayVariances
     <span class="token operator">:</span> <span class="token function">getVariancesWorker</span><span class="token punctuation">(</span>type<span class="token punctuation">.</span><span class="token builtin">symbol</span><span class="token punctuation">,</span> type<span class="token punctuation">.</span>typeParameters<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
-<p>ここで<code class="language-text">arrayVariances</code>は以下のとおりです．</p>
+<p>ここで<code class="language-text">arrayVariances</code>は以下です．</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> arrayVariances <span class="token operator">=</span> <span class="token punctuation">[</span>VarianceFlags<span class="token punctuation">.</span>Covariant<span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
 <p>あーやってる．これはやってますわ．</p>
 <p>コメントには「配列やタプルは共変なので変性を計算する必要はない」とあります．先程のダンプで<code class="language-text">type</code>が<code class="language-text">Array</code>なのは確認済みです．この場合，<code class="language-text">[VarianceFlags.Covariant]</code>という固定値が返されます．それ以外の場合は<code class="language-text">getVariancesWorker</code>という関数を呼び出して頑張って変性を計算しているようです．これは実質的に配列専用の型付け規則です．</p>
@@ -489,7 +491,7 @@ Found <span class="token number">1</span> error</code></pre></div>
 <p>出典：<a href="https://www.amazon.co.jp/%E5%9E%8B%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E5%85%A5%E9%96%80-%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9E%E3%81%A8%E5%9E%8B%E3%81%AE%E7%90%86%E8%AB%96-%EF%BC%A2%EF%BD%85%EF%BD%8E%EF%BD%8A%EF%BD%81%EF%BD%8D%EF%BD%89%EF%BD%8E%EF%BC%A3%EF%BC%8E%EF%BC%B0%EF%BD%89%EF%BD%85%EF%BD%92%EF%BD%83%EF%BD%85-ebook/dp/B07CBB69SS">型システム入門 プログラミング言語と型の理論</a>，p.7</p>
 </blockquote>
 <p>とあり，TypeScriptやFlowはとても難しいことをやってくれているわけです．後からJSに型システムを導入するにあたって，その方向性にバリエーションが生まれるのは，そりゃそうだよなぁという感じです．</p>
-<p>あとどうでもいいのですが，「反変」ってなんて読むのが正しいんですかね？私は過去「はんぺん」と読んでいたのですが，ある日知り合いから「おでんかよｗｗｗ」ってバカにされたのが悔しくて「はんへん」に頑張って矯正しました．だけどさっきWikipediaを見たら「はんぺん」って書いてあるじゃないですか．もう何がなんだか……．</p>
+<p>あとどうでもいいのですが，「反変」ってなんて読むのが正しいんですかね？私は過去「はんぺん」と読んでいたのですが，ある日知り合いから「おでんかよｗｗｗ」とバカにされたのが悔しくて「はんへん」に頑張って矯正しました．だけどさっきWikipediaを見たら「はんぺん」って書いてあるじゃないですか．もう何がなんだか……．</p>
 <p>TAPLには読み方書いてなかったし，Wikipedia以外の情報もあまり出てこなくて詰んでいます．ご存知の方がいましたら助けてください．</p>
 <p>最後に，本記事は<a href="https://adventar.org/calendars/7972">Recruit Engineers Advent Calendar 2022</a>の15日目の記事でした．あまりぱっとしたネタが思いつかず，n番煎じみたいな記事になってしまいすみません．昨日は<a href="https://twitter.com/takepepe">@Takepepe</a>さんのxxxでした．明日は加納さんがxxxを書いてくれるそうです．楽しみですね．</p></section><div class="css-coij5c"><button class="share-button" data-api="https://twitter.com/share?" data-query_url="https://sititou70.github.io/TypeScript%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E9%85%8D%E5%88%97%E3%81%AE%E5%85%B1%E5%A4%89%E6%80%A7/" data-query_text="TypeScriptにおける配列の共変性" aria-label="Share on Twitter"><svg viewBox="0 0 64 64" width="36" height="36"><circle cx="32" cy="32" r="31" fill="#00aced"></circle><path d="M48,22.1c-1.2,0.5-2.4,0.9-3.8,1c1.4-0.8,2.4-2.1,2.9-3.6c-1.3,0.8-2.7,1.3-4.2,1.6 C41.7,19.8,40,19,38.2,19c-3.6,0-6.6,2.9-6.6,6.6c0,0.5,0.1,1,0.2,1.5c-5.5-0.3-10.3-2.9-13.5-6.9c-0.6,1-0.9,2.1-0.9,3.3 c0,2.3,1.2,4.3,2.9,5.5c-1.1,0-2.1-0.3-3-0.8c0,0,0,0.1,0,0.1c0,3.2,2.3,5.8,5.3,6.4c-0.6,0.1-1.1,0.2-1.7,0.2c-0.4,0-0.8,0-1.2-0.1 c0.8,2.6,3.3,4.5,6.1,4.6c-2.2,1.8-5.1,2.8-8.2,2.8c-0.5,0-1.1,0-1.6-0.1c2.9,1.9,6.4,2.9,10.1,2.9c12.1,0,18.7-10,18.7-18.7 c0-0.3,0-0.6,0-0.8C46,24.5,47.1,23.4,48,22.1z" fill="white"></path></svg></button><button class="share-button" data-api="https://www.facebook.com/sharer/sharer.php?" data-query_u="https://sititou70.github.io/TypeScript%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E9%85%8D%E5%88%97%E3%81%AE%E5%85%B1%E5%A4%89%E6%80%A7/" data-query_quote="TypeScriptにおける配列の共変性" aria-label="Share on Facebook"><svg viewBox="0 0 64 64" width="36" height="36"><circle cx="32" cy="32" r="31" fill="#3b5998"></circle><path d="M34.1,47V33.3h4.6l0.7-5.3h-5.3v-3.4c0-1.5,0.4-2.6,2.6-2.6l2.8,0v-4.8c-0.5-0.1-2.2-0.2-4.1-0.2 c-4.1,0-6.9,2.5-6.9,7V28H24v5.3h4.6V47H34.1z" fill="white"></path></svg></button><button class="share-button" data-api="http://b.hatena.ne.jp/add?mode=confirm&amp;" data-query_url="https://sititou70.github.io/TypeScript%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E9%85%8D%E5%88%97%E3%81%AE%E5%85%B1%E5%A4%89%E6%80%A7/" data-query_title="TypeScriptにおける配列の共変性" aria-label="Bookmark on Hatena"><svg viewBox="0 0 64 64" width="36" height="36"><circle cx="32" cy="32" r="31" fill="#009ad9"></circle><path d="M 36.164062 33.554688 C 34.988281 32.234375 33.347656 31.5 31.253906 31.34375 C 33.125 30.835938 34.476562 30.09375 35.335938 29.09375 C 36.191406 28.09375 36.609375 26.78125 36.609375 25.101562 C 36.628906 23.875 36.332031 22.660156 35.75 21.578125 C 35.160156 20.558594 34.292969 19.71875 33.253906 19.160156 C 32.304688 18.640625 31.175781 18.265625 29.847656 18.042969 C 28.523438 17.824219 26.195312 17.730469 22.867188 17.730469 L 14.769531 17.730469 L 14.769531 47.269531 L 23.113281 47.269531 C 26.46875 47.269531 28.886719 47.15625 30.367188 46.929688 C 31.851562 46.695312 33.085938 46.304688 34.085938 45.773438 C 35.289062 45.148438 36.28125 44.179688 36.933594 42.992188 C 37.597656 41.796875 37.933594 40.402344 37.933594 38.816406 C 37.933594 36.621094 37.347656 34.867188 36.164062 33.554688 Z M 22.257812 24.269531 L 23.984375 24.269531 C 25.988281 24.269531 27.332031 24.496094 28.015625 24.945312 C 28.703125 25.402344 29.042969 26.183594 29.042969 27.285156 C 29.042969 28.390625 28.664062 29.105469 27.9375 29.550781 C 27.210938 29.992188 25.84375 30.199219 23.855469 30.199219 L 22.257812 30.199219 Z M 29.121094 41.210938 C 28.328125 41.691406 26.976562 41.925781 25.078125 41.925781 L 22.257812 41.925781 L 22.257812 35.488281 L 25.195312 35.488281 C 27.144531 35.488281 28.496094 35.738281 29.210938 36.230469 C 29.925781 36.726562 30.304688 37.582031 30.304688 38.832031 C 30.304688 40.078125 29.914062 40.742188 29.105469 41.222656 Z M 29.121094 41.210938 M 46.488281 39.792969 C 44.421875 39.792969 42.742188 41.46875 42.742188 43.535156 C 42.742188 45.605469 44.421875 47.28125 46.488281 47.28125 C 48.554688 47.28125 50.230469 45.605469 50.230469 43.535156 C 50.230469 41.46875 48.554688 39.792969 46.488281 39.792969 Z M 46.488281 39.792969 M 43.238281 17.730469 L 49.738281 17.730469 L 49.738281 37.429688 L 43.238281 37.429688 Z M 43.238281 17.730469 " fill="white"></path></svg></button></div><script>(() => {
     const windowOpen = (url, {
