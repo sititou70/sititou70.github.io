@@ -435,11 +435,11 @@ $ <span class="token comment"># パス？？？</span></code></pre></div>
     <span class="token operator">?</span> arrayVariances
     <span class="token operator">:</span> <span class="token function">getVariancesWorker</span><span class="token punctuation">(</span>type<span class="token punctuation">.</span><span class="token builtin">symbol</span><span class="token punctuation">,</span> type<span class="token punctuation">.</span>typeParameters<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
-<p>ここで<code class="language-text">arrayVariances</code>は</p>
+<p>ここで<code class="language-text">arrayVariances</code>は以下のとおりです．</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> arrayVariances <span class="token operator">=</span> <span class="token punctuation">[</span>VarianceFlags<span class="token punctuation">.</span>Covariant<span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
 <p>あーやってる．これはやってますわ．</p>
 <p>コメントには「配列やタプルは共変なので変性を計算する必要はない」とあります．先程のダンプで<code class="language-text">type</code>が<code class="language-text">Array</code>なのは確認済みです．この場合，<code class="language-text">[VarianceFlags.Covariant]</code>という固定値が返されます．それ以外の場合は<code class="language-text">getVariancesWorker</code>という関数を呼び出して頑張って変性を計算しているようです．これは実質的に配列専用の型付け規則です．</p>
-<p>というわけで，<code class="language-text">node_modules/typescript/lib/tsc.js</code>を以下のようにいじってみました．</p>
+<p>というわけで，<code class="language-text">node_modules/typescript/lib/tsc.js</code>を以下のようにいじります．</p>
 <div class="gatsby-highlight" data-language="diff"><pre class="language-diff"><code class="language-diff">function getVariances(type) {
 <span class="token deleted-sign deleted"><span class="token prefix deleted">-</span> return type === globalArrayType || type === globalReadonlyArrayType || type.objectFlags &amp; 8 ?
 </span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span> return false ?
