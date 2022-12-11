@@ -436,8 +436,8 @@ $ <span class="token comment"># パス？？？</span></code></pre></div>
 <summary>
   ところで，relationが取りうる値としてassignableRelationとsubtypeRelationというのがありますが，これらは何が違うのでしょうか？
 </summary>
-<p>サブタイプ関係は<strong>安全代入の原則</strong>とも呼ばれるだけあって，代入可能と同じ意味としてここまで暗黙的に扱ってきました．しかし，型検査器内では区別されているということで，何が違うのか気になりますね．</p>
-<p>結論から言うと<strong>コードが長すぎてよくわからなかった</strong>のですが，サッと眺めた感じだと<code class="language-text">assignableRelation</code>の方が<code class="language-text">subtypeRelation</code>と比べてゆるい関係に見えました．例えば以下のようなコードがあり</p>
+<p>ここまで，サブタイプ関係を代入可能と同じようなものとして暗黙的に扱ってきました．しかし，型検査器内ではこれらは区別されているということで，何が違うのか気になりますね．</p>
+<p>まぁ結論から言うと<strong>コードが長すぎてよくわからなかった</strong>のですが（すみません），サッと眺めた感じだと<code class="language-text">assignableRelation</code>の方が<code class="language-text">subtypeRelation</code>と比べてゆるい関係に見えました．例えば以下のようなコードがあり</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">if</span> <span class="token punctuation">(</span>relation <span class="token operator">===</span> assignableRelation <span class="token operator">||</span> relation <span class="token operator">===</span> comparableRelation<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token comment">// Type number is assignable to any computed numeric enum type or any numeric enum literal type, and</span>
@@ -487,7 +487,7 @@ $ <span class="token comment"># パス？？？</span></code></pre></div>
   <span class="token comment">//   型パラメタの引数に対する変性の情報を計算し（たぶんArray&lt;T>のTの変性を計算するということ）</span>
   <span class="token comment">//   それによって型引数を関連付けます（なるほど？）</span>
 
-  <span class="token comment">// getVariancesが，さっき言っていた「Array&lt;T>のTの変性を計算する」やつ</span>
+  <span class="token comment">// getVariancesが，さっき言っていた「Array&lt;T>のTの変性を計算する」やつと思われる</span>
   <span class="token comment">// ダンプ：(source as TypeReference).target === Array</span>
   <span class="token keyword">const</span> variances <span class="token operator">=</span> <span class="token function">getVariances</span><span class="token punctuation">(</span><span class="token punctuation">(</span>source <span class="token keyword">as</span> TypeReference<span class="token punctuation">)</span><span class="token punctuation">.</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token comment">// ダンプ：variances === [VarianceFlags.Covariant]</span>
