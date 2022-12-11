@@ -228,7 +228,7 @@ void function() {
         </picture>
   </a>
     </span></p>
-<p>答え：<strong>できる！</strong></p>
+<p>答え：<strong>できる</strong></p>
 <p>（配列に共変性がある）</p>
 <p>―――</p>
 <p>――――――</p>
@@ -283,7 +283,7 @@ dogArray<span class="token punctuation">.</span><span class="token function-vari
 animalArray<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>animal<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>このコードはtscによる型検査をパスします</p>
 <div class="gatsby-highlight" data-language="sh"><pre class="language-sh"><code class="language-sh">$ npx tsc
-$ <span class="token comment"># パス！</span></code></pre></div>
+$ <span class="token comment"># パス</span></code></pre></div>
 <p>しかし，ランタイムで落ちます</p>
 <div class="gatsby-highlight" data-language="sh"><pre class="language-sh"><code class="language-sh">$ <span class="token function">node</span> index.js
 /home/sititou70/ts-array-variant/index.js:11
@@ -461,10 +461,10 @@ $ <span class="token comment"># パス？？？</span></code></pre></div>
 <span class="token keyword">const</span> flag<span class="token operator">:</span> Flag<span class="token punctuation">.</span><span class="token constant">A</span> <span class="token operator">=</span> <span class="token number">123</span><span class="token punctuation">;</span></code></pre></div>
 <p>おー，代入できます．</p>
 <p>このケースは<code class="language-text">relation === assignableRelation</code>のif文の中にあるため，<code class="language-text">assignableRelation</code>では有効ですが<code class="language-text">subtypeRelation</code>では無効です．</p>
-<p>また，今回は見つけられませんでしたが，逆に<code class="language-text">subtypeRelation</code>では有効だけど<code class="language-text">assignableRelation</code>では無効なケースもあるのでしょうか（無いかもしれません</p>
-<p>確かに，<code class="language-text">123 &lt;: Flag.A</code>は通常のサブタイプ関係では変な感じがしますから，新たに代入専用の関係を定義する必要があるのは納得です．</p>
+<p>また，今回は見つけられませんでしたが，逆に<code class="language-text">subtypeRelation</code>では有効だけど<code class="language-text">assignableRelation</code>では無効なケースもあるかもしれません．</p>
+<p>いずれにせよ，確かに<code class="language-text">123 &lt;: Flag.A</code>は通常のサブタイプ関係では変な感じがしますから，新たに代入専用の関係を定義したほうが良いのは納得です．</p>
 </details>
-<p>さて，<code class="language-text">checkTypeRelatedTo</code>はとても長い関数で，関数呼び出しや条件分岐がとっても複雑なのですが，今回は最終的に<code class="language-text">structuredTypeRelatedToWorker</code>関数の以下のような部分に入ります．</p>
+<p>さて，<code class="language-text">checkTypeRelatedTo</code>はとても長い関数なのですが，今回の場合は最終的に<code class="language-text">structuredTypeRelatedToWorker</code>関数の以下の部分に入ります．</p>
 <p><code class="language-text">// ダンプ</code>から始まるコメントは<code class="language-text">console.log</code>で実際の値を確かめた結果です．</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token comment">// ただし今回のケースに関係のない部分を一部省略しています</span>
 <span class="token keyword">if</span> <span class="token punctuation">(</span>
@@ -518,14 +518,14 @@ $ <span class="token comment"># パス？？？</span></code></pre></div>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> arrayVariances <span class="token operator">=</span> <span class="token punctuation">[</span>VarianceFlags<span class="token punctuation">.</span>Covariant<span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
 <p>あーやってる．これはやってますわ．</p>
 <p>コメントには「配列やタプルは共変なので変性を計算する必要はない」とあります．先程のダンプで<code class="language-text">type</code>が<code class="language-text">Array</code>なのは確認済みです．この場合，<code class="language-text">[VarianceFlags.Covariant]</code>という固定値が返されます．パフォーマンスを意図したコメントにも読めますが，これは実質的に配列専用の型付け規則です．それ以外の場合は<code class="language-text">getVariancesWorker</code>という関数を呼び出して変性を計算しているようです．</p>
-<p>というわけで，<code class="language-text">node_modules/typescript/lib/tsc.js</code>を以下のようにいじります．</p>
+<p>というわけで，<code class="language-text">node_modules/typescript/lib/tsc.js</code>を以下のように変更します</p>
 <div class="gatsby-highlight" data-language="diff"><pre class="language-diff"><code class="language-diff">function getVariances(type) {
 <span class="token deleted-sign deleted"><span class="token prefix deleted">-</span> return type === globalArrayType || type === globalReadonlyArrayType || type.objectFlags &amp; 8 ?
 </span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span> return false ?
 </span><span class="token unchanged"><span class="token prefix unchanged"> </span>   arrayVariances :
 <span class="token prefix unchanged"> </span>   getVariancesWorker(type.symbol, type.typeParameters);
 </span>}</code></pre></div>
-<p>「配列だろうが頑張って変性を計算しろ！」と叱っておきました．これで再度型検査してみると……</p>
+<p>「配列だろうが頑張って変性を計算しなさい！」と叱っておきました．これで再度型検査してみると……</p>
 <div class="gatsby-highlight" data-language="sh"><pre class="language-sh"><code class="language-sh">$ npx tsc
 index.ts:20:7 - error TS2322: Type <span class="token string">'Dog[]'</span> is not assignable to <span class="token builtin class-name">type</span> <span class="token string">'Animal[]'</span><span class="token builtin class-name">.</span>
   Types of property <span class="token string">'indexOf'</span> are incompatible.
