@@ -483,9 +483,9 @@ $ <span class="token comment"># パス？？？</span></code></pre></div>
   <span class="token comment">// 訳すと：</span>
   <span class="token comment">//   同じジェネリクス型に対する2つの型があり，（Array&lt;Dog>とArray&lt;Animal>，今回はどちらもArrayに対する型）</span>
   <span class="token comment">//   それらはマーカータイプではなく（？　わからん）</span>
-  <span class="token comment">//   構造的に比較されることを意図しています（構造的部分型ですからね）</span>
+  <span class="token comment">//   構造的に比較されることを意図しています</span>
   <span class="token comment">//   型パラメタの引数に対する変性の情報を計算し（たぶんArray&lt;T>のTの変性を計算するということ）</span>
-  <span class="token comment">//   それによって型引数を関連付けます（？？　なるほど？）</span>
+  <span class="token comment">//   それによって型引数を関連付けます（なるほど？）</span>
 
   <span class="token comment">// getVariancesが，さっき言っていた「Array&lt;T>のTの変性を計算する」やつ</span>
   <span class="token comment">// ダンプ：(source as TypeReference).target === Array</span>
