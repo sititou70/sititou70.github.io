@@ -455,7 +455,7 @@ $ <span class="token comment"># パス？？？</span></code></pre></div>
   <span class="token punctuation">)</span>
     <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
-<p>コメントには「<code class="language-text">number</code>型は，enum型やenumリテラル型に代入可能．enumをフラグのように利用するケースがあるため」とあります．まさに直後の<code class="language-text">TypeFlags</code>はenumであり，フラグのように使用されています．</p>
+<p>コメントには「<code class="language-text">number</code>型は，enum型やenumリテラル型に代入可能．enumをフラグのように利用するケースがあるため」とあります．まさにその直後の<code class="language-text">TypeFlags</code>はenumで，フラグのように使用されていますね．</p>
 <p>サンプルコードでも確認してみます．</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">enum</span> Flag <span class="token punctuation">{</span>
   <span class="token constant">A</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span>
@@ -543,7 +543,7 @@ index.ts:20:7 - error TS2322: Type <span class="token string">'Dog[]'</span> is 
 
 
 Found <span class="token number">1</span> error <span class="token keyword">in</span> index.ts:20</code></pre></div>
-<p>ちゃんと落ちました！いいですね！</p>
+<p>ちゃんと落ちました！予想通り！</p>
 <h2 id="おまけflowでは" style="position:relative;"><a href="#%E3%81%8A%E3%81%BE%E3%81%91flow%E3%81%A7%E3%81%AF" aria-label="おまけflowでは permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>おまけ：Flowでは</h2>
 <p>配列は共変ではありません．</p>
 <p>今回のようなコードはデフォルトでエラーになります．</p>
@@ -604,8 +604,8 @@ $ <span class="token comment"># ランタイムエラーになる</span></code><
 <p>はえー．</p>
 <h2 id="まとめ" style="position:relative;"><a href="#%E3%81%BE%E3%81%A8%E3%82%81" aria-label="まとめ permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>まとめ</h2>
 <p>TypeScriptの配列には共変性があります．これは，配列の型定義がメソッド記法で書かれていることと，型検査器に配列専用の型付け規則があることで実現されるようです．</p>
-<p>今回，TypeScriptの型検査器を初めて読んでみました．VS Codeで<code class="language-text">checker.ts</code>を開いただけでPCのファンが回りだし，メモリを700MB持っていかれました．ヤバいですね．</p>
-<p>TypeScriptは健全性をある程度犠牲にして利便性とのバランスを取っています．それに比べてFlowは，より健全性を重視しているように感じました．</p>
+<p>今回，TypeScriptの型検査器を初めて読んでみました．VS Codeで<code class="language-text">checker.ts</code>を開いただけなのに，PCのファンが回りだし，メモリを700MB持っていかれました．ヤバいです．</p>
+<p>TypeScriptでは，健全性をある程度犠牲にして利便性とのバランスを取っています．それに比べてFlowは，より健全性を重視しているように感じました．</p>
 <p>そもそもTAPLによれば</p>
 <blockquote>
 <p>型検査を考慮して設計されていない言語に型システムを組み込むのは困難な問題である。</p>
