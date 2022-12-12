@@ -521,7 +521,7 @@ $ <span class="token comment"># パス？？？</span></code></pre></div>
 <p>ここで<code class="language-text">arrayVariances</code>は以下です．</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> arrayVariances <span class="token operator">=</span> <span class="token punctuation">[</span>VarianceFlags<span class="token punctuation">.</span>Covariant<span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
 <p>あーやってる．これはやってますわ．</p>
-<p>コメントには「配列やタプルは共変なので変性を計算する必要はない」とあります．先程のダンプで<code class="language-text">type</code>が<code class="language-text">Array</code>なのは確認済みです．この場合，<code class="language-text">[VarianceFlags.Covariant]</code>という固定値が返されます．パフォーマンスを意図したコメントにも読めますが，これは実質的に配列を共変たらしめる専用の型付け規則です．それ以外の場合は<code class="language-text">getVariancesWorker</code>という関数を呼び出して変性を計算しているようです．</p>
+<p>コメントには「配列やタプルは共変なので変性を計算する必要はない」とあります．先程のダンプで<code class="language-text">type</code>が<code class="language-text">Array</code>なのは確認済みです．この場合，<code class="language-text">[VarianceFlags.Covariant]</code>という固定値が返されます．パフォーマンスを意図したコメントにも読めますが，これは実質的に配列を共変としている専用の型付け規則です．それ以外の場合は<code class="language-text">getVariancesWorker</code>という関数を呼び出して変性を計算しているようです．</p>
 <p>というわけで，<code class="language-text">node_modules/typescript/lib/tsc.js</code>を以下のように変更します</p>
 <div class="gatsby-highlight" data-language="diff"><pre class="language-diff"><code class="language-diff">function getVariances(type) {
 <span class="token deleted-sign deleted"><span class="token prefix deleted">-</span> return type === globalArrayType || type === globalReadonlyArrayType || type.objectFlags &amp; 8 ?
