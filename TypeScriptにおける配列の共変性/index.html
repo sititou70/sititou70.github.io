@@ -340,7 +340,7 @@ TypeError: Cannot <span class="token builtin class-name">read</span> properties 
 <span class="token comment">//    ^^^^^^^^^^^^^^</span>
 <span class="token comment">// 型 'MyArray2&lt;Dog>' を型 'MyArray2&lt;Animal>' に割り当てることはできません。</span>
 <span class="token comment">//   プロパティ 'dog' は型 'Animal' にありませんが、型 'Dog' では必須です。ts(2322)</span></code></pre></div>
-<p>このように，メソッド記法では<strong>引数の扱いがゆるくなります</strong>．<sup id="fnref-2"><a href="#fn-2" class="footnote-ref">2</a></sup></p>
+<p>このように，メソッド記法では，関数型の記法に比べて<strong>引数の扱いがゆるくなります</strong>．<sup id="fnref-2"><a href="#fn-2" class="footnote-ref">2</a></sup></p>
 <p>（恥ずかしながら，私はこの挙動を半年くらい前まで知りませんでした．そして知った当時はだいぶ驚きました）</p>
 <p>さて，思い返してみると，ライブラリの型定義は（配列に限らず）ほとんどメソッド記法で書かれていました．</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">interface</span> <span class="token class-name"><span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">></span></span> <span class="token punctuation">{</span>
@@ -371,11 +371,13 @@ TypeError: Cannot <span class="token builtin class-name">read</span> properties 
 <p>これで以下のコードは型検査で失敗するようになるはずです．</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> dogArray<span class="token operator">:</span> Dog<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>dog<span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> animalArray<span class="token operator">:</span> Animal<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> dogArray<span class="token punctuation">;</span></code></pre></div>
+<p>しかし，</p>
 <div class="gatsby-highlight" data-language="sh"><pre class="language-sh"><code class="language-sh">$ npx tsc
 $ <span class="token comment"># パス？？？</span></code></pre></div>
-<p>しかし，予想に反してパスしてしまいました．これが今回気づいたことです．</p>
+<p>予想に反してパスしてしまいました．これが今回気づいたことです．</p>
 <p>原因を確かめるために，TypeScriptのコードを読んでみます．</p>
-<p>型検査器のコードは<a href="https://github.com/microsoft/TypeScript">microsoft/TypeScript</a>の<code class="language-text">src/compiler/checker.ts</code>にあるのですが，現時点で47,206行（！？）もあり，2.6MBもの容量があり，GitHubはプレビューを拒否します．</p>
+<p>これは初めてのことなので不安もありますが，がんばります．</p>
+<p>さて，型検査器のコードは<a href="https://github.com/microsoft/TypeScript">microsoft/TypeScript</a>の<code class="language-text">src/compiler/checker.ts</code>にあります．こちらのファイルは，現時点で47,206行（！？）もあり，2.6MBもの容量があり，GitHubはプレビューを拒否します．</p>
 <p>※<strong>あくまで念のために繰り返しますが，これは1つの<code class="language-text">.ts</code>ファイルです．</strong></p>
 <p><span
       class="gatsby-resp-image-wrapper"
@@ -415,7 +417,7 @@ $ <span class="token comment"># パス？？？</span></code></pre></div>
         </picture>
   </a>
     </span></p>
-<p>なので， <em>覚悟</em> を決めて読んでいきます．</p>
+<p>さっそく不安が的中しましたが，<em>覚悟</em> を決めて読んでいきます．</p>
 <p><code class="language-text">tsc</code>コマンドのエントリーポイントから<code class="language-text">console.log</code>や<code class="language-text">console.trace</code>を仕込みつつ追っていくと，やがて<code class="language-text">checker.ts</code>の<code class="language-text">checkTypeRelatedTo</code>という関数にたどり着きました．</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token comment">/**
  * Checks if 'source' is related to 'target' (e.g.: is a assignable to).
