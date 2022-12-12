@@ -442,7 +442,7 @@ $ <span class="token comment"># パス？？？</span></code></pre></div>
   ところで，relationが取りうる値としてassignableRelationとsubtypeRelationというのがありますが，これらは何が違うのでしょうか？
 </summary>
 <p>ここまで，サブタイプ関係と代入可能を同じような概念として暗黙的に扱ってきました．しかし，型検査器内ではこれらは区別されているということで，何が違うのか気になりますね．</p>
-<p>まぁ結論から言うと<strong>コードが長すぎてよくわからなかった</strong>のですが（すみません），サッと眺めた感じだと<code class="language-text">assignableRelation</code>の方が<code class="language-text">subtypeRelation</code>と比べてゆるい関係に見えました．例えば以下のようなコードがあり</p>
+<p>まぁ結論から言うと<strong>コードが長すぎてよくわからなかった</strong>のですが（すみません），サッと眺めた感じだと<code class="language-text">assignableRelation</code>の方が<code class="language-text">subtypeRelation</code>と比べてゆるい関係に見えました．基本的には両者に共通の処理が大半を占めつつも，例えば以下のようなコードがあり</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">if</span> <span class="token punctuation">(</span>relation <span class="token operator">===</span> assignableRelation <span class="token operator">||</span> relation <span class="token operator">===</span> comparableRelation<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token comment">// Type number is assignable to any computed numeric enum type or any numeric enum literal type, and</span>
