@@ -368,9 +368,7 @@ TypeError: Cannot <span class="token builtin class-name">read</span> properties 
 <span class="token prefix unchanged"> </span>  */
 </span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span>  indexOf(searchElement: T, fromIndex?: number): number;
 </span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>  indexOf: (searchElement: T, fromIndex?: number) => number;</span></code></pre></div>
-<p>これで以下のコードは型検査で失敗するようになるはずです．</p>
-<div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> dogArray<span class="token operator">:</span> Dog<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>dog<span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> animalArray<span class="token operator">:</span> Animal<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> dogArray<span class="token punctuation">;</span></code></pre></div>
+<p>これにより，問題のコードは型検査で失敗するようになるはずです．</p>
 <p>しかし，</p>
 <div class="gatsby-highlight" data-language="sh"><pre class="language-sh"><code class="language-sh">$ npx tsc
 $ <span class="token comment"># パス？？？</span></code></pre></div>
