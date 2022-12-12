@@ -467,7 +467,7 @@ $ <span class="token comment"># パス？？？</span></code></pre></div>
 <p>おー，代入できます．</p>
 <p>このケースは<code class="language-text">relation === assignableRelation</code>のif文の中にあるため，<code class="language-text">assignableRelation</code>では有効ですが<code class="language-text">subtypeRelation</code>では無効です．</p>
 <p>また，今回は見つけられませんでしたが，逆に<code class="language-text">subtypeRelation</code>では有効だけど<code class="language-text">assignableRelation</code>では無効なケースもあるかもしれません．</p>
-<p>いずれにせよ，確かに<code class="language-text">123 &lt;: Flag.A</code>は通常のサブタイプ関係では変な感じがしますから，新たに代入専用の関係を定義したほうが良いのは納得です．</p>
+<p>いずれにせよ，確かに<code class="language-text">123 &lt;: Flag.A</code>は通常のサブタイプ関係では変な感じがしますから，新たに代入専用の関係を定義したほうが良いのだろうなと解釈しました．</p>
 </details>
 <p>さて，<code class="language-text">checkTypeRelatedTo</code>に入ってからはとても複雑な条件分岐や関数呼び出しが待ち構えているのですが，今回の場合は最終的に<code class="language-text">structuredTypeRelatedToWorker</code>関数の以下の部分に入ります．</p>
 <p><code class="language-text">// ダンプ</code>から始まるコメントは<code class="language-text">console.log</code>で実際の値を確かめた結果です．</p>
