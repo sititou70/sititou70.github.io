@@ -373,8 +373,7 @@ TypeError: Cannot <span class="token builtin class-name">read</span> properties 
 <div class="gatsby-highlight" data-language="sh"><pre class="language-sh"><code class="language-sh">$ npx tsc
 $ <span class="token comment"># パス？？？</span></code></pre></div>
 <p>予想に反してパスしてしまいました．これが今回気づいたことです．</p>
-<p>原因を確かめるために，TypeScriptのコードを読んでみます．</p>
-<p>これは初めてのことなので不安もありますが，がんばります．</p>
+<p>原因を確かめるために，TypeScriptのコードを読んでみることにしました．これは初めてのことなので不安もありますが，がんばります．</p>
 <p>さて，型検査器のコードは<a href="https://github.com/microsoft/TypeScript">microsoft/TypeScript</a>の<code class="language-text">src/compiler/checker.ts</code>にあります．こちらのファイルは，現時点で47,206行（！？）もあり，2.6MBもの容量があり，GitHubはプレビューを拒否します．</p>
 <p>※<strong>あくまで念のために繰り返しますが，これは1つの<code class="language-text">.ts</code>ファイルです．</strong></p>
 <p><span
@@ -415,7 +414,7 @@ $ <span class="token comment"># パス？？？</span></code></pre></div>
         </picture>
   </a>
     </span></p>
-<p>さっそく不安が的中しましたが，<em>覚悟</em> を決めて読んでいきます．</p>
+<p>さっそく不安が的中していますが，<em>覚悟</em> を決めて読んでいきます．</p>
 <p><code class="language-text">tsc</code>コマンドのエントリーポイントから<code class="language-text">console.log</code>や<code class="language-text">console.trace</code>を仕込みつつ追っていくと，やがて<code class="language-text">checker.ts</code>の<code class="language-text">checkTypeRelatedTo</code>という関数にたどり着きました．</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token comment">/**
  * Checks if 'source' is related to 'target' (e.g.: is a assignable to).
