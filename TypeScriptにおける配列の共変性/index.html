@@ -536,14 +536,12 @@ $ <span class="token comment"># パス？？？</span></code></pre></div>
     type<span class="token punctuation">.</span>objectFlags <span class="token operator">&amp;</span> ObjectFlags<span class="token punctuation">.</span>Tuple
     <span class="token operator">?</span> arrayVariances
     <span class="token operator">:</span> <span class="token function">getVariancesWorker</span><span class="token punctuation">(</span>type<span class="token punctuation">.</span><span class="token builtin">symbol</span><span class="token punctuation">,</span> type<span class="token punctuation">.</span>typeParameters<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre></div>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// ここでarrayVariancesは以下</span>
+<span class="token keyword">const</span> arrayVariances <span class="token operator">=</span> <span class="token punctuation">[</span>VarianceFlags<span class="token punctuation">.</span>Covariant<span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
 <blockquote>
-<p>出典：<a href="https://github.com/microsoft/TypeScript/blob/main/src/compiler/checker.ts">checker.ts，TypeScript</a></p>
-</blockquote>
-<p>ここで<code class="language-text">arrayVariances</code>は以下です．</p>
-<div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> arrayVariances <span class="token operator">=</span> <span class="token punctuation">[</span>VarianceFlags<span class="token punctuation">.</span>Covariant<span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
-<blockquote>
-<p>出典：<a href="https://github.com/microsoft/TypeScript/blob/main/src/compiler/checker.ts">checker.ts，TypeScript</a></p>
+<p>出典：<a href="https://github.com/microsoft/TypeScript/blob/main/src/compiler/checker.ts">checker.ts，TypeScript</a>，補足のコメントは筆者による</p>
 </blockquote>
 <p>あーやってる．これはやってますわ．</p>
 <p>コメントには「配列やタプルは共変なので変性を計算する必要はない」とあります．先程のダンプで<code class="language-text">type</code>が<code class="language-text">Array</code>なのは確認済みです．この場合，<code class="language-text">[VarianceFlags.Covariant]</code>という固定値が返されます．パフォーマンスを意図しての処理とも読めますが，実質的には配列を共変とする型付け規則の実装でもあります．それ以外の場合は<code class="language-text">getVariancesWorker</code>という関数を呼び出して変性を計算しているようです．</p>
