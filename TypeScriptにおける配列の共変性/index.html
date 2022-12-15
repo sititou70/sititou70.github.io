@@ -384,7 +384,7 @@ TypeError: Cannot <span class="token builtin class-name">read</span> properties 
 $ <span class="token comment"># パス？？？</span></code></pre></div>
 <p>予想に反してパスしてしまいました．これが今回気づいたことです．</p>
 <p>原因を確かめるために，TypeScriptのコードを読んでみることにしました．これは初めてのことなので不安もありますが，がんばります．</p>
-<p>さて，型検査器のコードは<a href="https://github.com/microsoft/TypeScript">microsoft/TypeScript</a>の<code class="language-text">src/compiler/checker.ts</code>にあります．こちらのファイルは，現時点で47,206行（！？）あり，2.6MBもの容量があり，GitHubはプレビューを拒否します．</p>
+<p>さて，型検査器のコードは<a href="https://github.com/microsoft/TypeScript">microsoft/TypeScript</a>の<code class="language-text">src/compiler/checker.ts</code>にあります．こちらのファイルは，現時点で47,206行（！？）あり，2.6MBもの容量があり，GitHubは表示を拒否します．</p>
 <p>※<strong>あくまで念のために繰り返しますが，これは1つの<code class="language-text">.ts</code>ファイルです．</strong></p>
 <p><span
       class="gatsby-resp-image-wrapper"
@@ -534,9 +534,12 @@ $ <span class="token comment"># パス？？？</span></code></pre></div>
   <span class="token keyword">return</span> type <span class="token operator">===</span> globalArrayType <span class="token operator">||</span>
     type <span class="token operator">===</span> globalReadonlyArrayType <span class="token operator">||</span>
     type<span class="token punctuation">.</span>objectFlags <span class="token operator">&amp;</span> ObjectFlags<span class="token punctuation">.</span>Tuple
-    <span class="token operator">?</span> arrayVariances <span class="token comment">// ダンプ：arrayVariances === [VarianceFlags.Covariant]</span>
+    <span class="token operator">?</span> arrayVariances
     <span class="token operator">:</span> <span class="token function">getVariancesWorker</span><span class="token punctuation">(</span>type<span class="token punctuation">.</span><span class="token builtin">symbol</span><span class="token punctuation">,</span> type<span class="token punctuation">.</span>typeParameters<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre></div>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// ここでarrayVariancesは</span>
+<span class="token keyword">const</span> arrayVariances <span class="token operator">=</span> <span class="token punctuation">[</span>VarianceFlags<span class="token punctuation">.</span>Covariant<span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
 <blockquote>
 <p>出典：<a href="https://github.com/microsoft/TypeScript/blob/main/src/compiler/checker.ts">checker.ts，TypeScript</a>，補足のコメントは筆者による</p>
 </blockquote>
