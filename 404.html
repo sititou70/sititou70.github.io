@@ -50,10 +50,12 @@ navigator.serviceWorker.getRegistrations().then(registrations=>{for(let registra
       }
     })
   </script><link rel="icon" href="/favicon-32x32.png?v=0421bfaf5f835f1057e5549dc99a4e33" type="image/png"/><link rel="manifest" href="/manifest.webmanifest" crossorigin="anonymous"/><link rel="apple-touch-icon" sizes="64x64" href="/assets/icon.jpg?v=0421bfaf5f835f1057e5549dc99a4e33"/><title>404 Not Found | sititou70</title><link rel="alternate" type="application/rss+xml" title="sititou70 all posts" href="/rss.xml"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-93342312-1"></script><script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'UA-93342312-1');</script></head><body><script>
+          if (location.href.startsWith("https://sititou70.github.io/")) {
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'UA-93342312-1');
+          }</script></head><body><script>
 void function() {
   window.__onThemeChange = function() {}
 
