@@ -484,7 +484,7 @@ $ <span class="token comment"># パス？？？</span></code></pre></div>
 <span class="token keyword">const</span> flag<span class="token operator">:</span> Flag<span class="token punctuation">.</span><span class="token constant">A</span> <span class="token operator">=</span> <span class="token number">123</span><span class="token punctuation">;</span></code></pre></div>
 <p>おー，代入できます．</p>
 <p>このケースは<code class="language-text">relation === assignableRelation</code>のif文の中にあるため，<code class="language-text">assignableRelation</code>では有効ですが<code class="language-text">subtypeRelation</code>では無効です．</p>
-<p>また，今回は見つけられませんでしたが，逆に<code class="language-text">subtypeRelation</code>では有効だけど<code class="language-text">assignableRelation</code>では無効なケースもあるかもしれません．</p>
+<p><del>また，今回は見つけられませんでしたが，逆に<code class="language-text">subtypeRelation</code>では有効だけど<code class="language-text">assignableRelation</code>では無効なケースもあるかもしれません．</del> これは基本的になさそうです．代入可能関係はサブタイプ関係を拡張していると<a href="https://www.typescriptlang.org/docs/handbook/type-compatibility.html#subtype-vs-assignment">ドキュメントに記載がありました．</a></p>
 <p>いずれにせよ，確かに<code class="language-text">123 &lt;: Flag.A</code>は通常のサブタイプ関係では変な感じがしますから，新たに代入専用の関係を定義したほうが良かったのだろうなと解釈しました．</p>
 </details>
 <p>さて，<code class="language-text">checkTypeRelatedTo</code>に入ってからはとても複雑な条件分岐や関数呼び出しが待ち構えているのですが，今回の場合は最終的に<code class="language-text">structuredTypeRelatedToWorker</code>関数の以下の部分に入ります．</p>
@@ -652,7 +652,7 @@ $ <span class="token comment"># ランタイムエラーになる</span></code><
 <div class="footnotes">
 <hr>
 <ol>
-<li id="fn-1">TAPL p.143で言うところの深さ部分型付け，S-RcdDepth規則を言っています．これはあくまで必要であって，他にも幅部分型付けなどもあるので十分ではないです．<a href="#fnref-1" class="footnote-backref">↩</a></li>
+<li id="fn-1">TAPL p.143で言うところの深さ部分型付け，S-RcdDepth規則のことです．他にも幅部分型付けなどもあるので逆は成り立ちません．<a href="#fnref-1" class="footnote-backref">↩</a></li>
 <li id="fn-2">正確には双変となり，共変または反変を許すといったかんじになるのだそうですが詳しい説明は割愛します．気になる方は「bivarianceHack」と検索してみてください．また，この挙動は<code class="language-text">strictFunctionTypes</code>オプションとはあまり関係ありません．今回の環境は<code class="language-text">strict: true</code>であり，<code class="language-text">strictFunctionTypes</code>も有効化されています．<a href="#fnref-2" class="footnote-backref">↩</a></li>
 <li id="fn-3">ちなみにこれは，TAPLにおける演習 15.5.3の解答でもあります．TAPLではこの演習は解答略とされているので，正確に著者が意図したものという保証はありませんが．<a href="#fnref-3" class="footnote-backref">↩</a></li>
 <li id="fn-4">TAPLに読み方は載っていませんでしたし，検索してもWikipedia以外の情報が出てこないので詰んでいます．もしご存知でしたら助けてください．<a href="#fnref-4" class="footnote-backref">↩</a></li>
