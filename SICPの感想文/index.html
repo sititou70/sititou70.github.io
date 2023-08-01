@@ -436,7 +436,7 @@ Sha boom</p>
 <p>メタ循環評価器は、そのためのベースラインとなります。</p>
 <h4 id="評価器の仕組み" style="position:relative;"><a href="#%E8%A9%95%E4%BE%A1%E5%99%A8%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF" aria-label="評価器の仕組み permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>評価器の仕組み</h4>
 <p>評価器は、evalとapplyの相互再帰呼出しによって動作していきます。</p>
-<p>evalは式を環境で評価します。式が手続き適用であればapplyを呼び出します。applyは適用を処理します。手続きが複合手続きであれば、環境をextendし、その中で本体を評価するためにevalを呼び出します。</p>
+<p>evalは環境で式を評価します。式が手続き適用であればapplyを呼び出します。applyは適用を処理します。手続きが複合手続きであれば環境をextendし、その中で本体を評価するためにevalを呼び出します。</p>
 <p>このようにeval、apply、eval、apply……と互いに呼び出し合う様子を表したのが以下の図で、おそらくSICPで最も重要かつ有名な図です。</p>
 <p><span
       class="gatsby-resp-image-wrapper"
@@ -522,10 +522,11 @@ Sha boom</p>
 <p>基層のSchemeは適用順序なのに、そのうえで正規順序Schemeが動作するのは、インタプリタが基層言語の1つ上の抽象レベルに引き上げてくれるからです。</p>
 <p>遅延評価で嬉しいことはいくつかあるのですが、例えば無限ストリームが素直に書けるようになります。前述したJSのストリームは、遅延オブジェクトを明示的に扱っていました。</p>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> ones <span class="token operator">=</span> <span class="token function">consStream</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> ones<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p>本当は次のように書きたいのですが、適用順序評価の環境だと、onesを初期化する前に参照してしまいうまく行きません。</p>
+<p>これは、本当は次のように書きたいのですが、</p>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> ones <span class="token operator">=</span> <span class="token function">consStream</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> ones<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">// ReferenceError: Cannot access 'ones' before initialization</span></code></pre></div>
-<p>ところが、正規順序評価の環境では、引数の評価は必要になるまで評価が遅延されるため、このようにきれいに書けるのです。やった〜〜</p>
+<p>適用順序評価の環境だと、onesを初期化する前に参照してしまいうまく行きません。</p>
+<p>ところが正規順序評価の環境では、引数の評価は必要になるまで評価が遅延されるため、このようにきれいに書けるのです。やった〜〜</p>
 <h3 id="決定性計算" style="position:relative;"><a href="#%E6%B1%BA%E5%AE%9A%E6%80%A7%E8%A8%88%E7%AE%97" aria-label="決定性計算 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>⾮決定性計算</h3>
 <p>非決定性計算は、まるで時間が巻き戻るようなプログラミングパラダイムです。SFみを感じる。</p>
 <p><code class="language-text">amb</code>は、いくつかの式に「曖昧に」評価される特別な式です。JSで無理やり表現すると、次のようになります。</p>
@@ -535,7 +536,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p>このプログラムを実行すると、<code class="language-text">[1, 3]</code>と表示され、いったん停止します。しかし、非決定性計算の環境では、「他の可能性は？」と処理系に尋ねることができます。</p>
 <p>そうすると、処理系は最後の<code class="language-text">amb</code>の時点に <strong>時間を戻して</strong> 、<code class="language-text">b</code>への代入を別の選択肢である4でやり直し、<code class="language-text">[1, 4]</code>を表示します。</p>
 <p>さらに「他の可能性は？」と尋ねると、<code class="language-text">amb(3, 4)</code>で取れる選択肢はなくなったため、それより前の<code class="language-text">amb(1, 2)</code>に戻ってaの代入を2でやり直し、<code class="language-text">[2, 3]</code>が表示されます。更に尋ねると、同様に<code class="language-text">[2, 4]</code>が表示され、更に尋ねると「これ以上の可能性はない」と返します。</p>
-<p>まるで<code class="language-text">amb</code>のたびに世界線が分岐しているようにも見えます。SICPには、このパラダイムを使って様々な論理パズルを解く方法が載っているため、興味のある方は参照されると面白いと思います。</p>
+<p>まるで<code class="language-text">amb</code>のたびに世界線が分岐しているようにも見えます。SICPには、このパラダイムを使って様々な論理パズルを解く方法が載っており、とても面白いため興味のある方は参照されると良いと思います。</p>
 <p>これを実現するために、evalとapplyは、成功継続（ambが成功した場合の残りの計算）と失敗継続（ambが失敗した、つまり選択肢がない場合に実行すべき残りの計算、前のambの残りの選択肢を選ぶ処理だったり、代入を復元する処理だったり）を渡し合います。</p>
 <p>ここらへんで「継続」という用語があまり怖くなくなった気がします。</p>
 <h3 id="論理プログラミング" style="position:relative;"><a href="#%E8%AB%96%E7%90%86%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0" aria-label="論理プログラミング permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>論理プログラミング</h3>
@@ -547,8 +548,8 @@ console<span class="token punctuation">.</span><span class="token function">log<
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">// [1, 2, 3, 4]</span></code></pre></div>
 <p>これは「<code class="language-text">append([1, 2], [3, 4])</code>の結果は？」という質問に処理系が答えてくれたということになります。ここまでが普通のプログラミングです。</p>
-<p>しかしこの処理系では、「結果が<code class="language-text">[1, 2, 3, 4]</code>となる<code class="language-text">append([1, 2], ?x)</code>は？」と質問することもできます。</p>
-<p>これには「<code class="language-text">append([1, 2], [3, 4])</code>」という回答が返ります。<code class="language-text">?x</code>はパターン変数と呼ばれる特殊な記法で、命名は適当です。</p>
+<p>しかしこの処理系では、「結果が<code class="language-text">[1, 2, 3, 4]</code>となる<code class="language-text">append([1, 2], ?x)</code>は？」と質問することもできます。<code class="language-text">?x</code>はパターン変数と呼ばれる特殊な記法で、命名は適当です。</p>
+<p>これには「<code class="language-text">append([1, 2], [3, 4])</code>」という回答が返ります。</p>
 <p>さらに、「結果が<code class="language-text">[1, 2, 3, 4]</code>となる<code class="language-text">append(?x, ?y)</code>は？」と質問することもできます。この場合、</p>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token function">append</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">append</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -556,7 +557,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token function">append</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">append</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>が回答されます。</p>
-<p>まるで出力から入力を、結論から仮定を推測しているようで、「なんでこんなことができるんだ……？」と感心してしまいます。</p>
+<p>まるで出力から入力を、結論から仮定を推論しているようで、「なんでこんなことができるんだ……？」と感心してしまいます。</p>
 <p>このような挙動を実現するために、ユニフィケーション（単一化）というアルゴリズムを学びました。これは進化版applyといった感じです。</p>
 <p>これまでの関数適用は、変数と値の対を扱えばいいので簡単でした。例えば、<code class="language-text">append([1, 2], [3, 4])</code>を適用するときは、「<code class="language-text">list1</code>と<code class="language-text">[1, 2]</code>の束縛」、「<code class="language-text">list2</code>と<code class="language-text">[3, 4]</code>の束縛」を作れば良いです。</p>
 <p>一方で、<code class="language-text">append(?x, ?y)</code>を処理する場合、実引数側にも変数が現れます。またここでは説明しませんでしたが、仮引数側に値が現れることもあります。しかもその値は複雑な複合オブジェクトであるかもしれず、さらに中に変数を含んでいるかもしれません。また、実引数側の変数名と仮引数側の変数名が衝突する場合も考えられます。これを考慮しないと、最終的な推論がうまく行きません。</p>
@@ -573,7 +574,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <h2 id="5章" style="position:relative;"><a href="#5%E7%AB%A0" aria-label="5章 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>5章</h2>
 <p>仮想的なレジスタマシンのエミュレータを実装し、その機械語のうえで4章のメタ循環評価器を実装しました。</p>
 <p>これにより、例えばSchemeはどのようにしてメモリを消費せずに末尾呼び出しを行っているかという疑問が解決します。</p>
-<p>実際に、手続きの最後の処理が手続き呼び出しである場合、その後何もすることがない（継続がない）ため、スタックに何も積まず次の手続きへgotoできることが示されます。<a href="http://practical-scheme.net/docs/cont-j.html">なんでも継続</a>で、「継続の考え方を使うと末尾再帰の最適化は自然に導かれる」と言っていた意味がちょっとわかった気がします。</p>
+<p>実際に、手続きの最後の処理が手続き呼び出しである場合、その後呼び出しの後何もすることがない（継続がない）ため、スタックに何も積まず次の手続きへgotoできることが示されます。<a href="http://practical-scheme.net/docs/cont-j.html">なんでも継続</a>で、「継続の考え方を使うと末尾再帰の最適化は自然に導かれる」と言っていた意味がちょっとわかった気がします。</p>
 <p>また、Schemeのプログラムを仮想マシンの命令列に変換するコンパイラも実装しました。ここらへんまで来ると、自分が何をやっているのかよくわからなくなってきます。</p>
 <h3 id="5章の練習問題" style="position:relative;"><a href="#5%E7%AB%A0%E3%81%AE%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C" aria-label="5章の練習問題 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>5章の練習問題</h3>
 <p>最後の2問の練習問題、5.51と5.52がSICPのラスボスです。</p>
@@ -648,7 +649,7 @@ quote_value
 <p>……と思っていたのですが、ここにきて5.51側のバグがやっぱり見つかったので、けっきょくC言語の世界に<code class="language-text">return</code>しました。</p>
 <p>そのバグというのがどれも結構厄介で、ちょっと考えたくらいではわからないものでした。ここでは、地道に原因を追求していくのが近道なんだなぁということを改めて学びました。</p>
 <p>例えば、上層のSchemeで「変数を定義した後、その直後は変数を参照できるが、数行以上経過するとUnboundになる」というバグがありました。普通にプログラミングしている分にはまずありえない状況なので、一周回ってウケちゃいますね。</p>
-<p>「まずは、これがコンパイラのバグなのか、レジスタマシンのバグなのかを切り分けよう……。生成されたCのコードを読んでみると、コンパイラは問題なさそうだ。じゃあレジスタマシンの基本演算の実装がおかしい？いや、SICPのをほぼそのまま移植しているので大丈夫なはず……。よくわからんから環境をユーティリティでprintデバッグしてみよう。あれ、環境をprintするとセグフォするぞ……。しかもprintしてもセグフォしない環境もある……？これはまずユーティリティのバグを直さないと……」</p>
+<p>ぼく「まずは、これがコンパイラのバグなのか、レジスタマシンのバグなのかを切り分けよう……。生成されたCのコードを読んでみると、コンパイラは問題なさそうだ。じゃあレジスタマシンの基本演算の実装がおかしい？いや、SICPのをほぼそのまま移植しているので大丈夫なはず……。よくわからんから環境をユーティリティでprintデバッグしてみよう。あれ、環境をprintするとセグフォするぞ……。しかもprintしてもセグフォしない環境もある……？これはまずユーティリティのバグを直さないと……」</p>
 <p>といった感じです。結論としては、GCが微妙なタイミングで起きるとダメとか、mallocの数を±1だけ間違ってたとか、そういう細かい原因でした。</p>
 <p>そんなこんなを繰り返して3日経ったころ、ようやくサンプルコードやメタ循環評価器が動くようになりました。</p>
 <p>まず、sample.rktをコンパイルしてみます。</p>
