@@ -637,7 +637,7 @@ one
 <p>複合手続きの適用の際に引数を評価するのをやめて、代わりに<code class="language-text">delay</code>によって式を遅延オブジェクトで包みます。</p>
 <p>基本手続きの適用や<code class="language-text">if</code>の条件部、REPLの表示部分など、実際の値が必要である場合に<code class="language-text">force</code>するようにします。</p>
 <p>遅延評価を導入することで、無限ストリームを素直に表現できるようになります。</p>
-<p>4.3 Schemeの変異版 — ⾮決定性計算</p>
+<h3 id="43-schemeの変異版--決定性計算" style="position:relative;"><a href="#43-scheme%E3%81%AE%E5%A4%89%E7%95%B0%E7%89%88--%E6%B1%BA%E5%AE%9A%E6%80%A7%E8%A8%88%E7%AE%97" aria-label="43 schemeの変異版  決定性計算 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4.3 Schemeの変異版 — ⾮決定性計算</h3>
 <p>メタ循環評価器を拡張して、非決定性計算と呼ばれるプログラミングパラダイムを導入します。それは以下のようなものです。</p>
 <p><code class="language-text">amb</code>は非決定性計算のための特殊形式であり、式を曖昧に返します。</p>
 <p>例えば、<code class="language-text">(amb 1 2 3)</code>を評価し、1が選択されたとします。そのまま計算が進められていき、<code class="language-text">(amb)</code>を評価するとします。<code class="language-text">(amb)</code>は、返せる式がないため失敗を意味します。したがって、評価器は<code class="language-text">(amb 1 2 3)</code>で1を選択したのが間違いだったと判断し、時間を<code class="language-text">(amb 1 2 3)</code>の時点に巻き戻し、今度は2を選択します。更に失敗すると同様に3が選択され、さらに失敗すると<code class="language-text">(amb 1 2 3)</code>自体も失敗し、それ以前の<code class="language-text">amb</code>に時間が巻き戻ります。すべての<code class="language-text">amb</code>が失敗するとそれ以上やることはなくなります。</p>
