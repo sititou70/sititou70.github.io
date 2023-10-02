@@ -181,7 +181,8 @@ void function() {
 <p><code class="language-text">&lt;:</code>という記号は2つの型のあいだに書いて，「左の型が右の型のサブタイプである」と読みます．</p>
 <p>TypeScriptの型システムは構造的なので，2つのオブジェクトがサブタイプ関係にあるには，<strong>それらに共通するプロパティについてもまた，サブタイプ関係が必要<sup id="fnref-1"><a href="#fn-1" class="footnote-ref">1</a></sup>です</strong>．</p>
 <p>今回の例では，<code class="language-text">Dog</code>と<code class="language-text">Animal</code>に共通する<code class="language-text">animal</code>プロパティについて<code class="language-text">string &lt;: string</code>なのでOKです．</p>
-<p>ここで，<strong><code class="language-text">Animal</code>型の変数に<code class="language-text">Dog</code>型の値を代入できます</strong></p>
+<p>TSでは，<code class="language-text">S &lt;: T</code>ならば<code class="language-text">T</code>型の変数に<code class="language-text">S</code>型の値を代入できます．</p>
+<p>つまり，<code class="language-text">Dog &lt;: Animal</code>なので <strong><code class="language-text">Animal</code>型の変数に<code class="language-text">Dog</code>型の値を代入できます．</strong></p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token comment">// できる</span>
 <span class="token keyword">const</span> animalVariable<span class="token operator">:</span> Animal <span class="token operator">=</span> dog<span class="token punctuation">;</span></code></pre></div>
 <h2 id="問題" style="position:relative;"><a href="#%E5%95%8F%E9%A1%8C" aria-label="問題 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>問題</h2>
@@ -387,7 +388,6 @@ $ <span class="token comment"># パス？？？</span></code></pre></div>
 <p>予想に反してパスしてしまいました．これが今回気づいたことです．</p>
 <p>原因を確かめるために，TypeScriptのコードを読んでみることにしました．これは初めてのことなので不安もありますが，がんばります．</p>
 <p>さて，型検査器のコードは<a href="https://github.com/microsoft/TypeScript">microsoft/TypeScript</a>の<code class="language-text">src/compiler/checker.ts</code>にあります．こちらのファイルは，現時点で47,206行（！？）あり，2.6MBもの容量があり，GitHubは表示を拒否します．</p>
-<p>※<strong>あくまで念のために繰り返しますが，これは1つの<code class="language-text">.ts</code>ファイルです．</strong></p>
 <p><span
       class="gatsby-resp-image-wrapper"
       style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 489px; "
@@ -426,6 +426,7 @@ $ <span class="token comment"># パス？？？</span></code></pre></div>
         </picture>
   </a>
     </span></p>
+<p>※<strong>あくまで念のために繰り返しますが，これは1つの<code class="language-text">.ts</code>ファイルです．</strong></p>
 <p>さっそく不安が的中していますが，<em>覚悟</em> を決めて読んでいきます．</p>
 <p><code class="language-text">tsc</code>コマンドのエントリーポイントから<code class="language-text">console.log</code>や<code class="language-text">console.trace</code>を仕込みつつ追っていくと，やがて<code class="language-text">checker.ts</code>の<code class="language-text">checkTypeRelatedTo</code>という関数にたどり着きました．</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token comment">/**
@@ -546,7 +547,9 @@ $ <span class="token comment"># パス？？？</span></code></pre></div>
 <p>出典: <a href="https://github.com/microsoft/TypeScript/blob/main/src/compiler/checker.ts">checker.ts，TypeScript</a>，補足のコメントは筆者による</p>
 </blockquote>
 <p>あーやってる．これはやってますわ．</p>
-<p>コメントには「配列やタプルは共変なので変性を計算する必要はない」とあります．先程のダンプで<code class="language-text">type</code>が<code class="language-text">Array</code>なのは確認済みです．この場合，<code class="language-text">[VarianceFlags.Covariant]</code>という固定値が返されます．パフォーマンスを意図しての処理とも読めますが，実質的には配列を共変とする型付け規則の実装でもあります．それ以外の場合は<code class="language-text">getVariancesWorker</code>という関数を呼び出して変性を計算しているようです．</p>
+<p>コメントには「配列やタプルは共変なので変性を計算する必要はない」とあります．先程のダンプで<code class="language-text">type</code>が<code class="language-text">Array</code>なのは確認済みです．</p>
+<p><code class="language-text">type</code>が<code class="language-text">Array</code>の場合，<code class="language-text">[VarianceFlags.Covariant]</code>という固定値が返されます．パフォーマンスを意図しての処理とも読めますが，実質的には配列を共変とする型付け規則の実装でもあります．</p>
+<p>それ以外の場合は<code class="language-text">getVariancesWorker</code>という関数を呼び出して変性を計算しているようです．</p>
 <p>というわけで，<code class="language-text">node_modules/typescript/lib/tsc.js</code>を以下のように変更します</p>
 <div class="gatsby-highlight" data-language="diff"><pre class="language-diff"><code class="language-diff">function getVariances(type) {
 <span class="token deleted-sign deleted"><span class="token prefix deleted">-</span> return type === globalArrayType || type === globalReadonlyArrayType || type.objectFlags &amp; 8 ?
