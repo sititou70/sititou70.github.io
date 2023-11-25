@@ -609,7 +609,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <li>関数を評価すると作成される</li>
 <li>関数と環境のペアである
 <ul>
-<li>関数：関数本体への参照。具体的に何なのかは処理系によって異なる</li>
+<li>関数：関数への参照。具体的に何なのかは処理系によって異なる</li>
 <li>環境：クロージャが作成されたときの環境への参照</li>
 </ul>
 </li>
@@ -661,7 +661,7 @@ ArrowFunction : ArrowParameters => ConciseBody
   // 新規オブジェクト作成し、Fとおく
   2. Let F be OrdinaryObjectCreate(functionPrototype, internalSlotsList).
 
-  // Fに関数本体をセットする
+  // Fに関数のBodyをセットする
   6. Set F.[[ECMAScriptCode]] to Body.
 
   // Fに現在の環境をセットする
@@ -677,7 +677,7 @@ ArrowFunction : ArrowParameters => ConciseBody
 <li>[[ECMAScriptCode]]
 <ul>
 <li>Type：a Parse Node</li>
-<li>説明：関数の本体を定義するソース・テキストのルート解析ノード。</li>
+<li>説明：関数のBodyを定義するソース・テキストのルート解析ノード。</li>
 </ul>
 </li>
 <li>[[Environment]]
