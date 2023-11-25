@@ -689,7 +689,7 @@ ArrowFunction : ArrowParameters => ConciseBody
 </ul>
 <p>出典：<a href="https://tc39.es/ecma262/#sec-ecmascript-function-objects">10.2 ECMAScript Function Objects, ECMAScript</a>、翻訳はDeepLのものを筆者が改変したもの</p>
 </blockquote>
-<p>よし。思ったとおりです。</p>
+<p>うむ。思ったとおりです。</p>
 <p>また、<code class="language-text">F.[[Environment]]</code>の中身である、Environment Recordの説明は以下のようになっています。</p>
 <blockquote>
 <p>Environment Recordは、（中略）識別子と特定の変数および関数との関連付けを定義するために使用される仕様タイプです。通常、（中略）FunctionDeclarationやBlockStatement、TryStatementのCatch節など（中略）が評価されるたびに、そのコードによって作成される識別子の束縛を記録する新しいEnvironment Recordが作成されます。</p>
@@ -808,7 +808,7 @@ DebugPrint: 0x2d73c590c5f9: <span class="token punctuation">[</span>Function<spa
 <blockquote>
 <p>出典：<a href="https://github.com/v8/v8/blob/a619087d49b84eb2f98c7c13d5329c34eca17bde/src/objects/js-function.h#L89">v8/src/objects/js-function.h at a619087d49b84eb2f98c7c13d5329c34eca17bde · v8/v8</a>、コメントの翻訳はDeepLのものを筆者が改変したもの</p>
 </blockquote>
-<p>お、冒頭のコメントを見ると、<code class="language-text">JSFunction</code> はJavaScriptの関数を表す内部表現で間違っていなさそうですね。</p>
+<p>冒頭のコメントを見るに、<code class="language-text">JSFunction</code> はJavaScriptの関数を表す内部表現で間違っていなさそうですね。</p>
 <p><code class="language-text">[code]</code> と <code class="language-text">[context]</code> というメンバは、なんとなくですが関数と環境であるように見えます。なんとなくですけど。</p>
 <p>次に <code class="language-text">Context</code> の定義周辺も見てみます。</p>
 <div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token comment">// JSFunctionsは(context, function code)のペアであり、これはクロージャとも呼ばれる。</span>
@@ -826,11 +826,11 @@ DebugPrint: 0x2d73c590c5f9: <span class="token punctuation">[</span>Function<spa
 <p>出典：<a href="https://github.com/v8/v8/blob/a619087d49b84eb2f98c7c13d5329c34eca17bde/src/objects/contexts.h#L396">v8/src/objects/contexts.h at a619087d49b84eb2f98c7c13d5329c34eca17bde · v8/v8</a>、コメントの翻訳はDeepLのものを筆者が改変したもの</p>
 </blockquote>
 <p>これまた冒頭のコメントから、<code class="language-text">Context</code> が環境に相当するとわかりました。ヨッシャ。</p>
-<p><code class="language-text">previous</code> というメンバには他の環境への参照が入るようです。これは外側の環境への参照かなと予想しました。雑ですね。</p>
-<p>正直、C++筋がへなちょこなのと、マクロが山盛りなことも相まって、コードの意味は1Byteもわかりませんでした。コメントになんとか助けられたかんじです。</p>
+<p><code class="language-text">previous</code> というメンバには他の環境への参照が入るようです。これは外側の環境への参照かなと雑に予想しました。</p>
+<p>正直、C++筋がへなちょこなのと、マクロが山盛りなことも相まって、コードの意味は1Byteもわからず、コメントに助けられたかんじです。</p>
 <h3 id="より詳しくデバッグプリントしてみる" style="position:relative;"><a href="#%E3%82%88%E3%82%8A%E8%A9%B3%E3%81%97%E3%81%8F%E3%83%87%E3%83%90%E3%83%83%E3%82%B0%E3%83%97%E3%83%AA%E3%83%B3%E3%83%88%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B" aria-label="より詳しくデバッグプリントしてみる permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>より詳しくデバッグプリントしてみる</h3>
 <p>先程の <code class="language-text">JSFunctionPrint</code> は <code class="language-text">context</code> の内容を詳しく表示してくれません。</p>
-<p>一方で、<code class="language-text">objects-printer.cc</code> を散歩していると <code class="language-text">ContextPrint</code> という、いかにも <code class="language-text">context</code> の内容を表示してくれそうな処理を見つけました。</p>
+<p>一方で、<code class="language-text">objects-printer.cc</code> を散歩していると <code class="language-text">ContextPrint</code> という、いかにも <code class="language-text">context</code> を良い感じに表示してくれそうな処理を見つけました。</p>
 <p>というわけで、<code class="language-text">JSFunctionPrint</code> を改造して、<code class="language-text">context</code> とその外側の環境に関する詳しい情報を表示するようにしてみます。</p>
 <details>
   <summary>V8の開発環境を構築します</summary>
@@ -915,7 +915,7 @@ DebugPrint: 0x3b160004aa85: <span class="token punctuation">[</span>Function<spa
 <span class="token comment"># 以下counter1のデバッグプリントと同じ</span></code></pre></div>
 <p>まず、<code class="language-text">counter1</code> の <code class="language-text">context</code> における <code class="language-text">elements</code> の部分に束縛の情報が表示されています。<code class="language-text">counter1</code>の環境なので、<code class="language-text">2</code>が表示されていますね。一方で、<code class="language-text">counter2</code> の方を見ると <code class="language-text">1</code> が表示されています。</p>
 <p>そして、<code class="language-text">previous context</code> は、どちらのカウンタのデバッグプリントでもグローバル環境が表示されています。 <code class="language-text">elements</code> を見ると、<code class="language-text">makeCounter</code> や、2つの <code class="language-text">JSFunction</code> の束縛が表示されています。これらは、それぞれ <code class="language-text">counter1</code> と <code class="language-text">counter2</code> にアドレスが一致します。</p>
-<p>例の図に似た構造ですね。</p>
+<p>例の図に似ていますね。</p>
 <p><span
       class="gatsby-resp-image-wrapper"
       style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 728px; "
@@ -961,7 +961,7 @@ DebugPrint: 0x3b160004aa85: <span class="token punctuation">[</span>Function<spa
 <p><code class="language-text">context</code> は束縛の集合と、外側の環境への参照（<code class="language-text">previous</code>）を持っているため、環境に相当します。</p>
 <h2 id="まとめ" style="position:relative;"><a href="#%E3%81%BE%E3%81%A8%E3%82%81" aria-label="まとめ permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>まとめ</h2>
 <p>SICP、ECMAScript、V8を調べることで、それぞれにクロージャ、環境、束縛に相当する構造があることを確認しました。</p>
-<p>ことの発端は、<a href="https://blog.recruit.co.jp/rtc/2023/08/10/recruit-bootcamp-2023/">会社の新人向けJavaScript研修</a>にサポート講師として参加した際、新人の方からの「クロージャとは何ですか？」という質問に、僕がうまく回答できなかったことでした。</p>
+<p>きっかけは、<a href="https://blog.recruit.co.jp/rtc/2023/08/10/recruit-bootcamp-2023/">会社の新人向けJavaScript研修</a>にサポート講師として参加した際、新人の方からの「クロージャとは何ですか？」という質問に、僕がうまく回答できなかったことでした。</p>
 <p>こういう素朴な疑問が、理解を深めるきっかけになったのは良かったです。研修というのは、新人だけでなく講師の知見を広げる場でもあるんだなぁと感じました。</p>
 <p>今回の説明で取り上げた内容は、ECMAScriptとV8のほんの一部分です。実際、ECMAScriptのページはHTMLファイルだけで7MBありますし、V8のビルドには40分かかります。<sup id="fnref-1"><a href="#fn-1" class="footnote-ref">1</a></sup> そのような膨大な仕様と実装によってJavaScriptが動いていると思うと、頭のいい人たちはすごいなぁというお気持ちです。</p>
 <p>それとは対象的に、SICPにおける説明がいかに簡潔でわかりやすいか、というのも実感できました。</p>
