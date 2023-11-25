@@ -280,7 +280,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
   </a>
     </span></p>
 <p>関数を評価すると、クロージャが作成されます。正方形の2つのペアがクロージャです。</p>
-<p>左のFと書かれた正方形は、関数への参照です。参照先が具体的に何なのかは処理系によって異なりますが、例えばAST、S式、バイトコード、マシンコードなどがあり得ます。</p>
+<p>左のFと書かれた正方形は、関数への参照です。参照先が具体的に何なのかは処理系によって異なりますが、例えばAST、バイトコード、マシンコードなどがあり得ます。</p>
 <p>右のEと書かれた正方形は、クロージャが作成されたときの環境への参照です。今回は関数をグローバル環境で評価したので、グローバル環境を指しています。</p>
 <p>評価結果であるクロージャをグローバル環境の <code class="language-text">makeCounter</code> に代入します。グローバル環境に <code class="language-text">makeCounter</code> とクロージャの束縛が追加されました。</p>
 <h3 id="step-2makecounter-の呼び出しcounter1" style="position:relative;"><a href="#step-2makecounter-%E3%81%AE%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%97counter1" aria-label="step 2makecounter の呼び出しcounter1 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 2：<code class="language-text">makeCounter</code> の呼び出し（<code class="language-text">counter1</code>）</h3>
