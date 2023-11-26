@@ -637,9 +637,9 @@ console<span class="token punctuation">.</span><span class="token function">log<
 </ul>
 </li>
 </ul>
-<p>章の冒頭で文法が定義され、その後は各文法に対するStatic Semantics（SS）とRuntime Semantics（RS）が定義されています。</p>
-<p>Static Semanticsとは例えば、非同期のアロー関数でないのに <code class="language-text">await</code> が現れるなら文法エラー、みたいなやつです。コードを実際に動かさなくてもわかるやつ。</p>
-<p>今回はアロー関数の評価に興味があるので、<a href="https://tc39.es/ecma262/#sec-arrow-function-definitions-runtime-semantics-evaluation">15.3.5 Runtime Semantics: Evaluation</a>から見ていくと良さそうです。</p>
+<p>SSとRSは、それぞれStatic SemanticsとRuntime Semanticsのことみたいです。</p>
+<p>Static Semanticsには、プログラムを動かす前にわかるようなことが定義されています。例えば、非同期のアロー関数でないのに <code class="language-text">await</code> が現れるなら文法エラー、などです。</p>
+<p>今回は、プログラム実行時の評価の挙動に興味があるので、<a href="https://tc39.es/ecma262/#sec-arrow-function-definitions-runtime-semantics-evaluation">15.3.5 Runtime Semantics: Evaluation</a>から見ていくと良さそうですね。</p>
 <p>以下、今回関心のある部分のみ抜粋します。</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text"># 15.3.5 Runtime Semantics: Evaluation
 ArrowFunction : ArrowParameters => ConciseBody
