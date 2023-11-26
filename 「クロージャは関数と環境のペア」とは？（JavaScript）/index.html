@@ -707,7 +707,7 @@ ArrowFunction : ArrowParameters => ConciseBody
 <p>でも使用されているようです。</p>
 <p>しがたって、今回のサンプルプログラムではアロー関数を使用しましたが、他の書き方でもクロージャが生成されるのは変わらないということです。</p>
 <p>「JavaScriptのほとんど（あるいはすべて？）の関数はクロージャ」と言われる理由がわかります。</p>
-<h3 id="クロージャの呼び出し適用" style="position:relative;"><a href="#%E3%82%AF%E3%83%AD%E3%83%BC%E3%82%B8%E3%83%A3%E3%81%AE%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%97%E9%81%A9%E7%94%A8" aria-label="クロージャの呼び出し適用 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>クロージャの呼び出し（適用）</h3>
+<h3 id="クロージャの呼び出し関数呼び出しの評価" style="position:relative;"><a href="#%E3%82%AF%E3%83%AD%E3%83%BC%E3%82%B8%E3%83%A3%E3%81%AE%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%97%E9%96%A2%E6%95%B0%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%97%E3%81%AE%E8%A9%95%E4%BE%A1" aria-label="クロージャの呼び出し関数呼び出しの評価 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>クロージャの呼び出し（関数呼び出しの評価）</h3>
 <p>関数呼び出しの評価は、<a href="https://tc39.es/ecma262/#sec-function-calls-runtime-semantics-evaluation">13.3.6.1 Runtime Semantics: Evaluation</a>から見ていくと良さそうです。</p>
 <p>以下、今回関心のある部分のみ抜粋します。</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text"># 13.3.6.1 Runtime Semantics: Evaluation
@@ -759,7 +759,7 @@ Bytecode age: <span class="token number">0</span>
 <p>ふむり。</p>
 <p><code class="language-text">CreateFunctionContext</code> が気になります。<code class="language-text">makeCounter</code> の呼び出し時に毎回Contextが作られるということで、これは環境やEnvironment Recordの作成に相当するものかと予想しました。</p>
 <p>その後の <code class="language-text">PushContext</code> は、コードを実行する環境を新しいものに切り替えてるっぽいです。</p>
-<p><code class="language-text">LdaZero</code> と <code class="language-text">StaCurrentContextSlot</code> は、<code class="language-text">let cnt = 0;</code> に対応してそうです。Zeroを生成して、Context（環境のことだと予想）にストアしてる？</p>
+<p><code class="language-text">LdaZero</code> と <code class="language-text">StaCurrentContextSlot</code> は、<code class="language-text">let cnt = 0;</code> に対応してそうです。Zeroを生成して、Context（環境？）にストアしてる？</p>
 <p><code class="language-text">CreateClosure</code> と <code class="language-text">Return</code> はそのまんまですね。</p>
 <h3 id="デバッグプリントしてみる" style="position:relative;"><a href="#%E3%83%87%E3%83%90%E3%83%83%E3%82%B0%E3%83%97%E3%83%AA%E3%83%B3%E3%83%88%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B" aria-label="デバッグプリントしてみる permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>デバッグプリントしてみる</h3>
 <p>次に、<code class="language-text">--allow-natives-syntax</code> の <code class="language-text">%DebugPrint</code> を使って、<code class="language-text">CreateClosure</code> の結果がどのようになっているのかをデバッグプリントしてみます。</p>
@@ -909,7 +909,7 @@ DebugPrint: 0x3b160004aa85: <span class="token punctuation">[</span>Function<spa
 
 <span class="token comment"># counter2の環境の外側の環境（グローバル環境）</span>
 0x3b160019a031: <span class="token punctuation">[</span>Context<span class="token punctuation">]</span> <span class="token keyword">in</span> OldSpace
-<span class="token comment"># 以下counter1のデバッグプリントと同じ</span></code></pre></div>
+<span class="token comment"># 以下、counter1でのグローバル環境のデバッグプリントと同じ</span></code></pre></div>
 <p>まず、<code class="language-text">counter1</code> の <code class="language-text">context</code> における <code class="language-text">elements</code> の部分に束縛の情報が表示されています。<code class="language-text">counter1</code>の環境なので<code class="language-text">2</code>が表示されていますね。一方で、<code class="language-text">counter2</code> の方を見ると <code class="language-text">1</code> が表示されています。</p>
 <p>そして <code class="language-text">previous context</code> は、どちらのカウンタのデバッグプリントでもグローバル環境が表示されています。 <code class="language-text">elements</code> を見ると、<code class="language-text">makeCounter</code> の他に、2つの <code class="language-text">JSFunction</code> の束縛が表示されています。これらは、それぞれ <code class="language-text">counter1</code> と <code class="language-text">counter2</code> にアドレスが一致します。</p>
 <p>全体的に、例の図に似た構造があるのを確認できました。</p>
