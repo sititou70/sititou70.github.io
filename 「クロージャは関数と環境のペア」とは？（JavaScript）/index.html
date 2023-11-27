@@ -229,7 +229,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p>束縛とは、「変数」と「値」のペアです。束縛の集合は区切り線の下に書かれます。現状は束縛はありません。</p>
 <p>矢印は外側の環境への参照です。グローバル環境に外側は無いため、バツ印を指しています。</p>
 <p>以降は、このグローバル環境でサンプルプログラムを評価していきます。</p>
-<h3 id="step-1makecounter-の作成" style="position:relative;"><a href="#step-1makecounter-%E3%81%AE%E4%BD%9C%E6%88%90" aria-label="step 1makecounter の作成 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 1：<code class="language-text">makeCounter</code> の作成</h3>
+<h3 id="step-1makecounterの作成" style="position:relative;"><a href="#step-1makecounter%E3%81%AE%E4%BD%9C%E6%88%90" aria-label="step 1makecounterの作成 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 1：<code class="language-text">makeCounter</code>の作成</h3>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">makeCounter</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
   <span class="token keyword">let</span> cnt <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
   <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
@@ -281,10 +281,10 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p>関数を評価すると、クロージャが作成されます。正方形の2つのペアがクロージャです。</p>
 <p>左のFと書かれた正方形は、関数への参照です。参照先が具体的に何なのかは処理系によって異なりますが、例えばAST、バイトコード、マシンコードなどがあり得ます。</p>
 <p>右のEと書かれた正方形は、クロージャが作成されたときの環境への参照です。今回は関数をグローバル環境で評価したので、グローバル環境を指しています。</p>
-<p>評価結果であるクロージャをグローバル環境の <code class="language-text">makeCounter</code> に代入します。グローバル環境に <code class="language-text">makeCounter</code> とクロージャの束縛が追加されました。</p>
-<h3 id="step-2makecounter-の呼び出しcounter1" style="position:relative;"><a href="#step-2makecounter-%E3%81%AE%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%97counter1" aria-label="step 2makecounter の呼び出しcounter1 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 2：<code class="language-text">makeCounter</code> の呼び出し（<code class="language-text">counter1</code>）</h3>
+<p>評価結果であるクロージャをグローバル環境の<code class="language-text">makeCounter</code>に代入します。グローバル環境に<code class="language-text">makeCounter</code>とクロージャの束縛が追加されました。</p>
+<h3 id="step-2makecounterの呼び出しcounter1" style="position:relative;"><a href="#step-2makecounter%E3%81%AE%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%97counter1" aria-label="step 2makecounterの呼び出しcounter1 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 2：<code class="language-text">makeCounter</code>の呼び出し（<code class="language-text">counter1</code>）</h3>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> counter1 <span class="token operator">=</span> <span class="token function">makeCounter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p><code class="language-text">makeCounter</code> はクロージャなので、<code class="language-text">makeCounter()</code> はクロージャを呼び出しています。</p>
+<p><code class="language-text">makeCounter</code>はクロージャなので、<code class="language-text">makeCounter()</code>はクロージャを呼び出しています。</p>
 <p>クロージャが呼び出されると、</p>
 <ol>
 <li>新しい環境が作成され、その「外側の環境」はクロージャの環境になります</li>
@@ -340,7 +340,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
   <span class="token keyword">return</span> cnt<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>これをEnv 1で評価していきます。</p>
-<p>まず、<code class="language-text">let cnt = 0;</code> によって <code class="language-text">cnt</code> と <code class="language-text">0</code> の束縛が作成されます。</p>
+<p>まず、<code class="language-text">let cnt = 0;</code>によって<code class="language-text">cnt</code>と<code class="language-text">0</code>の束縛が作成されます。</p>
 <p><span
       class="gatsby-resp-image-wrapper"
       style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 728px; "
@@ -381,10 +381,10 @@ console<span class="token punctuation">.</span><span class="token function">log<
         </picture>
   </a>
     </span></p>
-<p>次に <code class="language-text">return () => { cnt++; return cnt; };</code> の部分ですが、これは関数（アロー関数）の評価結果を <code class="language-text">return</code> しています。</p>
+<p>次に<code class="language-text">return () => { cnt++; return cnt; };</code>の部分ですが、これは関数（アロー関数）の評価結果を<code class="language-text">return</code>しています。</p>
 <p>おさらいですが、関数を評価するとクロージャが作成されます。</p>
 <p>クロージャは、「関数への参照」と「クロージャが作成されたときの環境（ここではEnv 1）への参照」のペアです。</p>
-<p>これが <code class="language-text">return</code> されて最終的に <code class="language-text">counter1</code> に代入されるため、結果は以下のようになります。</p>
+<p>これが<code class="language-text">return</code>されて最終的に<code class="language-text">counter1</code>に代入されるため、結果は以下のようになります。</p>
 <p><span
       class="gatsby-resp-image-wrapper"
       style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 728px; "
@@ -425,8 +425,8 @@ console<span class="token punctuation">.</span><span class="token function">log<
         </picture>
   </a>
     </span></p>
-<h3 id="step-3makecounter-の呼び出しcounter2" style="position:relative;"><a href="#step-3makecounter-%E3%81%AE%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%97counter2" aria-label="step 3makecounter の呼び出しcounter2 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 3：<code class="language-text">makeCounter</code> の呼び出し（<code class="language-text">counter2</code>）</h3>
-<p>同様に <code class="language-text">counter2</code> が定義されます。</p>
+<h3 id="step-3makecounterの呼び出しcounter2" style="position:relative;"><a href="#step-3makecounter%E3%81%AE%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%97counter2" aria-label="step 3makecounterの呼び出しcounter2 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 3：<code class="language-text">makeCounter</code>の呼び出し（<code class="language-text">counter2</code>）</h3>
+<p>同様に<code class="language-text">counter2</code>が定義されます。</p>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> counter2 <span class="token operator">=</span> <span class="token function">makeCounter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>結果は以下のようになります。</p>
 <p><span
@@ -471,7 +471,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
     </span></p>
 <h3 id="step-4counterの呼び出し" style="position:relative;"><a href="#step-4counter%E3%81%AE%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%97" aria-label="step 4counterの呼び出し permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 4：counterの呼び出し</h3>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">counter1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1</span></code></pre></div>
-<p><code class="language-text">counter1()</code> はクロージャを呼び出しています。</p>
+<p><code class="language-text">counter1()</code>はクロージャを呼び出しています。</p>
 <p>おさらいですが、クロージャが呼び出されると、クロージャの環境を外側の環境とする新しい環境が作成され、そこでクロージャの関数が評価されます。</p>
 <p>したがって、まず以下ようなEnv 3が作成されます。</p>
 <p><span
@@ -517,7 +517,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p>次に、クロージャの関数をEnv 3で評価します。クロージャが指す関数の本体は以下のとおりです。</p>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript">cnt<span class="token operator">++</span><span class="token punctuation">;</span>
 <span class="token keyword">return</span> cnt<span class="token punctuation">;</span></code></pre></div>
-<p>まず、Env 3で <code class="language-text">cnt++;</code> を評価します。Env 3に 変数 <code class="language-text">cnt</code> の束縛はないため、外側の環境である Env 1に探しに行きます。そこで <code class="language-text">cnt</code> が見つかるため、Env 1の <code class="language-text">cnt</code> をインクリメントして、以下のようになります。</p>
+<p>まず、Env 3で<code class="language-text">cnt++;</code>を評価します。Env 3に 変数<code class="language-text">cnt</code>の束縛はないため、外側の環境である Env 1に探しに行きます。そこで<code class="language-text">cnt</code>が見つかるため、Env 1の<code class="language-text">cnt</code>をインクリメントして、以下のようになります。</p>
 <p><span
       class="gatsby-resp-image-wrapper"
       style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 728px; "
@@ -558,8 +558,8 @@ console<span class="token punctuation">.</span><span class="token function">log<
         </picture>
   </a>
     </span></p>
-<p>次に、Env 3で <code class="language-text">return cnt;</code> を評価します。先ほどと同じように <code class="language-text">cnt</code> を探索すると、Env 1で束縛が見つかるため、最終的に <code class="language-text">1</code> が <code class="language-text">return</code> され、<code class="language-text">console.log</code> によって表示されます。</p>
-<p>同じように、 <code class="language-text">counter2</code> を呼び出した場合は、Env 2の <code class="language-text">cnt</code> がインクリメントされます。</p>
+<p>次に、Env 3で<code class="language-text">return cnt;</code>を評価します。先ほどと同じように<code class="language-text">cnt</code>を探索すると、Env 1で束縛が見つかるため、最終的に<code class="language-text">1</code>が<code class="language-text">return</code>され、<code class="language-text">console.log</code>によって表示されます。</p>
+<p>同じように、<code class="language-text">counter2</code>を呼び出した場合は、Env 2の<code class="language-text">cnt</code>がインクリメントされます。</p>
 <p>最終的に、すべてのサンプルプログラムの実行が終わった時点では、以下の図のようになっています。</p>
 <p><span
       class="gatsby-resp-image-wrapper"
@@ -637,7 +637,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 </li>
 </ul>
 <p>SSとRSは、それぞれStatic SemanticsとRuntime Semanticsのことみたいです。</p>
-<p>Static Semanticsには、プログラムを動かす前にわかるようなことが定義されています。例えば、非同期のアロー関数でないのに <code class="language-text">await</code> が現れるなら文法エラー、などです。</p>
+<p>Static Semanticsには、プログラムを動かす前にわかるようなことが定義されています。例えば、非同期のアロー関数でないのに<code class="language-text">await</code>が現れるなら文法エラー、などです。</p>
 <p>今回は、プログラム実行時の評価の挙動に興味があるので、<a href="https://tc39.es/ecma262/#sec-arrow-function-definitions-runtime-semantics-evaluation">15.3.5 Runtime Semantics: Evaluation</a>から見ていくと良さそうですね。</p>
 <p>以下、今回関心のある部分のみ抜粋します。</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text"># 15.3.5 Runtime Semantics: Evaluation
@@ -696,9 +696,9 @@ ArrowFunction : ArrowParameters => ConciseBody
 <p>出典：<a href="https://tc39.es/ecma262/#sec-environment-records">9.1 Environment Records, ECMAScript</a>、翻訳はDeepLのものを筆者が改変したもの</p>
 </blockquote>
 <p>SICPの説明で聞いたようなことが書かれてます。</p>
-<p>ちなみに、<code class="language-text">OrdinaryFunctionCreate</code> はアロー関数だけではなく、</p>
+<p>ちなみに、<code class="language-text">OrdinaryFunctionCreate</code>はアロー関数だけではなく、</p>
 <ul>
-<li><code class="language-text">function</code> による（非同期）関数の評価</li>
+<li><code class="language-text">function</code>による（非同期）関数の評価</li>
 <li>（非同期）メソッドの評価</li>
 <li>getter / setterの評価</li>
 <li>（非同期）ジェネレータの評価</li>
@@ -734,12 +734,12 @@ CallExpression : CallExpression Arguments
 <p>というわけで、クロージャの呼び出し時に、その環境を外側の環境とする新しい環境を作成していそうだとわかります。</p>
 <h3 id="javascriptまとめ" style="position:relative;"><a href="#javascript%E3%81%BE%E3%81%A8%E3%82%81" aria-label="javascriptまとめ permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JavaScriptまとめ</h3>
 <p>アロー関数の評価結果は関数オブジェクトでした。これは関数（<code class="language-text">[[ECMAScriptCode]]</code>）と環境（<code class="language-text">[[Environment]]</code>）を持っているためクロージャです。</p>
-<p><code class="language-text">[[Environment]]</code> の中身であるEnvironment Recordは、束縛の集合と、外側の環境への参照（<code class="language-text">[[OuterEnv]]</code>）を持ちます。これは環境に相当します。</p>
+<p><code class="language-text">[[Environment]]</code>の中身であるEnvironment Recordは、束縛の集合と、外側の環境への参照（<code class="language-text">[[OuterEnv]]</code>）を持ちます。これは環境に相当します。</p>
 <h2 id="v8では" style="position:relative;"><a href="#v8%E3%81%A7%E3%81%AF" aria-label="v8では permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>V8では</h2>
 <p>最後に、実際のJSエンジン内部でクロージャがどのように実現されているか、ふんわり眺めてみましょう。</p>
 <h3 id="バイトコードを見てみる" style="position:relative;"><a href="#%E3%83%90%E3%82%A4%E3%83%88%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E8%A6%8B%E3%81%A6%E3%81%BF%E3%82%8B" aria-label="バイトコードを見てみる permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>バイトコードを見てみる</h3>
-<p>はじめに、 <code class="language-text">makeCounter</code> のバイトコードを見てみます。<a href="https://v8.dev/docs/ignition">バイトコードおよびインタプリタについての説明</a>は公式サイトに譲ります。ここでは、「V8がソースコードから生成したやることリスト」くらいの認識で行きます。</p>
-<p>ともかく、<code class="language-text">--print-bytecode</code> オプションを使用してみます。</p>
+<p>はじめに、<code class="language-text">makeCounter</code>のバイトコードを見てみます。<a href="https://v8.dev/docs/ignition">バイトコードおよびインタプリタについての説明</a>は公式サイトに譲ります。ここでは、「V8がソースコードから生成したやることリスト」くらいの認識で行きます。</p>
+<p>ともかく、<code class="language-text">--print-bytecode</code>オプションを使用してみます。</p>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">$ <span class="token function">node</span> <span class="token parameter variable">-v</span>
 v18.3.0
 
@@ -756,13 +756,13 @@ Bytecode age: <span class="token number">0</span>
    <span class="token number">91</span> S<span class="token operator">></span> 0x1c7f8fca6d7 @   <span class="token number">15</span> <span class="token builtin class-name">:</span> a9                Return
 <span class="token punctuation">..</span>.</code></pre></div>
 <p>ふむり。</p>
-<p><code class="language-text">CreateFunctionContext</code> が気になります。<code class="language-text">makeCounter</code> の呼び出し時に毎回Contextが作られるということで、これは環境やEnvironment Recordの作成に相当するものかと予想しました。</p>
-<p>その後の <code class="language-text">PushContext</code> は、コードを実行する環境を新しいものに切り替えてるっぽいです。</p>
-<p><code class="language-text">LdaZero</code> と <code class="language-text">StaCurrentContextSlot</code> は、<code class="language-text">let cnt = 0;</code> に対応してそうです。Zeroを生成して、Context（環境？）にストアしてる？</p>
-<p><code class="language-text">CreateClosure</code> と <code class="language-text">Return</code> はそのまんまですね。</p>
+<p><code class="language-text">CreateFunctionContext</code>が気になります。<code class="language-text">makeCounter</code>の呼び出し時に毎回Contextが作られるということで、これは環境やEnvironment Recordの作成に相当するものかと予想しました。</p>
+<p>その後の<code class="language-text">PushContext</code>は、コードを実行する環境を新しいものに切り替えてるっぽいです。</p>
+<p><code class="language-text">LdaZero</code>と<code class="language-text">StaCurrentContextSlot</code>は、<code class="language-text">let cnt = 0;</code>に対応してそうです。Zeroを生成して、Context（環境？）にストアしてる？</p>
+<p><code class="language-text">CreateClosure</code>と<code class="language-text">Return</code>はそのまんまですね。</p>
 <h3 id="デバッグプリントしてみる" style="position:relative;"><a href="#%E3%83%87%E3%83%90%E3%83%83%E3%82%B0%E3%83%97%E3%83%AA%E3%83%B3%E3%83%88%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B" aria-label="デバッグプリントしてみる permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>デバッグプリントしてみる</h3>
-<p>次に、<code class="language-text">--allow-natives-syntax</code> の <code class="language-text">%DebugPrint</code> を使って、<code class="language-text">CreateClosure</code> の結果がどのようになっているのかをデバッグプリントしてみます。</p>
-<p>サンプルコードの最後に <code class="language-text">%DebugPrint(counter1);</code> を追加して、次のコマンドを実行します。</p>
+<p>次に、<code class="language-text">--allow-natives-syntax</code>の<code class="language-text">%DebugPrint</code>を使って、<code class="language-text">CreateClosure</code>の結果がどのようになっているのかをデバッグプリントしてみます。</p>
+<p>サンプルコードの最後に<code class="language-text">%DebugPrint(counter1);</code>を追加して、次のコマンドを実行します。</p>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">$ <span class="token function">node</span> --allow-natives-syntax sample.js
 DebugPrint: 0x2d73c590c5f9: <span class="token punctuation">[</span>Function<span class="token punctuation">]</span>
  - map: 0x11b664d813b9 <span class="token operator">&lt;</span>Map<span class="token punctuation">(</span>HOLEY_ELEMENTS<span class="token punctuation">)</span><span class="token operator">></span> <span class="token punctuation">[</span>FastProperties<span class="token punctuation">]</span>
@@ -783,9 +783,9 @@ DebugPrint: 0x2d73c590c5f9: <span class="token punctuation">[</span>Function<spa
 <p>出典：<a href="https://github.com/v8/v8/blob/a619087d49b84eb2f98c7c13d5329c34eca17bde/src/diagnostics/objects-printer.cc#L1849">v8/src/diagnostics/objects-printer.cc at a619087d49b84eb2f98c7c13d5329c34eca17bde · v8/v8</a>、翻訳はDeepLのものを筆者が改変したもの</p>
 </blockquote>
 <p>上記の1件だけヒットします。</p>
-<p>これは <code class="language-text">JSFunction</code> をデバッグプリントするためのコードなので、 <code class="language-text">counter1</code> は <code class="language-text">JSFunction</code> という構造で表現されているはずです。</p>
+<p>これは<code class="language-text">JSFunction</code>をデバッグプリントするためのコードなので、<code class="language-text">counter1</code>は<code class="language-text">JSFunction</code>という構造で表現されているはずです。</p>
 <h3 id="重要そうな構造の定義を眺めてみる" style="position:relative;"><a href="#%E9%87%8D%E8%A6%81%E3%81%9D%E3%81%86%E3%81%AA%E6%A7%8B%E9%80%A0%E3%81%AE%E5%AE%9A%E7%BE%A9%E3%82%92%E7%9C%BA%E3%82%81%E3%81%A6%E3%81%BF%E3%82%8B" aria-label="重要そうな構造の定義を眺めてみる permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>重要そうな構造の定義を眺めてみる</h3>
-<p>というわけで、<code class="language-text">JSFunction</code> の定義に飛んで周辺を見てみますと、</p>
+<p>というわけで、<code class="language-text">JSFunction</code>の定義に飛んで周辺を見てみますと、</p>
 <div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token comment">// JSFunctionはJavaScriptのfunctionsを表す</span>
 <span class="token keyword">class</span> <span class="token class-name">JSFunction</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">TorqueGeneratedJSFunction</span><span class="token operator">&lt;</span>
                        <span class="token class-name">JSFunction</span><span class="token punctuation">,</span> <span class="token class-name">JSFunctionOrBoundFunctionOrWrappedFunction</span><span class="token operator">></span></span> <span class="token punctuation">{</span>
@@ -805,9 +805,9 @@ DebugPrint: 0x2d73c590c5f9: <span class="token punctuation">[</span>Function<spa
 <blockquote>
 <p>出典：<a href="https://github.com/v8/v8/blob/a619087d49b84eb2f98c7c13d5329c34eca17bde/src/objects/js-function.h#L89">v8/src/objects/js-function.h at a619087d49b84eb2f98c7c13d5329c34eca17bde · v8/v8</a>、コメントの翻訳はDeepLのものを筆者が改変したもの</p>
 </blockquote>
-<p>冒頭のコメントを見るに、<code class="language-text">JSFunction</code> はJavaScriptの関数を表す内部表現で間違っていなさそうですね。</p>
-<p><code class="language-text">[code]</code> と <code class="language-text">[context]</code> というメンバは、なんとなくですが関数と環境であるように見えます。なんとなくですけど。</p>
-<p>次に <code class="language-text">Context</code> の定義周辺も見てみます。</p>
+<p>冒頭のコメントを見るに、<code class="language-text">JSFunction</code>はJavaScriptの関数を表す内部表現で間違っていなさそうですね。</p>
+<p><code class="language-text">[code]</code>と<code class="language-text">[context]</code>というメンバは、なんとなくですが関数と環境であるように見えます。なんとなくですけど。</p>
+<p>次に<code class="language-text">Context</code>の定義周辺も見てみます。</p>
 <div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token comment">// JSFunctionsは(context, function code)のペアであり、これはクロージャとも呼ばれる。</span>
 <span class="token comment">//</span>
 <span class="token comment">// ...</span>
@@ -822,12 +822,12 @@ DebugPrint: 0x2d73c590c5f9: <span class="token punctuation">[</span>Function<spa
 <blockquote>
 <p>出典：<a href="https://github.com/v8/v8/blob/a619087d49b84eb2f98c7c13d5329c34eca17bde/src/objects/contexts.h#L396">v8/src/objects/contexts.h at a619087d49b84eb2f98c7c13d5329c34eca17bde · v8/v8</a>、コメントの翻訳はDeepLのものを筆者が改変したもの</p>
 </blockquote>
-<p>さきほど、<code class="language-text">Context</code> は環境に相当するものだと予想していましたが、冒頭のコメントを見る限り正解っぽいです。ヨッシャ。</p>
-<p><code class="language-text">previous</code> というメンバには他の環境への参照が入ると書かれています。明示的に書かれていませんが、外側の環境への参照ですかね？</p>
+<p>さきほど、<code class="language-text">Context</code>は環境に相当するものだと予想していましたが、冒頭のコメントを見る限り正解っぽいです。ヨッシャ。</p>
+<p><code class="language-text">previous</code>というメンバには他の環境への参照が入ると書かれています。明示的に書かれていませんが、外側の環境への参照ですかね？</p>
 <h3 id="より詳しくデバッグプリントしてみる" style="position:relative;"><a href="#%E3%82%88%E3%82%8A%E8%A9%B3%E3%81%97%E3%81%8F%E3%83%87%E3%83%90%E3%83%83%E3%82%B0%E3%83%97%E3%83%AA%E3%83%B3%E3%83%88%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B" aria-label="より詳しくデバッグプリントしてみる permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>より詳しくデバッグプリントしてみる</h3>
-<p>先程の <code class="language-text">JSFunctionPrint</code> は <code class="language-text">context</code> の内容を詳しく表示してくれないようでした。</p>
-<p>一方で、<code class="language-text">objects-printer.cc</code> を散歩していると <code class="language-text">ContextPrint</code> という、いかにも <code class="language-text">context</code> を良い感じに表示してくれそうな処理を見つけました。</p>
-<p>というわけで、<code class="language-text">JSFunctionPrint</code> を改造して、<code class="language-text">context</code> とその <code class="language-text">previous</code> に関する詳しい情報を表示するようにしてみます。</p>
+<p>先程の<code class="language-text">JSFunctionPrint</code>は<code class="language-text">context</code>の内容を詳しく表示してくれないようでした。</p>
+<p>一方で、<code class="language-text">objects-printer.cc</code>を散歩していると<code class="language-text">ContextPrint</code>という、いかにも<code class="language-text">context</code>を良い感じに表示してくれそうな処理を見つけました。</p>
+<p>というわけで、<code class="language-text">JSFunctionPrint</code>を改造して、<code class="language-text">context</code>とその<code class="language-text">previous</code>に関する詳しい情報を表示するようにしてみます。</p>
 <details>
 <summary>V8のビルド環境を構築します</summary>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token builtin class-name">cd</span> <span class="token environment constant">$HOME</span>
@@ -873,7 +873,7 @@ index 51c4d991d17..3d9c03d64a7 100644
 </span><span class="token unchanged"><span class="token prefix unchanged"> </span>}
 </span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span>void SharedFunctionInfo::PrintSourceCode(std::ostream&amp; os) {</span></code></pre></div>
-<p>サンプルコードの最後に<code class="language-text">%DebugPrint(counter2);</code> も追加します。</p>
+<p>サンプルコードの最後に<code class="language-text">%DebugPrint(counter2);</code>も追加します。</p>
 <p>V8をビルドし、改造したデバッグプリントを実行してみます。</p>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">$ ./tools/dev/gm.py x64.release <span class="token operator">&amp;&amp;</span> ./out/x64.release/d8 --allow-natives-syntax <span class="token punctuation">..</span>/sample.js
 
@@ -909,8 +909,8 @@ DebugPrint: 0x3b160004aa85: <span class="token punctuation">[</span>Function<spa
 <span class="token comment"># counter2の環境の外側の環境（グローバル環境）</span>
 0x3b160019a031: <span class="token punctuation">[</span>Context<span class="token punctuation">]</span> <span class="token keyword">in</span> OldSpace
 <span class="token comment"># 以下、counter1でのグローバル環境のデバッグプリントと同じ</span></code></pre></div>
-<p>まず、<code class="language-text">counter1</code> の <code class="language-text">context</code> における <code class="language-text">elements</code> の部分に束縛の情報が表示されています。<code class="language-text">counter1</code>の環境なので<code class="language-text">2</code>が表示されていますね。一方で、<code class="language-text">counter2</code> の方を見ると <code class="language-text">1</code> が表示されています。</p>
-<p>そして <code class="language-text">previous context</code> は、どちらのカウンタのデバッグプリントでもグローバル環境が表示されています。 <code class="language-text">elements</code> を見ると、<code class="language-text">makeCounter</code> の他に、2つの <code class="language-text">JSFunction</code> の束縛が表示されています。これらは、それぞれ <code class="language-text">counter1</code> と <code class="language-text">counter2</code> にアドレスが一致します。</p>
+<p>まず、<code class="language-text">counter1</code>の<code class="language-text">context</code>における<code class="language-text">elements</code>の部分に束縛の情報が表示されています。<code class="language-text">counter1</code>の環境なので<code class="language-text">2</code>が表示されていますね。一方で、<code class="language-text">counter2</code>の方を見ると<code class="language-text">1</code>が表示されています。</p>
+<p>そして<code class="language-text">previous context</code>は、どちらのカウンタのデバッグプリントでもグローバル環境が表示されています。<code class="language-text">elements</code>を見ると、<code class="language-text">makeCounter</code>の他に、2つの<code class="language-text">JSFunction</code>の束縛が表示されています。これらは、それぞれ<code class="language-text">counter1</code>と<code class="language-text">counter2</code>にアドレスが一致します。</p>
 <p>全体的に、例の図に似た構造があるのを確認できました。</p>
 <p><span
       class="gatsby-resp-image-wrapper"
@@ -953,8 +953,8 @@ DebugPrint: 0x3b160004aa85: <span class="token punctuation">[</span>Function<spa
   </a>
     </span></p>
 <h3 id="v8まとめ" style="position:relative;"><a href="#v8%E3%81%BE%E3%81%A8%E3%82%81" aria-label="v8まとめ permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>V8まとめ</h3>
-<p>アロー関数の評価結果は <code class="language-text">JSFunction</code> でした。これは関数（<code class="language-text">[code]</code>）と環境（<code class="language-text">[context]</code>）を持つためクロージャです。</p>
-<p><code class="language-text">context</code> は束縛の集合（<code class="language-text">elements</code>）と、外側の環境への参照（<code class="language-text">previous</code>）を持っているため、環境に相当します。</p>
+<p>アロー関数の評価結果は<code class="language-text">JSFunction</code>でした。これは関数（<code class="language-text">[code]</code>）と環境（<code class="language-text">[context]</code>）を持つためクロージャです。</p>
+<p><code class="language-text">context</code>は束縛の集合（<code class="language-text">elements</code>）と、外側の環境への参照（<code class="language-text">previous</code>）を持っているため、環境に相当します。</p>
 <h2 id="まとめ" style="position:relative;"><a href="#%E3%81%BE%E3%81%A8%E3%82%81" aria-label="まとめ permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>まとめ</h2>
 <p>SICP、ECMAScript、V8を調べることで、それぞれにクロージャ、環境、束縛に相当する構造があることを確認しました。</p>
 <p>きっかけは、<a href="https://blog.recruit.co.jp/rtc/2023/08/10/recruit-bootcamp-2023/">会社の新人向けJavaScript研修</a>にサポート講師として参加した際、新人の方からの「クロージャとは何ですか？」という質問に、僕がうまく回答できなかったことでした。</p>
