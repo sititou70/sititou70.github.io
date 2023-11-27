@@ -830,7 +830,7 @@ DebugPrint: 0x2d73c590c5f9: <span class="token punctuation">[</span>Function<spa
 <p>一方で、<code class="language-text">objects-printer.cc</code> を散歩していると <code class="language-text">ContextPrint</code> という、いかにも <code class="language-text">context</code> を良い感じに表示してくれそうな処理を見つけました。</p>
 <p>というわけで、<code class="language-text">JSFunctionPrint</code> を改造して、<code class="language-text">context</code> とその <code class="language-text">previous</code> に関する詳しい情報を表示するようにしてみます。</p>
 <details>
-  <summary>V8のビルド環境を構築します</summary>
+<summary>V8のビルド環境を構築します</summary>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token builtin class-name">cd</span> <span class="token environment constant">$HOME</span>
 <span class="token function">mkdir</span> ws <span class="token comment"># ワークスペースを作成</span>
 <span class="token builtin class-name">cd</span> ws
