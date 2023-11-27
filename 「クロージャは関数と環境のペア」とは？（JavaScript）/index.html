@@ -426,7 +426,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
         </picture>
   </a>
     </span></p>
-<h3 id="step-3makecounter-の適用counter2" style="position:relative;"><a href="#step-3makecounter-%E3%81%AE%E9%81%A9%E7%94%A8counter2" aria-label="step 3makecounter の適用counter2 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 3：<code class="language-text">makeCounter</code> の適用（<code class="language-text">counter2</code>）</h3>
+<h3 id="step-3makecounter-の呼び出しcounter2" style="position:relative;"><a href="#step-3makecounter-%E3%81%AE%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%97counter2" aria-label="step 3makecounter の呼び出しcounter2 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 3：<code class="language-text">makeCounter</code> の呼び出し（<code class="language-text">counter2</code>）</h3>
 <p>同様に <code class="language-text">counter2</code> が定義されます。</p>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> counter2 <span class="token operator">=</span> <span class="token function">makeCounter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>結果は以下のようになります。</p>
@@ -518,7 +518,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p>次に、クロージャの関数をEnv 3で評価します。クロージャが指す関数の本体は以下のとおりです。</p>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript">cnt<span class="token operator">++</span><span class="token punctuation">;</span>
 <span class="token keyword">return</span> cnt<span class="token punctuation">;</span></code></pre></div>
-<p>まず、Env 3で <code class="language-text">cnt++;</code> を評価します。Env 3に 変数 <code class="language-text">cnt</code> の束縛はないため、外側の環境である Env 1に探しに行きます。そこで <code class="language-text">cnt</code> が見つかるため、Env 1の <code class="language-text">cnt</code> をインクリメントして、次のようになります。</p>
+<p>まず、Env 3で <code class="language-text">cnt++;</code> を評価します。Env 3に 変数 <code class="language-text">cnt</code> の束縛はないため、外側の環境である Env 1に探しに行きます。そこで <code class="language-text">cnt</code> が見つかるため、Env 1の <code class="language-text">cnt</code> をインクリメントして、以下のようになります。</p>
 <p><span
       class="gatsby-resp-image-wrapper"
       style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 728px; "
@@ -669,7 +669,7 @@ ArrowFunction : ArrowParameters => ConciseBody
 
   // Fを返す（アロー関数の評価結果となる）
   23. Return F.</code></pre></div>
-<p>おー、やってますね〜</p>
+<p>おっ、やってますね〜</p>
 <p>アロー関数の評価結果はオブジェクトであり、関数（<code class="language-text">F.[[ECMAScriptCode]]</code>）と環境（<code class="language-text">F.[[Environment]]</code>）を内部スロットに持っていそうです。</p>
 <p>念のため、それぞれの内部スロットの説明を詳しく見てみます。</p>
 <blockquote>
@@ -828,9 +828,9 @@ DebugPrint: 0x2d73c590c5f9: <span class="token punctuation">[</span>Function<spa
 <h3 id="より詳しくデバッグプリントしてみる" style="position:relative;"><a href="#%E3%82%88%E3%82%8A%E8%A9%B3%E3%81%97%E3%81%8F%E3%83%87%E3%83%90%E3%83%83%E3%82%B0%E3%83%97%E3%83%AA%E3%83%B3%E3%83%88%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B" aria-label="より詳しくデバッグプリントしてみる permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>より詳しくデバッグプリントしてみる</h3>
 <p>先程の <code class="language-text">JSFunctionPrint</code> は <code class="language-text">context</code> の内容を詳しく表示してくれないようでした。</p>
 <p>一方で、<code class="language-text">objects-printer.cc</code> を散歩していると <code class="language-text">ContextPrint</code> という、いかにも <code class="language-text">context</code> を良い感じに表示してくれそうな処理を見つけました。</p>
-<p>というわけで、<code class="language-text">JSFunctionPrint</code> を改造して、<code class="language-text">context</code> とその外側の環境に関する詳しい情報を表示するようにしてみます。</p>
+<p>というわけで、<code class="language-text">JSFunctionPrint</code> を改造して、<code class="language-text">context</code> とその <code class="language-text">previous</code> に関する詳しい情報を表示するようにしてみます。</p>
 <details>
-  <summary>V8の開発環境を構築します</summary>
+  <summary>V8のビルド環境を構築します</summary>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token builtin class-name">cd</span> <span class="token environment constant">$HOME</span>
 <span class="token function">mkdir</span> ws <span class="token comment"># ワークスペースを作成</span>
 <span class="token builtin class-name">cd</span> ws
