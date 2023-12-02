@@ -669,7 +669,7 @@ ArrowFunction : ArrowParameters => ConciseBody
   // Fを返す（アロー関数の評価結果となる）
   23. Return F.</code></pre></div>
 <p>おー、やってますね〜。</p>
-<p>アロー関数の評価結果はオブジェクトであり、関数（<code class="language-text">F.[[ECMAScriptCode]]</code>）と環境（<code class="language-text">F.[[Environment]]</code>）を内部スロットに持っていそうです。</p>
+<p>アロー関数の評価時にオブジェクトを作成し、関数（<code class="language-text">F.[[ECMAScriptCode]]</code>）と環境（<code class="language-text">F.[[Environment]]</code>）を内部スロットにセットしていそうです。</p>
 <p>念のため、それぞれの内部スロットの説明を詳しく見てみます。</p>
 <blockquote>
 <ul>
@@ -804,7 +804,7 @@ DebugPrint: 0x2d73c590c5f9: <span class="token punctuation">[</span>Function<spa
   <span class="token comment">// 8.6.2, page 27.</span>
   <span class="token comment">// 訳：[code]: 生成されたこの関数のコードオブジェクト。</span>
   <span class="token comment">// foo()やnew foo()など、関数が呼び出されたときに実行される。</span>
-  <span class="token comment">// ECMA-262の8.6.2, 27ページにおける[[Call]]と[[Construct]]の説明を参照。</span>
+  <span class="token comment">// ECMA-262の8.6.2（27ページ）における[[Call]]と[[Construct]]の説明を参照。</span>
   <span class="token function">DECL_ACCESSORS</span><span class="token punctuation">(</span>code<span class="token punctuation">,</span> Tagged<span class="token operator">&lt;</span>Code<span class="token operator">></span><span class="token punctuation">)</span></code></pre></div>
 <blockquote>
 <p>出典：<a href="https://github.com/v8/v8/blob/a619087d49b84eb2f98c7c13d5329c34eca17bde/src/objects/js-function.h#L89">v8/src/objects/js-function.h at a619087d49b84eb2f98c7c13d5329c34eca17bde · v8/v8</a>、コメントの翻訳はDeepLのものを筆者が改変したもの</p>
@@ -879,7 +879,7 @@ index 51c4d991d17..3d9c03d64a7 100644
 </span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span>void SharedFunctionInfo::PrintSourceCode(std::ostream&amp; os) {</span></code></pre></div>
 <p>サンプルコードの最後に<code class="language-text">%DebugPrint(counter2);</code>も追加します。</p>
-<p>V8をビルドし、改造したデバッグプリントを実行してみます。</p>
+<p>V8をビルドし、改造したデバッグプリントを実行した結果が以下です。ただし関心のない部分を省略しています。</p>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">$ ./tools/dev/gm.py x64.release <span class="token operator">&amp;&amp;</span> ./out/x64.release/d8 --allow-natives-syntax <span class="token punctuation">..</span>/sample.js
 
 <span class="token comment"># counter1 (0x3b160004aa55) のデバッグプリント</span>
@@ -919,9 +919,9 @@ DebugPrint: 0x3b160004aa85: <span class="token punctuation">[</span>Function<spa
            <span class="token number">2</span>: 0x3b160004aa19 <span class="token operator">&lt;</span>JSFunction makeCounter <span class="token punctuation">(</span>sfi <span class="token operator">=</span> 0x3b1600199ee9<span class="token punctuation">)</span><span class="token operator">></span>
            <span class="token number">3</span>: 0x3b160004aa55 <span class="token operator">&lt;</span>JSFunction <span class="token punctuation">(</span>sfi <span class="token operator">=</span> 0x3b160019a07d<span class="token punctuation">)</span><span class="token operator">></span> <span class="token comment"># counter1</span>
            <span class="token number">4</span>: 0x3b160004aa85 <span class="token operator">&lt;</span>JSFunction <span class="token punctuation">(</span>sfi <span class="token operator">=</span> 0x3b160019a07d<span class="token punctuation">)</span><span class="token operator">></span> <span class="token comment"># counter2</span></code></pre></div>
-<p>まず、<code class="language-text">counter1</code>の<code class="language-text">context</code>を見てみましょう。<code class="language-text">elements</code>に着目すると、<code class="language-text">2</code>という値が表示されています。同様に<code class="language-text">counter2</code>の方は<code class="language-text">1</code>が表示されていることから、これらは束縛された<code class="language-text">cnt</code>の値であるようです。</p>
-<p>次に、<code class="language-text">counter1</code>と<code class="language-text">counter2</code>の<code class="language-text">context</code>の<code class="language-text">previous</code>を見てみますと、どちらも同じ<code class="language-text">context</code>が表示されているとわかります。<code class="language-text">elements</code>には、<code class="language-text">makeCounter</code>の他に2つの<code class="language-text">JSFunction</code>の束縛が表示されており、これらは<code class="language-text">counter1</code>と<code class="language-text">counter2</code>にアドレスが一致します。したがって、この<code class="language-text">context</code>はグローバル環境に相当するもののようですね。</p>
-<p>ということで、全体的に例の図と似た構造があるのを確認できました。</p>
+<p>まず、<code class="language-text">counter1</code>の<code class="language-text">context</code>を見てみましょう。<code class="language-text">elements</code>に着目すると<code class="language-text">2</code>が表示されています。同様に<code class="language-text">counter2</code>の方は<code class="language-text">1</code>が表示されていることから、これらは束縛された<code class="language-text">cnt</code>の値であるようです。</p>
+<p>次に、<code class="language-text">counter1</code>と<code class="language-text">counter2</code>それぞれの<code class="language-text">context</code>の<code class="language-text">previous</code>を見てみます。すると、どちらも同じ内容が表示されているとわかります。それぞれの<code class="language-text">elements</code>には、<code class="language-text">makeCounter</code>の他に2つの<code class="language-text">JSFunction</code>の束縛が表示されており、これらは<code class="language-text">counter1</code>と<code class="language-text">counter2</code>にアドレスが一致します。したがって、これらの<code class="language-text">context</code>はグローバル環境に相当するもののようですね。</p>
+<p>全体的に、例の図と似た構造があるのを確認できました。</p>
 <p><span
       class="gatsby-resp-image-wrapper"
       style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 728px; "
@@ -967,7 +967,7 @@ DebugPrint: 0x3b160004aa85: <span class="token punctuation">[</span>Function<spa
 <p><code class="language-text">context</code>は束縛の集合（<code class="language-text">elements</code>）と、外側の環境への参照（<code class="language-text">previous</code>）を持っているため、環境に相当します。</p>
 <h2 id="まとめ" style="position:relative;"><a href="#%E3%81%BE%E3%81%A8%E3%82%81" aria-label="まとめ permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>まとめ</h2>
 <p>SICP、ECMAScript、V8を調べることで、それぞれにクロージャ、環境、束縛に相当する構造があることを確認しました。</p>
-<p>きっかけは、<a href="https://blog.recruit.co.jp/rtc/2023/08/10/recruit-bootcamp-2023/">会社の新人向けJavaScript研修</a>にサポート講師として参加した際、新人の方からの「クロージャとは何ですか？」という質問に、僕がうまく回答できなかったことでした。</p>
+<p>そもそもの発端は、<a href="https://blog.recruit.co.jp/rtc/2023/08/10/recruit-bootcamp-2023/">会社の新人向けJavaScript研修</a>にサポート講師として参加した際、新人の方からの「クロージャとは何ですか？」という質問に、僕がうまく回答できなかったことでした。</p>
 <p>こういう素朴な疑問が、理解を深めるきっかけになったのは良かったです。研修というのは、新人だけでなく講師の知見を広げる場でもあるんだなぁと感じました。</p>
 <p>今回のことについてもっと知りたいなら、SICPの4章がおすすめです。環境モデルを含めたメタ循環評価器（ある言語で実装された、その言語自身の評価器）を作ることで理解が深まりますし、非決定性計算や論理プログラミングといった馴染みのないパラダイムに対して、環境モデルがどのように適用されるかというのは、むずかしいですが興味深いと感じました。</p>
 <p>JavaScriptのクロージャ周りで困った際には、ぜひ環境の図を描いてみてください。</p>
