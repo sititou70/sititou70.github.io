@@ -185,6 +185,25 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <h2 id="sicpでの説明" style="position:relative;"><a href="#sicp%E3%81%A7%E3%81%AE%E8%AA%AC%E6%98%8E" aria-label="sicpでの説明 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>SICPでの説明</h2>
 <p><a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book.html">SICP（Structure and Interpretation of Computer Programs）</a>という本における説明がわかりやすいので紹介します。</p>
 <p>この本で使用されている言語はSchemeですが、JavaScriptに置き換えて説明します。<sup id="fnref-1"><a href="#fn-1" class="footnote-ref">1</a></sup></p>
+<h3 id="この章で説明したいこと" style="position:relative;"><a href="#%E3%81%93%E3%81%AE%E7%AB%A0%E3%81%A7%E8%AA%AC%E6%98%8E%E3%81%97%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8" aria-label="この章で説明したいこと permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>この章で説明したいこと</h3>
+<p>クロージャは、</p>
+<ul>
+<li>関数を評価すると作成される</li>
+<li>関数と環境のペアである
+<ul>
+<li>関数：関数への参照。具体的に何なのかは処理系によって異なる</li>
+<li>環境：クロージャが作成されたときの環境への参照</li>
+</ul>
+</li>
+<li>呼び出されたとき、
+<ol>
+<li>新しい環境が作成され、その「外側の環境」はクロージャの環境になる</li>
+<li>新しい環境でクロージャの関数が評価される</li>
+</ol>
+</li>
+</ul>
+<p>環境とは、「束縛の集合」と「外側の環境への参照」のペア。</p>
+<p>束縛とは、「変数」と「値」のペア。</p>
 <h3 id="step-0グローバル環境の作成" style="position:relative;"><a href="#step-0%E3%82%B0%E3%83%AD%E3%83%BC%E3%83%90%E3%83%AB%E7%92%B0%E5%A2%83%E3%81%AE%E4%BD%9C%E6%88%90" aria-label="step 0グローバル環境の作成 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 0：グローバル環境の作成</h3>
 <p>プログラムを実行する準備として、次のようなグローバル環境が作成されます。</p>
 <p><span
@@ -870,10 +889,10 @@ index 51c4d991d17..3d9c03d64a7 100644
 <span class="token prefix unchanged"> </span>    os &lt;&lt; "not available\n";
 <span class="token prefix unchanged"> </span>  }
 </span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span>
-<span class="token prefix inserted">+</span>  os &lt;&lt; "\n --- context ---\n";
+<span class="token prefix inserted">+</span>  os &lt;&lt; "\n--- context ---\n";
 <span class="token prefix inserted">+</span>  context()->ContextPrint(os);
 <span class="token prefix inserted">+</span>
-<span class="token prefix inserted">+</span>  os &lt;&lt; "\n --- previous context ---\n";
+<span class="token prefix inserted">+</span>  os &lt;&lt; "\n--- previous context ---\n";
 <span class="token prefix inserted">+</span>  context()->previous()->ContextPrint(os);
 </span><span class="token unchanged"><span class="token prefix unchanged"> </span>}
 </span>
@@ -886,6 +905,7 @@ index 51c4d991d17..3d9c03d64a7 100644
 DebugPrint: 0x3b160004aa55: <span class="token punctuation">[</span>Function<span class="token punctuation">]</span>
 
 <span class="token comment"># counter1のcontext</span>
+--- context ---
 0x10580004aa4d: <span class="token punctuation">[</span>Context<span class="token punctuation">]</span>
  - elements:
            <span class="token number">0</span>: 0x3b160019a04d <span class="token operator">&lt;</span>ScopeInfo FUNCTION_SCOPE<span class="token operator">></span>
@@ -893,6 +913,7 @@ DebugPrint: 0x3b160004aa55: <span class="token punctuation">[</span>Function<spa
            <span class="token number">2</span>: <span class="token number">2</span> <span class="token comment"># cntの値</span>
 
 <span class="token comment"># counter1のcontextのprevious</span>
+--- previous context ---
 0x3b160019a031: <span class="token punctuation">[</span>Context<span class="token punctuation">]</span> <span class="token keyword">in</span> OldSpace
  - elements:
            <span class="token number">0</span>: 0x3b1600199eb1 <span class="token operator">&lt;</span>ScopeInfo SCRIPT_SCOPE<span class="token operator">></span>
@@ -905,6 +926,7 @@ DebugPrint: 0x3b160004aa55: <span class="token punctuation">[</span>Function<spa
 DebugPrint: 0x3b160004aa85: <span class="token punctuation">[</span>Function<span class="token punctuation">]</span>
 
 <span class="token comment"># counter2のcontext</span>
+--- context ---
 0x3b160004aa71: <span class="token punctuation">[</span>Context<span class="token punctuation">]</span>
  - elements:
            <span class="token number">0</span>: 0x3b160019a04d <span class="token operator">&lt;</span>ScopeInfo FUNCTION_SCOPE<span class="token operator">></span>
@@ -912,6 +934,7 @@ DebugPrint: 0x3b160004aa85: <span class="token punctuation">[</span>Function<spa
            <span class="token number">2</span>: <span class="token number">1</span> <span class="token comment"># cntの値</span>
 
 <span class="token comment"># counter2のcontextのprevious</span>
+--- previous context ---
 0x3b160019a031: <span class="token punctuation">[</span>Context<span class="token punctuation">]</span> <span class="token keyword">in</span> OldSpace
  - elements:
            <span class="token number">0</span>: 0x3b1600199eb1 <span class="token operator">&lt;</span>ScopeInfo SCRIPT_SCOPE<span class="token operator">></span>
