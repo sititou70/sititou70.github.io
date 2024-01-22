@@ -165,7 +165,7 @@ void function() {
 <p>このコードは動きません。<code class="language-text">f</code>がどこにもないからです。</p>
 <p>ラムダ計算という関数しかない世界で、<code class="language-text">f</code>をどこかからもらってくるには、引数で受け取るしかないはずです。</p>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token parameter">f</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span><span class="token parameter">n</span><span class="token punctuation">)</span> <span class="token operator">=></span> n <span class="token operator">===</span> <span class="token number">0</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token operator">:</span> n <span class="token operator">*</span> <span class="token function">f</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p>この新しい関数を<code class="language-text">g</code>と呼びましょう。</p>
+<p>この新しい関数を<code class="language-text">g</code>と呼ぶことにします。</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">gの定義：
   (f) => (n) => n === 0 ? 1 : n * f(n - 1)</code></pre></div>
 <p><code class="language-text">g</code>は、<code class="language-text">f</code>を受け取って<code class="language-text">f</code>を返す関数です。引数はそのまま<code class="language-text">f</code>であり、戻り値である<code class="language-text">(n) => n === 0 ? 1 : n * f(n - 1)</code>もまた<code class="language-text">f</code>の実装そのものであるからです。</p>
