@@ -168,7 +168,7 @@ void function() {
 <p>この新しい関数を<code class="language-text">g</code>と呼ぶことにします。</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">gの定義：
   (f) => (n) => n === 0 ? 1 : n * f(n - 1)</code></pre></div>
-<p><code class="language-text">g</code>は、<code class="language-text">f</code>を受け取って<code class="language-text">f</code>を返す関数です。引数はそのまま<code class="language-text">f</code>であり、戻り値である<code class="language-text">(n) => n === 0 ? 1 : n * f(n - 1)</code>もまた<code class="language-text">f</code>の実装そのものであるからです。</p>
+<p><code class="language-text">g</code>は、<code class="language-text">f</code>を受け取って<code class="language-text">f</code>を返す関数です。引数はそのまま<code class="language-text">f</code>であり、戻り値である<code class="language-text">(n) => n === 0 ? 1 : n * f(n - 1)</code>もまた<code class="language-text">f</code>の実装そのものだからです。</p>
 <p>以下のようにして、<code class="language-text">g</code>に名前を付けて扱いやすくします。</p>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">// prettier-ignore</span>
 <span class="token punctuation">(</span>
@@ -250,6 +250,7 @@ void function() {
   <span class="token punctuation">(</span><span class="token parameter">h</span><span class="token punctuation">)</span> <span class="token operator">=></span>
     <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">f</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span><span class="token parameter">n</span><span class="token punctuation">)</span> <span class="token operator">=></span> n <span class="token operator">===</span> <span class="token number">0</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token operator">:</span> n <span class="token operator">*</span> <span class="token function">f</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// *2</span>
     <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">n</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">h</span><span class="token punctuation">(</span>h<span class="token punctuation">)</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">//          ^^^^ hの定義よりf</span>
 <span class="token comment">//   ^^^^^^^^^^^^^^ (n) => f(n)、つまりfと同じ</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>ここで、<code class="language-text">*2</code>の部分が<code class="language-text">g</code>の定義と同じだと気づきます。これを外側から与えてやるようにします。</p>
@@ -286,7 +287,7 @@ void function() {
   <span class="token comment">// g</span>
   <span class="token punctuation">(</span><span class="token parameter">f</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span><span class="token parameter">n</span><span class="token punctuation">)</span> <span class="token operator">=></span> n <span class="token operator">===</span> <span class="token number">0</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token operator">:</span> n <span class="token operator">*</span> <span class="token function">f</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
-<p>最後に、<code class="language-text">*4</code>と<code class="language-text">*5</code>の行は見た目が似ていることに気づきます。実際、これらはどちらも<code class="language-text">h</code>を受け取って<code class="language-text">f</code>を返すという、同じことをしています。</p>
+<p><code class="language-text">*4</code>と<code class="language-text">*5</code>の行は見た目が似ていることに気づきます。実際、これらはどちらも<code class="language-text">h</code>を受け取って<code class="language-text">f</code>を返すという、同じことをしています。</p>
 <p><code class="language-text">*4</code>については<code class="language-text">h(h)</code>を返しているため、<code class="language-text">h</code>の定義より自明ですね。<code class="language-text">*5</code>については、まず<code class="language-text">(n) => h(h)(n)</code>が<code class="language-text">f</code>となるように先程作ったことを思い出します。そしてそれを<code class="language-text">g</code>に与えているため、<code class="language-text">g</code>の定義より<code class="language-text">f</code>を返しているとわかります。</p>
 <p>というわけで、<code class="language-text">*4</code>を<code class="language-text">*5</code>で書き換えても大丈夫そうだと思いつきます。そのほうが長くなりますが、対称性があってきれいなのでそうしてみます。</p>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">// prettier-ignore</span>
@@ -319,7 +320,7 @@ void function() {
 <ul>
 <li><a href="http://daretoku-unix.blogspot.com/2015/01/y.html">誰得UNIX: Yコンビネータを導出してみる</a>
 <ul>
-<li>完全には理解できていないですが、多分↑の説明と同じ流れのことをやっているようで大変参考になりました。</li>
+<li>完全には理解できていないですが、多分今回の説明と同じ流れのことをやっているようで大変参考になりました。</li>
 </ul>
 </li>
 <li><a href="https://kazu-yamamoto.hatenablog.jp/entry/20090408/1239172437">チョウゲンボウとホシムクドリから賢人鳥を導出する</a>
