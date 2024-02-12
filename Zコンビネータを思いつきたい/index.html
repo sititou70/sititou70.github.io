@@ -194,7 +194,7 @@ void function() {
 <p>そういう都合の良い関数<code class="language-text">h</code>の定義を考えてみます。</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">hの定義（不完全）：
   (h) => (n) => n === 0 ? 1 : n * ???(n - 1)</code></pre></div>
-<p><code class="language-text">h</code>は、<code class="language-text">h</code>を受け取って<code class="language-text">f</code>を返す関数です。</p>
+<p><code class="language-text">h</code>は、<code class="language-text">h</code>を受け取って<code class="language-text">f</code>を返す関数です。<code class="language-text">h(h)</code>とすると<code class="language-text">f</code>が得られるので都合が良いですね。</p>
 <p><code class="language-text">???</code>の部分が問題です。以前は<code class="language-text">f</code>と書いていましたが、ここには<code class="language-text">f</code>はありません。</p>
 <p>しかし<code class="language-text">h</code>はあるので、<code class="language-text">h(h)</code>とすることで<code class="language-text">f</code>が得られると気づきます。そのように<code class="language-text">h</code>を定義したからです。</p>
 <p>したがって、<code class="language-text">h</code>は以下のように定義できます。</p>
