@@ -146,7 +146,7 @@ T ::=             型:
   Γ,x:T             束縛</code></pre></div>
 <p>典型的なラムダ計算 + αですね。これは、証明の大変さと表現力のトレードオフの結果、および僕の趣味です。関数だけでいろいろ計算できちゃうというのがかっこいいですよね、ラムダ計算。</p>
 <p>数値は、最終的な計算結果を表すために導入しました。計算結果を表示するPrinterには、<code class="language-text">succ (succ (... (succ 0)))</code>を数字に変換する機能をつけようと思います。</p>
-<p>let束縛は便利なので入れました。正直、ラムダ抽象と適用によるシンタックスシュガーとすれば証明が簡単になるのですが、リハビリのために抽象構文として導入しました。</p>
+<p>let束縛は便利なので入れました。</p>
 <h2 id="評価" style="position:relative;"><a href="#%E8%A9%95%E4%BE%A1" aria-label="評価 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>評価</h2>
 <p>評価規則を定義することで、言語に意味を与えます。</p>
 <div class="math math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><msub><mi>t</mi><mn>1</mn></msub><mo>⟶</mo><msubsup><mi>t</mi><mn>1</mn><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msubsup></mrow><mrow><msub><mi>t</mi><mn>1</mn></msub><mtext> </mtext><msub><mi>t</mi><mn>2</mn></msub><mo>⟶</mo><msubsup><mi>t</mi><mn>1</mn><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msubsup><mtext> </mtext><msub><mi>t</mi><mn>2</mn></msub></mrow></mfrac><mspace width="1em"></mspace><mtext>(E-App1)</mtext></mrow><annotation encoding="application/x-tex">\dfrac
@@ -338,8 +338,8 @@ y \quad (\text{if} ~ y \ne x) \\
 </ul>
 </details>
 <h3 id="進行" style="position:relative;"><a href="#%E9%80%B2%E8%A1%8C" aria-label="進行 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>進行</h3>
-<p>それではリハビリタイムです。さきほど定義した言語が、安全であることを証明していきます。</p>
-<p>証明の大きな流れはTAPLを参考にしていますが、各議論や式変形は、僕でもわかるようにできるだけ細かく書くようにします。なのでめっちゃ長くなっちゃいました。</p>
+<p>それではリハビリタイムです。さきほど定義した言語が、安全であることを証明します。</p>
+<p>証明の大きな流れはTAPLを参考にしていますが、各議論や式変形は、僕でもわかるようにできるだけ細かく書くようにします。なのでめっちゃ長いです。読み飛ばしましょう。</p>
 <p>安全性は、進行と保存によって示します。</p>
 <p>まず、以下のように進行定理を示します。そのために、逆転補題と標準形補題という基本的な性質を示します。</p>
 <details>
@@ -1758,19 +1758,19 @@ let Fact = (
 <div class="gatsby-highlight" data-language="sh"><pre class="language-sh"><code class="language-sh">$ ./main.ts examples/fact.lambda --skip-tc
 <span class="token number">120</span></code></pre></div>
 <p>いいですね！</p>
-<p>次は発散コンビネータ（omegaとも）と呼ばれる、関数だけで無限ループするやつ</p>
+<p>次は発散コンビネータ（omegaとも）、関数だけで無限ループするやつ</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">(λf. (f f)) (λf. (f f))</code></pre></div>
 <div class="gatsby-highlight" data-language="sh"><pre class="language-sh"><code class="language-sh">$ ./main.ts examples/omega.lambda --skip-tc
 <span class="token comment"># 停止しない</span></code></pre></div>
 <p>ちゃんと動いてますね。</p>
 <h3 id="型付きラムダ計算" style="position:relative;"><a href="#%E5%9E%8B%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%A0%E3%83%80%E8%A8%88%E7%AE%97" aria-label="型付きラムダ計算 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>型付きラムダ計算</h3>
 <p>それでは、<code class="language-text">--skip-tc</code> を外し、型検査を有効にして動かしてみます。</p>
-<p>まず簡単な計算は以下のようになります。</p>
+<p>まず、先程の簡単な計算は以下のようになります。</p>
 <div class="gatsby-highlight" data-language="sh"><pre class="language-sh"><code class="language-sh">$ ./main.ts examples/arithmetics.lambda
 tc passed: Nat
 <span class="token number">729</span></code></pre></div>
 <p>型検査をパスして、推論の結果が <code class="language-text">Nat</code> 型であると表示されています。そのうえで、実際に実行してみたら <code class="language-text">729</code> だったというわけです。</p>
-<p>先程無限ループになった、発散コンビネータはどうなるでしょうか。</p>
+<p>無限ループである発散コンビネータはどうなるでしょうか。</p>
 <div class="gatsby-highlight" data-language="sh"><pre class="language-sh"><code class="language-sh">$ ./main.ts examples/omega.lambda
 <span class="token builtin class-name">type</span> checking failed
 <span class="token punctuation">{</span>
@@ -1786,7 +1786,7 @@ tc passed: Nat
   </p>
   &mdash; 七十 (@sititou70) <a href="https://twitter.com/sititou70/status/1757373752328049090?ref_src=twsrc%5Etfw">February 13, 2024</a>
 </blockquote>
-<p>実際、型が付いた項は停止する（停止しない項には型が付かない）と言うには、停止性という性質を証明する必要があるそうです。型付きラムダ計算では停止性が成り立つことが知られています。</p>
+<p>実際、停止しないならば項に型は付かない（項に型が付くならば停止する）と言うには、停止性という性質を証明する必要があるそうです。型付きラムダ計算では停止性が成り立つことが知られています。</p>
 <p>ところで、Zコンビネータにも型が付かないので、先程の階乗の計算も実行できなくなります。</p>
 <div class="gatsby-highlight" data-language="sh"><pre class="language-sh"><code class="language-sh">$ ./main.ts examples/fact.lambda
 <span class="token builtin class-name">type</span> checking failed
