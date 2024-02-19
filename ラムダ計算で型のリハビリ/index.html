@@ -1597,8 +1597,7 @@ y \quad (\text{if} ~ y \ne x) \\
 <h2 id="実装" style="position:relative;"><a href="#%E5%AE%9F%E8%A3%85" aria-label="実装 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>実装</h2>
 <p>証明が終わったのでさっそく実装していきましょう。</p>
 <h3 id="構文解析" style="position:relative;"><a href="#%E6%A7%8B%E6%96%87%E8%A7%A3%E6%9E%90" aria-label="構文解析 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>構文解析</h3>
-<p>プログラムを書いても、それをパースできなければ始まりません。</p>
-<p>どのようにプログラムを書くか、具象構文を定義します。</p>
+<p>まず、どのようにプログラムを書くかという、具象構文を定義します。</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">Term ::=
   Identifier
   λIdentifier. Term
@@ -1611,23 +1610,23 @@ y \quad (\text{if} ~ y \ne x) \\
 Identifier ::=
   /[a-zA-Z0-9]+/</code></pre></div>
 <p>抽象構文に似ていますが、カッコの規則などが追加されています。</p>
-<p>証明などの形式的な議論では明示的には不要でしたが、実際にプログラムを書く際には、適用の優先順位などを指定するために必要な構文です。</p>
+<p>証明などの形式的な議論では明示的には不要でしたが、実際にプログラムを書く際には必要です。例えば、適用の優先順位を指定する際などに使います。</p>
 <h4 id="字句解析" style="position:relative;"><a href="#%E5%AD%97%E5%8F%A5%E8%A7%A3%E6%9E%90" aria-label="字句解析 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>字句解析</h4>
 <p>カンで実装しました。</p>
-<p>例えば、<code class="language-text">λhoge.</code>という文字列を入力すると</p>
+<p>例えば、<code class="language-text">λhoge.</code>という文字列の入力に対しては、</p>
 <ul>
 <li>ラムダ記号</li>
 <li><code class="language-text">hoge</code>というIdentifier</li>
 <li>ドット記号</li>
 </ul>
-<p>というトークンの配列に解釈します。</p>
+<p>というトークンの列を出力します。</p>
 <p>また、スペースの連続や改行、コメントの除去などもここで処理してくれます。</p>
 <h4 id="構文解析lr法" style="position:relative;"><a href="#%E6%A7%8B%E6%96%87%E8%A7%A3%E6%9E%90lr%E6%B3%95" aria-label="構文解析lr法 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>構文解析：LR法</h4>
 <p>前から興味があった<a href="https://ja.wikipedia.org/wiki/LR%E6%B3%95">LR法</a>を実装してみました。</p>
 <p>特に<a href="https://www.jstage.jst.go.jp/article/jssst/31/1/31_1_30/_pdf">LR構文解析の原理</a>という論文が良かったので人類の皆さんにおすすめです。</p>
 <p>正直、他の資料ではLR法を理解できませんでした。アクション表やShift、Reduceを使ってそれを実行することはできるのですが、それでなぜ構文解析ができるのかがいまいち納得できなかったという感じです。</p>
-<p>しかし上記の論文では、LR法が<a href="https://ja.wikipedia.org/wiki/%E9%9D%9E%E6%B1%BA%E5%AE%9A%E6%80%A7%E6%9C%89%E9%99%90%E3%82%AA%E3%83%BC%E3%83%88%E3%83%9E%E3%83%88%E3%83%B3">非決定性有限オートマトン</a>を繰り返し使用することで実装できること、そして<a href="https://ja.wikipedia.org/wiki/%E9%83%A8%E5%88%86%E9%9B%86%E5%90%88%E6%A7%8B%E6%88%90%E6%B3%95">部分集合構成法</a>を使用することで、非決定性有限オートマトンを<a href="https://ja.wikipedia.org/wiki/%E6%B1%BA%E5%AE%9A%E6%80%A7%E6%9C%89%E9%99%90%E3%82%AA%E3%83%BC%E3%83%88%E3%83%9E%E3%83%88%E3%83%B3">決定性有限オートマトン</a>に変換できることが順序良く示されていてわかりやすかったです。</p>
-<p>あまりに最高なので、日本ソフトウェア科学会の解説論文賞を受賞したそうです。</p>
+<p>しかし上記の論文では、LR法が<a href="https://ja.wikipedia.org/wiki/%E9%9D%9E%E6%B1%BA%E5%AE%9A%E6%80%A7%E6%9C%89%E9%99%90%E3%82%AA%E3%83%BC%E3%83%88%E3%83%9E%E3%83%88%E3%83%B3">非決定性有限オートマトン</a>を繰り返し使用することで実装できること、そして<a href="https://ja.wikipedia.org/wiki/%E9%83%A8%E5%88%86%E9%9B%86%E5%90%88%E6%A7%8B%E6%88%90%E6%B3%95">部分集合構成法</a>を使用することで、非決定性有限オートマトンを<a href="https://ja.wikipedia.org/wiki/%E6%B1%BA%E5%AE%9A%E6%80%A7%E6%9C%89%E9%99%90%E3%82%AA%E3%83%BC%E3%83%88%E3%83%9E%E3%83%88%E3%83%B3">決定性有限オートマトン</a>に変換し、実行できることが順序良く示されていてわかりやすかったです。</p>
+<p>あまりに最高なので、日本ソフトウェア科学会の解説論文賞を受賞してたりするそうです。</p>
 <p>大堀先生、ありがとうございました。</p>
 <h4 id="構文の実装" style="position:relative;"><a href="#%E6%A7%8B%E6%96%87%E3%81%AE%E5%AE%9F%E8%A3%85" aria-label="構文の実装 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>構文の実装</h4>
 <p>LR法の実装を使うと、構文を実装するのはとても楽になります。</p>
@@ -1648,8 +1647,8 @@ Identifier ::=
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token comment">// ...</span>
 <span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
-<p><code class="language-text">symbol: "Term"</code> が <code class="language-text">::=</code> の左辺、 <code class="language-text">expression: ["Term", "Spaces", "Term"]</code> が右辺に直接対応しているのがわかります。</p>
-<p><code class="language-text">callback</code> はこの規則がマッチしたときに呼ばれる関数で、 <code class="language-text">["Term", "Spaces", "Term"]</code> のトークン列から適用のASTノードを返します。</p>
+<p><code class="language-text">symbol: "Term"</code> が <code class="language-text">::=</code> の左辺、 <code class="language-text">expression: ["Term", "Spaces", "Term"]</code> が右辺に直接対応しています。</p>
+<p><code class="language-text">callback</code> は、この規則がマッチしたときに呼ばれる関数で、 <code class="language-text">["Term", "Spaces", "Term"]</code> のトークン列から適用のASTノードを返します。</p>
 <p><a href="https://github.com/sititou70/pico-lambda/blob/master/parser/syntax.ts">syntax.ts</a>にはこのような規則が配列として列挙してあります。</p>
 <p>パーサーはこの規則をもとにオートマトンを構築して、トークン列からASTを構築してくれます。便利ですね。</p>
 <p>実際、見通しが甘くて文法の改修を何度か行ったのですが、とても短時間で済んでしまい驚きました。</p>
@@ -1663,8 +1662,8 @@ Identifier ::=
 <p>これまでの定義通りに実装しました。マジでそれだけです。</p>
 <h2 id="完成" style="position:relative;"><a href="#%E5%AE%8C%E6%88%90" aria-label="完成 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>完成！</h2>
 <p>言語の名前は<a href="https://github.com/sititou70/pico-lambda">pico-lambda</a>としました。<sup id="fnref-1"><a href="#fn-1" class="footnote-ref">1</a></sup></p>
-<h3 id="ラムダ計算" style="position:relative;"><a href="#%E3%83%A9%E3%83%A0%E3%83%80%E8%A8%88%E7%AE%97" aria-label="ラムダ計算 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ラムダ計算</h3>
-<p>ひとまず型検査はオフにして、まずは簡単な計算から</p>
+<h3 id="型無しラムダ計算" style="position:relative;"><a href="#%E5%9E%8B%E7%84%A1%E3%81%97%E3%83%A9%E3%83%A0%E3%83%80%E8%A8%88%E7%AE%97" aria-label="型無しラムダ計算 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>型無しラムダ計算</h3>
+<p>とりあえず型検査はオフにして、まずは簡単な計算から</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">let ToNumber = λn. (n (λx. (succ x)) 0) in
 
 let One   = λs. λz. (s z) in
@@ -1690,7 +1689,7 @@ let Pred = λn. λf. λx. (n (λg. λh. (h (g f))) (λu. x) (λu. u)) in
 <span class="token number">729</span></code></pre></div>
 <p>おー、計算できてます！</p>
 <p><code class="language-text">729</code> というのは、本当は <code class="language-text">succ (succ (... (succ 0)))</code> という値で、Printerがよしなに数字として表示しているだけです。</p>
-<p>続いて、前回の記事でも触れたZコンビネータを使った階乗の計算</p>
+<p>続いて、<a href="https://sititou70.github.io/Z%E3%82%B3%E3%83%B3%E3%83%93%E3%83%8D%E3%83%BC%E3%82%BF%E3%82%92%E6%80%9D%E3%81%84%E3%81%A4%E3%81%8D%E3%81%9F%E3%81%84/">前回の記事</a>でも触れた、Zコンビネータを使った階乗の計算</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">let ToNumber = λn. (n (λx. (succ x)) 0) in
 
 let Zero = λs. λz. z in
@@ -1759,7 +1758,7 @@ let Fact = (
 <div class="gatsby-highlight" data-language="sh"><pre class="language-sh"><code class="language-sh">$ ./main.ts examples/fact.lambda --skip-tc
 <span class="token number">120</span></code></pre></div>
 <p>いいですね！</p>
-<p>次はちょっと特殊で、発散コンビネータ（omegaとも）と呼ばれる、関数だけで無限ループするやつ</p>
+<p>次は発散コンビネータ（omegaとも）と呼ばれる、関数だけで無限ループするやつ</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">(λf. (f f)) (λf. (f f))</code></pre></div>
 <div class="gatsby-highlight" data-language="sh"><pre class="language-sh"><code class="language-sh">$ ./main.ts examples/omega.lambda --skip-tc
 <span class="token comment"># 停止しない</span></code></pre></div>
@@ -1770,7 +1769,7 @@ let Fact = (
 <div class="gatsby-highlight" data-language="sh"><pre class="language-sh"><code class="language-sh">$ ./main.ts examples/arithmetics.lambda
 tc passed: Nat
 <span class="token number">729</span></code></pre></div>
-<p>型検査をパスして、推論の結果が <code class="language-text">Nat</code> 型であると表示されています。そのうえで、実際に実行してみたら <code class="language-text">729</code> だったということです。</p>
+<p>型検査をパスして、推論の結果が <code class="language-text">Nat</code> 型であると表示されています。そのうえで、実際に実行してみたら <code class="language-text">729</code> だったというわけです。</p>
 <p>先程無限ループになった、発散コンビネータはどうなるでしょうか。</p>
 <div class="gatsby-highlight" data-language="sh"><pre class="language-sh"><code class="language-sh">$ ./main.ts examples/omega.lambda
 <span class="token builtin class-name">type</span> checking failed
@@ -1778,7 +1777,7 @@ tc passed: Nat
   msg: <span class="token string">'interType: unification failed'</span>,
   error: <span class="token punctuation">{</span> <span class="token punctuation">..</span>. <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
-<p>型検査に失敗し、実行されませんでした。無限ループで値を返さないものに型は付きそうにないので納得できると思います。</p>
+<p>型検査に失敗し、実行されませんでした。無限ループで値を返さないものに型は付きそうにないので、感覚的に納得できると思います。</p>
 <p><em>全ての無限ループを生まれる前に消し去りたい</em> ってやつです</p>
 <blockquote class="twitter-tweet">
   <p lang="ja" dir="ltr">
@@ -1787,7 +1786,7 @@ tc passed: Nat
   </p>
   &mdash; 七十 (@sititou70) <a href="https://twitter.com/sititou70/status/1757373752328049090?ref_src=twsrc%5Etfw">February 13, 2024</a>
 </blockquote>
-<p>実際、型が付いた項は停止する（停止しない項には型が付かない）を言うには、停止性という性質を証明する必要があります。型付きラムダ計算では停止性が成り立つことが知られているそうです。</p>
+<p>実際、型が付いた項は停止する（停止しない項には型が付かない）と言うには、停止性という性質を証明する必要があるそうです。型付きラムダ計算では停止性が成り立つことが知られています。</p>
 <p>ところで、Zコンビネータにも型が付かないので、先程の階乗の計算も実行できなくなります。</p>
 <div class="gatsby-highlight" data-language="sh"><pre class="language-sh"><code class="language-sh">$ ./main.ts examples/fact.lambda
 <span class="token builtin class-name">type</span> checking failed
@@ -1835,10 +1834,10 @@ let id2 = λx. x in
 
 (id1 id2)</code></pre></div>
 <p>型の都合でプログラムが汚れているのでだいぶ嫌です。</p>
-<p>これを解消する方法はいろいろあるらしいのですが、最も有名なのがLet多相というやつです。気が向いたら組み込んでみたいですね。</p>
+<p>これを解消する方法はいろいろあるようで、おそらく最も有名なのがLet多相です。気が向いたら組み込んでみたいですね。</p>
 <h2 id="まとめ" style="position:relative;"><a href="#%E3%81%BE%E3%81%A8%E3%82%81" aria-label="まとめ permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>まとめ</h2>
 <p>型のリハビリをしました。構文解析では、前から気になっていたLR法を実装しました。</p>
-<p>型理論初心者なので、間違っている箇所があれば教えていただけると助かります。</p>
+<p>型初心者なので、間違っている箇所があれば教えていただけると助かります。</p>
 <p>それでは！</p>
 <h2 id="参考にした文献" style="position:relative;"><a href="#%E5%8F%82%E8%80%83%E3%81%AB%E3%81%97%E3%81%9F%E6%96%87%E7%8C%AE" aria-label="参考にした文献 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>参考にした文献</h2>
 <ul>
