@@ -227,7 +227,7 @@ $ <span class="token operator">&lt;</span>.git/objects/5d/bf6b90bea3fd0c027fd0b1
 <span class="token comment"># sample.txtのブロブ（上記のsample.txt\0のあとに続くdccd 42c5...）を表示</span>
 $ <span class="token operator">&lt;</span>.git/objects/dc/cd42c581403fec2ecfd3c3e75cfff6a744667d zlib <span class="token parameter variable">-d</span>
 blob 9sample <span class="token number">1</span></code></pre></div>
-<p>よし、取り出せましたー。</p>
+<p>よし、取り出せました。</p>
 <p>各オブジェクトの参照の関係を図に表すと以下のようになります。</p>
 <p><span
       class="gatsby-resp-image-wrapper"
@@ -275,7 +275,7 @@ blob 9sample <span class="token number">1</span></code></pre></div>
 <p>するとエディタが開くので以下のようにして保存し閉じます。</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">pick 6650da2 sample commit 2
 squash 74baa8b sample commit 3</code></pre></div>
-<p>Squashによって新たに作成されるコミットのメッセージを編集するエディタが開くので、今回はそのまま保存して閉じます。</p>
+<p>Squashによって新たに作成されるコミットのメッセージを編集するエディタが開くので、よしなに編集して保存して閉じます。</p>
 <p><code class="language-text">git log</code>すると、たしかに<code class="language-text">sample commit 2</code>と<code class="language-text">sample commit 3</code>がまとめられているように見えます。</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">commit a7e076b007b00e903f9ddac603770995fdd94923 (HEAD -> master)
 Author: Takuya Shizukuishi &lt;sititou70@gmail.com>
