@@ -3618,7 +3618,7 @@ tc passed: Nat
   </p>
   &mdash; 七十 (@sititou70) <a href="https://twitter.com/sititou70/status/1757373752328049090?ref_src=twsrc%5Etfw">February 13, 2024</a>
 </blockquote>
-<p>実際、停止しないならば項に型は付かない（項に型が付くならば停止する）と言うには、停止性という性質を証明する必要があるそうです。型付きラムダ計算では停止性が成り立つと知られています。</p>
+<p>実際、停止しないならば項に型は付かない（項に型が付くならば停止する）と言うには、正規化可能性（または停止性）という性質を証明する必要があるそうです。型付きラムダ計算では正規化可能性が成り立つと知られています。</p>
 <p>ところで、同じような理由でZコンビネータにも型が付かないので、先程の階乗の計算もまた実行できません。</p>
 <div class="gatsby-highlight" data-language="sh"><pre class="language-sh"><code class="language-sh">$ ./main.ts examples/fact.lambda
 <span class="token builtin class-name">type</span> checking failed
