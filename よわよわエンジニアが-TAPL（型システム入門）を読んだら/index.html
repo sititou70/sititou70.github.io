@@ -241,7 +241,7 @@ let theme=getDefaultTheme();setTheme(theme);button.addEventListener("click",()=>
 </ul>
 <p>（※簡単のために，この記事では「項」のことを「プログラム」と表現しています）</p>
 <p>先ほど見た規則図もまた，１つのプログラミング言語を表しています．さすがに本格的なシステム開発などは難しいですが，例えばリストを定義して多相的なソート関数が書けるほどの能力があります．</p>
-<p>つまるところ，これだけのものを図1枚で表そうとしているので， <strong>専用の記法で表現を圧縮しまくった結果，宇宙語になっちゃった</strong> みたいなかんじです．</p>
+<p>これだけのものを図1枚で表そうとしているので， <strong>専用の記法で表現を圧縮しまくった結果，宇宙語になっちゃった</strong> みたいなかんじです．</p>
 <h2 id="型安全を説明できるようになった" style="position:relative;"><a href="#%E5%9E%8B%E5%AE%89%E5%85%A8%E3%82%92%E8%AA%AC%E6%98%8E%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%AA%E3%81%A3%E3%81%9F" aria-label="型安全を説明できるようになった permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>「型安全」を説明できるようになった</h2>
 <p>私に <strong>娘（6歳）<sup id="fnref-4"><a href="#fn-4" class="footnote-ref">4</a></sup></strong> がいると仮定します．<sup id="fnref-5"><a href="#fn-5" class="footnote-ref">5</a></sup></p>
 <h3 id="taplを読む前だと" style="position:relative;"><a href="#tapl%E3%82%92%E8%AA%AD%E3%82%80%E5%89%8D%E3%81%A0%E3%81%A8" aria-label="taplを読む前だと permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TAPLを読む前だと</h3>
@@ -561,7 +561,7 @@ list<span class="token punctuation">.</span><span class="token function">add</sp
 <p>Russellさん「あーちょっと暇だし，<sup id="fnref-14"><a href="#fn-14" class="footnote-ref">14</a></sup> <strong>自分自身を要素として含まない集合全体の集合</strong> でも考えてみるか〜」</p>
 <p>Russellさん「は？その集合に自分が含まれるかどうかが <strong>矛盾するやんけ！</strong> こりゃ数学を基礎から揺るがす大事件やで！」</p>
 <p>Russellさん「……よく考えたら， <strong>こんな変な集合を定義できるほうがおかしいわ</strong> 」</p>
-<p>Russellさん「せや！ <strong>型</strong> <sup id="fnref-15"><a href="#fn-15" class="footnote-ref">15</a></sup> を導入することで論理式の文法に制限を加え，変な集合を定義できなくしたろ！」</p>
+<p>Russellさん「せや！ <strong>型</strong> <sup id="fnref-15"><a href="#fn-15" class="footnote-ref">15</a></sup> を導入することで文法に制限を加え，変な集合を定義できなくしたろ！」</p>
 <p>〜型理論の基礎誕生〜</p>
 <p>みたいな感じですたぶん．</p>
 <h3 id="プログラミングに数学は必要" style="position:relative;"><a href="#%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E3%81%AB%E6%95%B0%E5%AD%A6%E3%81%AF%E5%BF%85%E8%A6%81" aria-label="プログラミングに数学は必要 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>プログラミングに数学は必要？</h3>
@@ -576,14 +576,20 @@ list<span class="token punctuation">.</span><span class="token function">add</sp
 <p>頭のいい人たちに感謝ですね．</p>
 <h2 id="型システム入門できた" style="position:relative;"><a href="#%E5%9E%8B%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E5%85%A5%E9%96%80%E3%81%A7%E3%81%8D%E3%81%9F" aria-label="型システム入門できた permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>型システム入門できた</h2>
 <p>ある日のことでした．</p>
+<p>――――――</p>
+<p>――――</p>
+<p>――</p>
 <p>ワイ「……」（TAPLを読んでいる）</p>
 <p>ワイ「ハァーーわからん！なんやねんこの定義！絶対おかしいやろ誤植ちゃうか！？」</p>
 <p>ワイ「エラッタには……載ってない！こうなったら元の論文あたって確認したる！」</p>
 <p>ワイ「（元論文を読んで）TAPLとおんなじこと書いとる……そりゃまぁワイが間違っとるか……」</p>
 <p>ワイ「あれ？ワイ，型理論の論文をなんとなく読めてないか……？」</p>
-<p>ということがあったのです．開いた論文にもTAPLと同じ宇宙語が使われていたので，なんとなーく雰囲気で目的の箇所を探せました．（英語の技術ドキュメントでもコードの部分だけはなんとなく読める感覚に近い）</p>
-<p>これって結構スゴくないですか！？数ヶ月前まで全くの素人だったヤツが，（内容の難易度はともかく）ちゃんとした論文を読んでいるのです！</p>
-<p>あっ！これが……</p>
+<p>――</p>
+<p>――――</p>
+<p>――――――</p>
+<p>ということがあったのです．開いた論文にもTAPLと同じ宇宙語が使われていたので，なんとなーく雰囲気で目的の箇所を探せました．英語の技術ドキュメントでも，コードの部分だけはふんわり読めるあの感覚です．</p>
+<p>これって結構すごくないですか？数ヶ月前まで全くの素人だったヤツが，（内容の難易度はともかく）ちゃんとした論文を読んでいるのです！</p>
+<p>あっ、これが……</p>
 <p><strong>型システム入門</strong> ってコト！？（タイトル回収）</p>
 <h2 id="こぼれ話" style="position:relative;"><a href="#%E3%81%93%E3%81%BC%E3%82%8C%E8%A9%B1" aria-label="こぼれ話 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>こぼれ話</h2>
 <details><summary>おもしろコーナー</summary>
@@ -777,7 +783,7 @@ A：定義はたいてい間違っている．</p>
 <div class="gatsby-resp-iframe-wrapper" style="padding-bottom: 56.25%; position: relative; height: 0; overflow: hidden; " > <iframe src="https://www.youtube.com/embed/JELIVTVuFHo?start=1587&amp;end=1636" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" style=" position: absolute; top: 0; left: 0; width: 100%; height: 100%; "></iframe> </div>
 </details>
 <details><summary>シーン2：TAPL崩壊の危機</summary>
-<p>6時間ぶっ通しで証明大会……それをできるのがすげぇ……</p>
+<p>6時間ぶっ通しで証明大会……それをできるのがすごいです．</p>
 <div class="gatsby-resp-iframe-wrapper" style="padding-bottom: 56.25%; position: relative; height: 0; overflow: hidden; " > <iframe src="https://www.youtube.com/embed/JELIVTVuFHo?start=3439&amp;end=3600" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" style=" position: absolute; top: 0; left: 0; width: 100%; height: 100%; "></iframe> </div>
 </details>
 <details><summary>シーン3：ピアース先生（TAPL原著者）「ドウモ　アリガト　ゴザイマシタ」</summary>
