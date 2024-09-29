@@ -188,7 +188,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>次に、ループの前、途中、後で常に成り立つ条件、ループ不変条件（Loop invariant）を考えます。</p>
 <p>今回のループ不変条件は、<code class="language-text">y * x! = n!</code>です。</p>
-<p>ループを進めるにしたがって、<code class="language-text">y</code>は増加し、<code class="language-text">x</code>は減少していきます。それらをうまいこと組み合わせると、お互いでバランスをとって一定になるといった感じです。</p>
+<p>ループを進めるにしたがって、<code class="language-text">y</code>は増加し、<code class="language-text">x</code>は減少していきます。これらをうまいこと組み合わせると、お互いでバランスをとって一定になるといった感じです。</p>
 <p>まず、ループの前で不変条件が成り立つことを確認します。</p>
 <div class="gatsby-highlight has-highlighted-lines" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">fact</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">n</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
   <span class="token comment">// { True }</span>
@@ -223,7 +223,24 @@ console<span class="token punctuation">.</span><span class="token function">log<
   <span class="token keyword">return</span> y<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>次に、ループのBodyの先頭で成り立つ条件を考えます。</p>
-<p>とりあえず、ループの1回目でここに入ってきた場合を考えてみましょう。ここに入ってきたということは、<code class="language-text">x !== 0</code>が真であるということですから、不変条件に加えて<code class="language-text">x</code>が<code class="language-text">0</code>でないことも成り立ちます。</p>
+<div class="gatsby-highlight has-highlighted-lines" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">fact</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">n</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token comment">// { True }</span>
+  <span class="token comment">// -></span>
+  <span class="token comment">// { n = n かつ 1 = 1 }</span>
+  <span class="token keyword">let</span> x <span class="token operator">=</span> n<span class="token punctuation">;</span>
+  <span class="token comment">// { x = n かつ 1 = 1 }</span>
+  <span class="token keyword">let</span> y <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token comment">// { x = n かつ y = 1 }</span>
+  <span class="token comment">// -></span>
+  <span class="token comment">// { y * x! = n! }</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>x <span class="token operator">!==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="gatsby-highlight-code-line">    <span class="token comment">// ここで成り立つ条件を考える</span></span>    y <span class="token operator">=</span> y <span class="token operator">*</span> x<span class="token punctuation">;</span>
+    x <span class="token operator">=</span> x <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// { y = n! }</span>
+  <span class="token keyword">return</span> y<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
+<p>とりあえず、ループの1回目でここに入ってきた場合を考えてみましょう。まず、変数の状態はループ前から変化していないので、不変条件が成り立ちます。加えて、ここに入ってきたということは<code class="language-text">x !== 0</code>が真であったということですから、<code class="language-text">x</code>が<code class="language-text">0</code>でないことも成り立ちます。</p>
 <div class="gatsby-highlight has-highlighted-lines" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">fact</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">n</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
   <span class="token comment">// { True }</span>
   <span class="token comment">// -></span>
@@ -242,8 +259,26 @@ console<span class="token punctuation">.</span><span class="token function">log<
   <span class="token keyword">return</span> y<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>ここで、ループのBodyの末尾でも不変条件が成り立つことを示したいです。</p>
+<div class="gatsby-highlight has-highlighted-lines" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">fact</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">n</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token comment">// { True }</span>
+  <span class="token comment">// -></span>
+  <span class="token comment">// { n = n かつ 1 = 1 }</span>
+  <span class="token keyword">let</span> x <span class="token operator">=</span> n<span class="token punctuation">;</span>
+  <span class="token comment">// { x = n かつ 1 = 1 }</span>
+  <span class="token keyword">let</span> y <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token comment">// { x = n かつ y = 1 }</span>
+  <span class="token comment">// -></span>
+  <span class="token comment">// { y * x! = n! }</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>x <span class="token operator">!==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// { y * x! = n! かつ x != 0 }</span>
+    y <span class="token operator">=</span> y <span class="token operator">*</span> x<span class="token punctuation">;</span>
+    x <span class="token operator">=</span> x <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="gatsby-highlight-code-line">    <span class="token comment">// ここでも{ y * x! = n! }が成り立ってほしい</span></span>  <span class="token punctuation">}</span>
+  <span class="token comment">// { y = n! }</span>
+  <span class="token keyword">return</span> y<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>なぜなら、1回目以降も不変条件が成り立つ（保存される）ことを示せるからです。ある回のBodyの先頭で不変条件が成り立つことは、その前回のBodyの末尾で不変条件が成り立つことから言えます。</p>
-<p>というわけで、Bodyの末尾に不変条件を書いてみます。</p>
+<p>というわけで、Bodyの末尾に不変条件を書いて、それが成り立つことを確認します。</p>
 <div class="gatsby-highlight has-highlighted-lines" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">fact</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">n</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
   <span class="token comment">// { True }</span>
   <span class="token comment">// -></span>
@@ -309,9 +344,10 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token comment">// { y * (x * (x - 1)!) = n! }</span>
 <span class="token comment">// -></span>
 <span class="token comment">// { (y * x) * (x - 1)! = n! }</span></code></pre></div>
-<p>大丈夫そうですね。<code class="language-text">x! = x * (x - 1)!</code>の変形がポイントです。</p>
-<p>注意したいのは、<code class="language-text">(x - 1)!</code>と書けるのは、<code class="language-text">x != 0</code>という条件があるからです。この条件がないと<code class="language-text">x</code>は<code class="language-text">0</code>であるかもしれず、そうなると<code class="language-text">-1</code>の階乗が出てきてしまうのでダメです。</p>
-<p>さて、ループの前と途中で不変条件が成り立つので、ループの後にも不変条件が成り立つと言えます。</p>
+<p>大丈夫そうですね。</p>
+<p><code class="language-text">x! = x * (x - 1)!</code>の変形がポイントです。例えば<code class="language-text">5! = 5 * 4! = 5 * (4 * 3 * 2 * 1)</code>みたいな感じです。</p>
+<p>注意したいのは、<code class="language-text">x != 0</code>という仮定のおかげで<code class="language-text">(x - 1)!</code>と書けるということです。この仮定がないと、<code class="language-text">x</code>は<code class="language-text">0</code>であるかもしれず、それだと<code class="language-text">-1</code>の階乗が出てきてしまうのでダメです。</p>
+<p>さて、ループの前でも、途中でも不変条件が成り立つ（保存される）ので、ループの後でも成り立つと言えます。</p>
 <div class="gatsby-highlight has-highlighted-lines" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">fact</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">n</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
   <span class="token comment">// { True }</span>
   <span class="token comment">// -></span>
@@ -450,10 +486,10 @@ console<span class="token punctuation">.</span><span class="token function">log<
         </picture>
   </a>
     </span></p>
-<p>右に表示されてるのが示すべき条件で、その示し方を左に書いた命令で指示しています。</p>
-<p>式変形や場合分けはCoqがやってくれたり、簡単な部分については自動で解決してくれたりします。</p>
+<p>右に表示されてるのが示すべき条件で、その示し方を左に書いた命令（タクティク）で指示しています。</p>
+<p>式変形や場合分けはCoqがやってくれます。また、簡単な部分については自動で解決してくれます。</p>
 <p>UATはCoqのチェックが通ることを確認したら完了ですね（？）</p>
-<p>まぁ一方で形式化のコストがかかるんですけど</p>
+<p>まぁ一方で形式化のコストがかかるんですけれども</p>
 <h2 id="まとめ" style="position:relative;"><a href="#%E3%81%BE%E3%81%A8%E3%82%81" aria-label="まとめ permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>まとめ</h2>
 <p>なぜかホーア論理をざっくり勉強したので、備忘のために階乗の関数をざっくり証明しました。</p>
 <p>プログラムはメモリの状態を次々に変化させます。それらの状態で成り立つ条件を追いかけることで、最終的に示したい性質が導かれることを確認しました。</p>
