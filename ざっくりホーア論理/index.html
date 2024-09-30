@@ -135,7 +135,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
   <span class="token keyword">return</span> y<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>ここで、1ステップ前、つまり<code class="language-text">let y = 1;</code>の実行前には、どんな条件が成り立てば良いかを考えます。</p>
-<p><code class="language-text">let y = 1;</code>という代入文は、「実行すると<code class="language-text">y</code>を<code class="language-text">1</code>と同じ値にする」と読めます。なので、実行後の条件の「すべての<code class="language-text">y</code>を<code class="language-text">1</code>に戻した条件」が、実行前にも成り立てば良さそうです。したがって以下のようになります。</p>
+<p><code class="language-text">let y = 1;</code>という代入文は、実行すると<code class="language-text">y</code>を<code class="language-text">1</code>に上書きします。なので、「実行後の条件で、すべての<code class="language-text">y</code>を<code class="language-text">1</code>に戻した条件」が、実行前にも成り立てば良さそうです。したがって以下のようになります。</p>
 <div class="gatsby-highlight has-highlighted-lines" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">fact</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">n</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
   <span class="token comment">// { True }</span>
   <span class="token keyword">let</span> x <span class="token operator">=</span> n<span class="token punctuation">;</span>
