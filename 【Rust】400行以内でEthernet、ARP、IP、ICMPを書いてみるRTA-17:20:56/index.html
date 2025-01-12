@@ -364,7 +364,7 @@ Wiresharkに表示されたフレーム:
     <span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>最も厄介なのがチェックサムです。<a href="https://sititou70.github.io/%E3%83%97%E3%83%AD%E3%83%88%E3%82%B3%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%82%92%E5%86%99%E7%B5%8C%E3%81%97%E3%81%A6%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%92%E5%AE%8C%E5%85%A8%E3%81%AB%E7%90%86%E8%A7%A3%E3%81%97%E3%81%9F%E3%81%8B%E3%81%A3%E3%81%9F%E6%97%A5%E8%A8%98/">以前の記事</a>でもお世話になった、<a href="https://docs.google.com/presentation/d/1kjvdsM2Slfug4t4lQ5HRCitoTbH7edl-1OPtEaG53D8/edit#slide=id.gd326ebd0a8_0_798">micropsのスライドの、チェックサムの計算方法</a>を参照します。</p>
-<p>おおざっぱな理解としては、対象のデータを2バイトごとに区切って整数とみなしで合計し、補数やらなにやらを取れば良いそうです。以下のように実装しました。</p>
+<p>おおざっぱな理解としては、対象のデータを2バイトごとに区切って整数とみなして合計し、補数やらなにやらを取れば良いそうです。以下のように実装しました。</p>
 <div class="gatsby-highlight" data-language="rust"><pre class="language-rust"><code class="language-rust"><span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function-definition function">checksum16</span><span class="token punctuation">(</span>data<span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token class-name">Vec</span><span class="token operator">&lt;</span><span class="token keyword">u8</span><span class="token operator">></span><span class="token punctuation">,</span> init<span class="token punctuation">:</span> <span class="token keyword">u32</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> <span class="token keyword">u16</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> <span class="token keyword">mut</span> sum <span class="token operator">=</span> init
         <span class="token operator">+</span> data
@@ -597,7 +597,7 @@ index out of bounds: the len is 1 but the index is 1</code></pre></div>
 <p>タイマーストップです！</p>
 <h2 id="完走した感想" style="position:relative;"><a href="#%E5%AE%8C%E8%B5%B0%E3%81%97%E3%81%9F%E6%84%9F%E6%83%B3" aria-label="完走した感想 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>完走した感想</h2>
 <p>終了時刻は <code class="language-text">2025-01-12T12:20:08+09:00</code>、記録は17:20:56でした。このカテゴリを走っている人が他にいないので、これが世界記録です。</p>
-<p>実際、ネットワークとかRustとかが久々すぎてミスが多かったり、Wiresharkで検証できることをコードで書いてて後から気づいて消したりと、チャートがボロボロだったので、もっと良いタイムが狙えた気がします。</p>
+<p>実際、ネットワークとかRustとかが久々すぎてミスが多かったり、Wiresharkで検証できることをコードで書いてて後から気づいて消したりと、チャートがボロボロだったので、もっと良いタイムを狙えた気がします。</p>
 <p>今回書いたコードは、テストコードを除くと374行でした。<a href="https://x.com/pandax381/status/1547489422954070021">毎回参考にさせていただいているpandax381さんの資料</a>にある、<a href="https://github.com/pandax381/microps">比較的読みやすい実装</a>でさえ、プロトコルやインターフェースの管理機構、非同期処理機構、ARPのキャッシュ機構、ルーティングテーブルの実装などを含んでいて、今回のより複雑です。</p>
 <p>なので、今回のコードは簡単すぎてプロトコルの実装と呼べるのかも怪しいのですが、勉強や趣味の目的には良いかもしれません。</p>
 <p>大切に育てたICMPメッセージが立派になって（Replyになって）戻ってくるのを見ると、親としての誇りを感じます。</p>
