@@ -311,7 +311,7 @@ Wiresharkに表示されたフレーム:
     frame<span class="token punctuation">.</span><span class="token function">drain</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">..</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// for IFF_NO_PI</span>
 
     <span class="token comment">// check</span>
-    <span class="token comment">//// destination is my hwaddre</span>
+    <span class="token comment">//// destination is my hwaddr</span>
     <span class="token keyword">if</span> frame<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">..</span><span class="token number">6</span><span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token function">parse_hwaddr</span><span class="token punctuation">(</span>my_hwaddr<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">continue</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
