@@ -439,8 +439,8 @@ iface
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">thread 'main' panicked at src/util.rs:126:62:
 index out of bounds: the len is 1 but the index is 1</code></pre></div>
 <p>はい、<a href="https://rta-play.info/meaning/oob/">Out of Bounds</a>です。</p>
-<p>どうやらチェックサムの計算で、データが奇数個の時に2人組を作れなくて怒ってるみたいです。<a href="https://dic.nicovideo.jp/a/%E3%81%AF%E3%81%84%E3%80%81%E4%BA%8C%E4%BA%BA%E7%B5%84%E3%81%A4%E3%81%8F%E3%81%A3%E3%81%A6%E3%83%BC">小学生時代のトラウマが蘇りますね</a>。</p>
-<p>というわけで、端数が出たらそれも <code class="language-text">sum</code> に足してやるようにします。<code class="language-text">chunks(2)</code> とか <code class="language-text">map</code> とかはやめて、以下のように書き直しました。漢は黙ってwhileループですよ。</p>
+<p>どうやらチェックサムの <code class="language-text">chunks(2)</code> で、データが奇数個の時に2人組を作れなくて怒ってるみたいです。<a href="https://dic.nicovideo.jp/a/%E3%81%AF%E3%81%84%E3%80%81%E4%BA%8C%E4%BA%BA%E7%B5%84%E3%81%A4%E3%81%8F%E3%81%A3%E3%81%A6%E3%83%BC">小学生時代のトラウマが蘇りますね</a>。</p>
+<p>というわけで、端数が出たらそれも <code class="language-text">sum</code> に足してやるようにします。<code class="language-text">chunks</code> とか <code class="language-text">map</code> とか <code class="language-text">reduce</code> とかはやめて、以下のように書き直しました。漢は黙ってwhileループですよ。</p>
 <div class="gatsby-highlight" data-language="rust"><pre class="language-rust"><code class="language-rust"><span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function-definition function">checksum16</span><span class="token punctuation">(</span>data<span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token class-name">Vec</span><span class="token operator">&lt;</span><span class="token keyword">u8</span><span class="token operator">></span><span class="token punctuation">,</span> init<span class="token punctuation">:</span> <span class="token keyword">u32</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> <span class="token keyword">u16</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> <span class="token keyword">mut</span> sum <span class="token operator">=</span> init<span class="token punctuation">;</span>
     <span class="token keyword">let</span> <span class="token keyword">mut</span> index <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
@@ -499,7 +499,7 @@ index out of bounds: the len is 1 but the index is 1</code></pre></div>
   </a>
     </span></p>
 <p>ICMPのチェックサムが間違っているとのこと。ご丁寧に正しいチェックサムまで併記されてて便利ですね。</p>
-<p>結論としては端数処理の計算が間違っていて、以下のように修正しました。</p>
+<p>結論としては端数の計算が間違っていて、以下のように修正しました。</p>
 <div class="gatsby-highlight" data-language="diff"><pre class="language-diff"><code class="language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span> sum += u32::from_be_bytes([0, 0, 0, data[index]]);
 </span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span> sum += u32::from_be_bytes([0, 0, data[index], 0]);</span></code></pre></div>
 <p>エンディアンの認識を間違ってましたね。</p>
