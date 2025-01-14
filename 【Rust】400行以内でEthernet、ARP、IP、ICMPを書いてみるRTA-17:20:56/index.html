@@ -137,10 +137,10 @@ let theme=getDefaultTheme();setTheme(theme);button.addEventListener("click",()=>
 <li>ハードウェアアドレスサイズ(1)：Ethernetは6</li>
 <li>プロトコルアドレスサイズ(1)：IPは4</li>
 <li>オペレーション(2)：送信者の動作。要求は1、返信は2</li>
-<li>送信先ハードウェアアドレス(6)</li>
+<li>送信元ハードウェアアドレス(6)</li>
 <li>送信元プロトコルアドレス(4)</li>
 <li>送信先ハードウェアアドレス(6)</li>
-<li>送信元プロトコルアドレス(4)</li>
+<li>送信先プロトコルアドレス(4)</li>
 </ul>
 <p>これを生成する関数、<code class="language-text">create_arp_request_message</code> を作成します。今回は、バイト列を <code class="language-text">Vec&lt;u8></code> で取り回すことにします。</p>
 <div class="gatsby-highlight" data-language="rust"><pre class="language-rust"><code class="language-rust"><span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function-definition function">create_arp_request_message</span><span class="token punctuation">(</span>
