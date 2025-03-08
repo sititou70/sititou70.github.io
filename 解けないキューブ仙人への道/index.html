@@ -1355,10 +1355,10 @@ x[4]: 5</code></pre></div>
 <p>そして、キューブをどのように操作したとしても、全体の置換としては偶置換になります。</p>
 <p>例えば、以下のようなスクランブルについて考えます。</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">U R' L U R U' B2 U2 R2 U' F2 U' F2 D2 R D2 F' D' B' R</code></pre></div>
-<p>B2とかを、Bを2回操作するように展開すると、以下のようになります。</p>
+<p>180度の操作を、90度2回の操作に展開すると以下のようになります。</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">U R' L U R U' B B U U R R U' F F U' F F D D R D D F' D' B' R</code></pre></div>
 <p>そして、それぞれの操作を互換の連続に展開すると以下のようになって、</p>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">(Uを実現する偶数個の互換) (R'を実現する偶数個の互換) (Lを実現する偶数個の互換) ...</code></pre></div>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">(Uを実現する偶数個の互換) (R'を実現する偶数個の互換) ...</code></pre></div>
 <p>全体としては結局、偶数個の互換によって実現されます。</p>
 <p>したがって、パーツの位置は、揃っている状態から偶置換で実現できないといけません。そうでないなら、それは揃っている状態から操作していったものではないということになるので、「解けない状態」であるとわかります。</p>
 <h2 id="実装編" style="position:relative;"><a href="#%E5%AE%9F%E8%A3%85%E7%B7%A8" aria-label="実装編 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>実装編</h2>
