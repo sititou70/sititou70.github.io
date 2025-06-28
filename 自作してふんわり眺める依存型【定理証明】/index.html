@@ -973,7 +973,7 @@ let theme=getDefaultTheme();setTheme(theme);button.addEventListener("click",()=>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">export</span> <span class="token keyword">const</span> annotatedPlus<span class="token operator">:</span> TermInferable <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"Ann"</span><span class="token punctuation">,</span> plus<span class="token punctuation">,</span> plusType<span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
+<span class="token keyword">export</span> <span class="token keyword">const</span> plusAnn<span class="token operator">:</span> TermInferable <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"Ann"</span><span class="token punctuation">,</span> plus<span class="token punctuation">,</span> plusType<span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
 <p>手始めに「すべての自然数nについて、 <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>+</mo><mi>n</mi><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">0 + n = n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span></span> 」の命題と証明を構築してみましょう。</p>
 <p>まず、命題を型で表現します。</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token comment">// 「自然数nを受け取って、0 + n = n型を返す関数」の型</span>
@@ -996,7 +996,7 @@ let theme=getDefaultTheme();setTheme(theme);button.addEventListener("click",()=>
           <span class="token punctuation">[</span>
             <span class="token punctuation">[</span>
               <span class="token comment">// さっき作った足し算を使う</span>
-              annotatedPlus<span class="token punctuation">,</span>
+              plusAnn<span class="token punctuation">,</span>
               <span class="token string">":@:"</span><span class="token punctuation">,</span>
               <span class="token punctuation">[</span><span class="token string">"Inf"</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">"Zero"</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// 0</span>
             <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -1019,20 +1019,20 @@ let theme=getDefaultTheme();setTheme(theme);button.addEventListener("click",()=>
 <span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
 <p>というのも、命題の型の左辺が評価されて簡単になるからです。</p>
 <ol>
-<li>まず<code class="language-text">annotatedPlus</code>を0に適用していますが、<code class="language-text">annotatedPlus</code>の定義より恒等関数に評価されます。</li>
+<li>まず<code class="language-text">plusAnn</code>を0に適用していますが、<code class="language-text">plusAnn</code>の定義より恒等関数に評価されます。</li>
 <li>次に恒等関数を<code class="language-text">n</code>に適用しています。当然、評価結果は<code class="language-text">n</code>です。</li>
 </ol>
 <p>で、右辺も<code class="language-text">n</code>なので、その値は<code class="language-text">Refl Nat n</code>で良いということです。</p>
 <p>このことを型検査で確かめてみます。</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token comment">// 証明を命題で注釈する</span>
-<span class="token keyword">export</span> <span class="token keyword">const</span> plusZeroLCheck<span class="token operator">:</span> TermInferable <span class="token operator">=</span> <span class="token punctuation">[</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> plusZeroLAnn<span class="token operator">:</span> TermInferable <span class="token operator">=</span> <span class="token punctuation">[</span>
   <span class="token string">"Ann"</span><span class="token punctuation">,</span>
   plusZeroLProof<span class="token punctuation">,</span>
   plusZeroLType<span class="token punctuation">,</span>
 <span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"check plusZeroL"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
   <span class="token comment">// 証明に命題の型が付くか検査する</span>
-  <span class="token function">typeInferable</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">(</span>plusZeroLCheck<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">typeInferable</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">(</span>plusZeroLAnn<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>検査を実行します。</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">   ✓ check plusZeroL 1ms
@@ -1040,11 +1040,11 @@ let theme=getDefaultTheme();setTheme(theme);button.addEventListener("click",()=>
  Test Files  1 passed (1)</code></pre></div>
 <p>無事に成功しました。これでOKです！</p>
 <p>足し算プログラムに要求される性質の1つを、依存型を使って検証したということになります。</p>
-<p>ちなみに、命題と証明を合わせた<code class="language-text">plusZeroLCheck</code>は、JSONで表すと509文字でした。</p>
+<p>ちなみに、命題と証明を合わせた<code class="language-text">plusZeroLAnn</code>は、JSONで表すと509文字でした。</p>
 <h3 id="もう少しむずかしい問題" style="position:relative;"><a href="#%E3%82%82%E3%81%86%E5%B0%91%E3%81%97%E3%82%80%E3%81%9A%E3%81%8B%E3%81%97%E3%81%84%E5%95%8F%E9%A1%8C" aria-label="もう少しむずかしい問題 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>もう少しむずかしい問題</h3>
 <p><span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>+</mo><mi>n</mi><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">0 + n = n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span></span> ができたら、 <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>+</mo><mn>0</mn><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">n + 0 = n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span></span> もやりたくなるのが人間です。</p>
 <p>しかし、その証明は難しいです。先程は、足し算を0に適用したので恒等関数に評価されていました。しかし今回は <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span></span> に適用するので、そこから先に評価が進みません（中立項になります）。</p>
-<p>コイツを示すには、自然数に対する帰納法が必要です。また、その中で等式の書き換えを行うのですが、そのためにはeqIndRCheckという別のヤツが必要で、それを示すにはEqの帰納法が必要です。</p>
+<p>コイツを示すには、自然数に対する帰納法が必要です。また、その中で等式の書き換えを行うのですが、そのためにはeqIndRAnnという別のヤツが必要で、それを示すにはEqの帰納法が必要です。</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token comment">// nを受け取って、n + 0 = n型の値を返す</span>
 <span class="token keyword">const</span> plusZeroRProof<span class="token operator">:</span> TermCheckable <span class="token operator">=</span> <span class="token punctuation">[</span>
   <span class="token string">"Lam"</span><span class="token punctuation">,</span> <span class="token comment">// arg: n</span>
@@ -1078,9 +1078,9 @@ let theme=getDefaultTheme();setTheme(theme);button.addEventListener("click",()=>
           <span class="token comment">// 3. これはprop (Succ n')なのでOK。</span>
 
           <span class="token function">makeApplyExpr</span><span class="token punctuation">(</span>
-            eqIndRCheck
+            eqIndRAnn
             <span class="token comment">// 何型に対する等式か。ここではNat（省略）</span>
-            <span class="token comment">// eqIndRCheckで示したい命題。等式のどの部分を書き換えるかを指定する（省略）</span>
+            <span class="token comment">// eqIndRAnnで示したい命題。等式のどの部分を書き換えるかを指定する（省略）</span>
             <span class="token comment">// 書き換え前の項「n'」（省略）</span>
             <span class="token comment">// 書き換え後の項「n' + 0」（省略）</span>
             <span class="token comment">// 書き換え前の等式「(S n') = (S n')」（省略）</span>
@@ -1155,12 +1155,12 @@ let theme=getDefaultTheme();setTheme(theme);button.addEventListener("click",()=>
     <span class="token punctuation">[</span>
       <span class="token string">"Inf"</span><span class="token punctuation">,</span>
       <span class="token punctuation">[</span>
-        <span class="token punctuation">[</span>annotatedMul<span class="token punctuation">,</span> <span class="token string">":@:"</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">"Inf"</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">"Bound"</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span>mulAnn<span class="token punctuation">,</span> <span class="token string">":@:"</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">"Inf"</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">"Bound"</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
         <span class="token string">":@:"</span><span class="token punctuation">,</span>
         <span class="token punctuation">[</span>
           <span class="token string">"Inf"</span><span class="token punctuation">,</span>
           <span class="token punctuation">[</span>
-            <span class="token punctuation">[</span>annotatedPlus<span class="token punctuation">,</span> <span class="token string">":@:"</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">"Inf"</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">"Bound"</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token punctuation">[</span>plusAnn<span class="token punctuation">,</span> <span class="token string">":@:"</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">"Inf"</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">"Bound"</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
             <span class="token string">":@:"</span><span class="token punctuation">,</span>
             <span class="token punctuation">[</span><span class="token string">"Inf"</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">"Bound"</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
           <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -1171,12 +1171,12 @@ let theme=getDefaultTheme();setTheme(theme);button.addEventListener("click",()=>
       <span class="token string">"Inf"</span><span class="token punctuation">,</span>
       <span class="token punctuation">[</span>
         <span class="token punctuation">[</span>
-          annotatedPlus<span class="token punctuation">,</span>
+          plusAnn<span class="token punctuation">,</span>
           <span class="token string">":@:"</span><span class="token punctuation">,</span>
           <span class="token punctuation">[</span>
             <span class="token string">"Inf"</span><span class="token punctuation">,</span>
             <span class="token punctuation">[</span>
-              <span class="token punctuation">[</span>annotatedMul<span class="token punctuation">,</span> <span class="token string">":@:"</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">"Inf"</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">"Bound"</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+              <span class="token punctuation">[</span>mulAnn<span class="token punctuation">,</span> <span class="token string">":@:"</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">"Inf"</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">"Bound"</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
               <span class="token string">":@:"</span><span class="token punctuation">,</span>
               <span class="token punctuation">[</span><span class="token string">"Inf"</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">"Bound"</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
             <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -1186,7 +1186,7 @@ let theme=getDefaultTheme();setTheme(theme);button.addEventListener("click",()=>
         <span class="token punctuation">[</span>
           <span class="token string">"Inf"</span><span class="token punctuation">,</span>
           <span class="token punctuation">[</span>
-            <span class="token punctuation">[</span>annotatedMul<span class="token punctuation">,</span> <span class="token string">":@:"</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">"Inf"</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">"Bound"</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token punctuation">[</span>mulAnn<span class="token punctuation">,</span> <span class="token string">":@:"</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">"Inf"</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">"Bound"</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
             <span class="token string">":@:"</span><span class="token punctuation">,</span>
             <span class="token punctuation">[</span><span class="token string">"Inf"</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">"Bound"</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
           <span class="token punctuation">]</span><span class="token punctuation">,</span>
