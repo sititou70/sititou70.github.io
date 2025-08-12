@@ -151,8 +151,8 @@ let theme=getDefaultTheme();setTheme(theme);button.addEventListener("click",()=>
 <p><code class="language-text">&lt;:</code>という記号は2つの型のあいだに書いて，「左の型が右の型のサブタイプである」と読みます．</p>
 <p>TypeScriptの型システムは構造的なので，2つのオブジェクトがサブタイプ関係にあるには，<strong>それらに共通するプロパティについてもまた，サブタイプ関係が必要<sup id="fnref-1"><a href="#fn-1" class="footnote-ref">1</a></sup>です</strong>．</p>
 <p>今回の例では，<code class="language-text">Dog</code>と<code class="language-text">Animal</code>に共通する<code class="language-text">animal</code>プロパティについて<code class="language-text">string &lt;: string</code>なのでOKです．</p>
-<p>TSでは，<code class="language-text">S &lt;: T</code>ならば<code class="language-text">T</code>型の変数に<code class="language-text">S</code>型の値を代入できます．</p>
-<p>つまり，<code class="language-text">Dog &lt;: Animal</code>なので <strong><code class="language-text">Animal</code>型の変数に<code class="language-text">Dog</code>型の値を代入できます．</strong></p>
+<p>TSでは，<code class="language-text">T</code>型の変数に<code class="language-text">S</code>型の値を代入する際、<code class="language-text">S &lt;: T</code>が検査されます。</p>
+<p>例えば，<code class="language-text">Animal</code>型の変数に<code class="language-text">Dog</code>型の値を代入する際，<code class="language-text">Dog &lt;: Animal</code>が検査されますが，これはOKです．</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token comment">// できる</span>
 <span class="token keyword">const</span> animalVariable<span class="token operator">:</span> Animal <span class="token operator">=</span> dog<span class="token punctuation">;</span></code></pre></div>
 <h2 id="問題" style="position:relative;"><a href="#%E5%95%8F%E9%A1%8C" aria-label="問題 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>問題</h2>
@@ -209,7 +209,7 @@ let theme=getDefaultTheme();setTheme(theme);button.addEventListener("click",()=>
 <p>―――――――――</p>
 <h2 id="できて良いんだっけ" style="position:relative;"><a href="#%E3%81%A7%E3%81%8D%E3%81%A6%E8%89%AF%E3%81%84%E3%82%93%E3%81%A0%E3%81%A3%E3%81%91" aria-label="できて良いんだっけ permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>……できて良いんだっけ…？</h2>
 <p>いっしょに考えてみましょう．</p>
-<p><code class="language-text">Animal[]</code>型の変数に<code class="language-text">Dog[]</code>型の値を代入するためには，<code class="language-text">Dog[] &lt;: Animal[]</code>が必要です．</p>
+<p><code class="language-text">Animal[]</code>型の変数に<code class="language-text">Dog[]</code>型の値を代入するということで，<code class="language-text">Dog[] &lt;: Animal[]</code>を検査します．</p>
 <p>したがって，先ほどと同じように<strong>2つの配列に共通するすべてのプロパティについてもまた，サブタイプ関係が必要です．</strong></p>
 <p>配列の型は<code class="language-text">lib.es5.d.ts</code>によって，以下のように定義されています．</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">interface</span> <span class="token class-name"><span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">></span></span> <span class="token punctuation">{</span>
@@ -285,7 +285,7 @@ TypeError: Cannot <span class="token builtin class-name">read</span> properties 
     at Module._load <span class="token punctuation">(</span>node:internal/modules/cjs/loader:878:12<span class="token punctuation">)</span>
     at Function.executeUserEntryPoint <span class="token punctuation">[</span>as runMain<span class="token punctuation">]</span> <span class="token punctuation">(</span>node:internal/modules/run_main:81:12<span class="token punctuation">)</span>
     at node:internal/main/run_main_module:23:47</code></pre></div>
-<p>このような挙動は，TypeScriptが型安全（健全）でないと言われる理由の1つです．</p>
+<p>このような挙動は，TypeScriptが型安全（型システムが健全）でないと言われる理由の1つです．</p>
 <p>しかし，これは<strong>わざと</strong>このような設計になっています．<a href="https://github.com/Microsoft/TypeScript/wiki/TypeScript-Design-Goals">TypeScript Design Goals</a>によれば，</p>
 <blockquote>
 <p>Non-goals</p>
