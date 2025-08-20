@@ -527,7 +527,8 @@ $ <span class="token comment"># パス？？？</span></code></pre></div>
 </span><span class="token unchanged"><span class="token prefix unchanged"> </span>   arrayVariances :
 <span class="token prefix unchanged"> </span>   getVariancesWorker(type.symbol, type.typeParameters);
 </span>}</code></pre></div>
-<p>「配列だろうが頑張って変性を計算しなさい！」と叱っておきました．これで再度型検査してみると……</p>
+<p>「配列だろうが頑張って変性を計算しなさい！」と叱っておきました．また、エラーを見やすくするために，<code class="language-text">indexOf</code>の定義を<code class="language-text">interface Array&lt;T></code>の先頭に移動しました．</p>
+<p>これで再度型検査してみると……</p>
 <div class="gatsby-highlight" data-language="sh"><pre class="language-sh"><code class="language-sh">$ npx tsc
 index.ts:20:7 - error TS2322: Type <span class="token string">'Dog[]'</span> is not assignable to <span class="token builtin class-name">type</span> <span class="token string">'Animal[]'</span><span class="token builtin class-name">.</span>
   Types of property <span class="token string">'indexOf'</span> are incompatible.
