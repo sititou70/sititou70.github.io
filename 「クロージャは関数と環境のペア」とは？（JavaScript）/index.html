@@ -693,7 +693,7 @@ ArrowFunction : ArrowParameters => ConciseBody
 <li>（非同期）ジェネレータの評価</li>
 </ul>
 <p>でも使用されているようでした。</p>
-<p>しがたって、今回のサンプルプログラムではアロー関数を使用しましたが、他の書き方でもクロージャが生成されるのは変わらないということです。</p>
+<p>したがって、今回のサンプルプログラムではアロー関数を使用しましたが、他の書き方でもクロージャが生成されるのは変わらないということです。</p>
 <p>「JavaScriptのほとんど（あるいはすべて？）の関数はクロージャ」と言われる理由がわかります。</p>
 <h3 id="クロージャの呼び出し関数呼び出しの評価" style="position:relative;"><a href="#%E3%82%AF%E3%83%AD%E3%83%BC%E3%82%B8%E3%83%A3%E3%81%AE%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%97%E9%96%A2%E6%95%B0%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%97%E3%81%AE%E8%A9%95%E4%BE%A1" aria-label="クロージャの呼び出し関数呼び出しの評価 permalink" class="anchor before"><svg aria-hidden="true" height="20" version="1.1" viewBox="0 0 16 16" width="20"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>クロージャの呼び出し（関数呼び出しの評価）</h3>
 <p>関数呼び出しの評価は、<a href="https://tc39.es/ecma262/#sec-function-calls-runtime-semantics-evaluation">13.3.6.1 Runtime Semantics: Evaluation</a>から見ていくと良さそうです。</p>
@@ -834,7 +834,7 @@ DebugPrint: 0x2d73c590c5f9: <span class="token punctuation">[</span>Function<spa
 fetch v8
 <span class="token builtin class-name">cd</span> v8
 
-<span class="token function">sudo</span> <span class="token function">apt</span> instal ccache</code></pre></div>
+<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> ccache</code></pre></div>
 <p>ccacheを導入するために以下のように変更します。</p>
 <div class="gatsby-highlight" data-language="diff"><pre class="language-diff"><code class="language-diff">diff --git a/.gn b/.gn
 index 3a73ff4e2a1..572d1e3caf6 100644
