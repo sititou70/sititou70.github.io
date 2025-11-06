@@ -151,7 +151,7 @@ let theme=getDefaultTheme();setTheme(theme);button.addEventListener("click",()=>
 <p><code class="language-text">&lt;:</code>という記号は2つの型のあいだに書いて，「左の型が右の型のサブタイプである」と読みます．</p>
 <p>TypeScriptの型システムは構造的なので，2つのオブジェクトがサブタイプ関係にあるには，<strong>それらに共通するプロパティについてもまた，サブタイプ関係が必要<sup id="fnref-1"><a href="#fn-1" class="footnote-ref">1</a></sup>です</strong>．</p>
 <p>今回の例では，<code class="language-text">Dog</code>と<code class="language-text">Animal</code>に共通する<code class="language-text">animal</code>プロパティについて<code class="language-text">string &lt;: string</code>なのでOKです．</p>
-<p>TSでは，<code class="language-text">T</code>型の変数に<code class="language-text">S</code>型の値を代入する際、<code class="language-text">S &lt;: T</code>が検査されます。</p>
+<p>TSでは，<code class="language-text">T</code>型の変数に<code class="language-text">S</code>型の値を代入する際，<code class="language-text">S &lt;: T</code>が検査されます。</p>
 <p>例えば，<code class="language-text">Animal</code>型の変数に<code class="language-text">Dog</code>型の値を代入する際，<code class="language-text">Dog &lt;: Animal</code>が検査されますが，これはOKです．</p>
 <div class="gatsby-highlight" data-language="typescript"><pre class="language-typescript"><code class="language-typescript"><span class="token comment">// できる</span>
 <span class="token keyword">const</span> animalVariable<span class="token operator">:</span> Animal <span class="token operator">=</span> dog<span class="token punctuation">;</span></code></pre></div>
@@ -626,7 +626,7 @@ $ <span class="token comment"># ランタイムエラーになる</span></code><
 <div class="footnotes">
 <hr>
 <ol>
-<li id="fn-1">TAPL p.143で言うところの深さ部分型付け，S-RcdDepth規則のことです．他にも幅部分型付けなどもあるので逆は成り立ちません．<a href="#fnref-1" class="footnote-backref">↩</a></li>
+<li id="fn-1">TAPL p.143で言うところの深さ部分型付け，S-RcdDepth規則のことです．他にも幅部分型付けなどの規則もあります．<a href="#fnref-1" class="footnote-backref">↩</a></li>
 <li id="fn-2">正確には双変となり，共変または反変を許すといったかんじになるのだそうですが詳しい説明は割愛します．気になる方は「bivarianceHack」と検索してみてください．また，この挙動は<code class="language-text">strictFunctionTypes</code>オプションとはあまり関係ありません．今回の環境は<code class="language-text">strict: true</code>であり，<code class="language-text">strictFunctionTypes</code>も有効化されています．<a href="#fnref-2" class="footnote-backref">↩</a></li>
 <li id="fn-3">ちなみにこれは，TAPLにおける演習 15.5.3の解答でもあります．TAPLではこの演習は解答略とされているので，正確に著者が意図したものという保証はありませんが．<a href="#fnref-3" class="footnote-backref">↩</a></li>
 <li id="fn-4">TAPLに読み方は載っていませんでしたし，検索してもWikipedia以外の情報が出てこないので詰んでいます．もしご存知でしたら助けてください．<a href="#fnref-4" class="footnote-backref">↩</a></li>
